@@ -13,15 +13,15 @@ public interface IUrDynamicDataSourceService extends IUrDynamicDataSourceBaseSer
 
     /**
      * 启动数据源
-     * @param urDynamicDataSource
-     * @return
+     * @param urDynamicDataSource 动态数据源
+     * @return 是否成功
      */
     boolean startDataSource(UrDynamicDataSource urDynamicDataSource);
 
     /**
      * 关闭数据源
-     * @param urDynamicDataSource
-     * @return
+     * @param dataSourceName 数据源名称
+     * @return 是否成功
      */
-    boolean shutdownDataSource(UrDynamicDataSource urDynamicDataSource);
+    boolean shutdownDataSource(String dataSourceName);
 }

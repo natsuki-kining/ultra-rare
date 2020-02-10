@@ -59,11 +59,9 @@ public class UrDynamicDataSourceServiceImpl extends AbstractUrDynamicDataSourceS
     }
 
     @Override
-    public boolean shutdownDataSource(UrDynamicDataSource urDynamicDataSource) {
-        return false;
+    public boolean shutdownDataSource(String dataSourceName) {
+        return multiSourceConfig.removeDataSource(dataSourceName);
     }
-
-
 
     private boolean addDataSource(StringBuilder info,UrDynamicDataSource ds) {
         if (multiSourceConfig.containsDataSourceName(ds.getDataSourceName())){
@@ -90,7 +88,7 @@ public class UrDynamicDataSourceServiceImpl extends AbstractUrDynamicDataSourceS
             info.append(" 数据源 新增 ");
             info.append(message);
             info.append("。");
-            return true;
+            return flag;
         }
     }
 

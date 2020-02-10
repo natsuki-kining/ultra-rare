@@ -35,4 +35,19 @@ public class UrDynamicDataSourceController extends AbstractUrDynamicDataSourceCo
         UrDynamicDataSource dynamicDataSource = urDynamicDataSourceService.selectUrDynamicDataSourceById(urDynamicDataSource.getId());
         return toAjax(super.urDynamicDataSourceService.startDataSource(dynamicDataSource));
     }
+
+    /**
+     * 关闭数据源
+     *
+     * @param dataSourceName 数据源名称
+     * @return
+     */
+    @RequiresPermissions("system:datasource:shutdownDataSource")
+    @Log(title = "关闭数据源", businessType = BusinessType.OTHER)
+    @PostMapping("/shutdownDataSource")
+    @ResponseBody
+    public AjaxResult shutdownDataSource(String dataSourceName) {
+        return toAjax(super.urDynamicDataSourceService.shutdownDataSource(dataSourceName));
+    }
+
 }
