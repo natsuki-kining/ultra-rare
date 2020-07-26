@@ -18,8 +18,8 @@ public class PageController {
         return html+".html";
     }
 
-    @GetMapping("bigScreenPage/{html}")
+    @GetMapping("demoPage/{html}")
     public String bigScreenPage(@PathVariable("html") String html){
-        return "bigscreen/"+html+".html";
+        return "bigscreen/demo/"+html+".html";
     }
 }
