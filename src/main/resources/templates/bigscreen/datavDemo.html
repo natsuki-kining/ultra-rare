@@ -2,13 +2,14 @@
 <html>
 <head>
   <title>DataV</title>
-  <script src="../static/common/vue.js"></script>
+  <script src="../../static/common/vue.min.js" type="text/javascript"></script>
   <!--Debug version-->
   <!--调试版-->
-  <script src="../static/bigscreen/datav.map.vue.js"></script>
+<!--  <script src="../static/bigscreen/datav.map.vue.js"></script>-->
   <!--Compression version-->
   <!--压缩版-->
-  <!-- <script src="https://unpkg.com/@jiaminghi/data-view/dist/datav.min.vue.js"></script> -->
+  <script src="../../static/bigscreen/datav.min.vue.js"></script>
+
   <style>
     html, body, #app {
       width: 100%;
@@ -27,11 +28,16 @@
     }
   </style>
 
+
 </head>
 <body>
-  <div id="app">
-    <dv-border-box-1>Welcome to DataV</dv-border-box-1>
+<div id="app">
+  <div id="data-view">
+    <div id="dv-full-screen-container">
+
+    </div>
   </div>
+</div>
 
   <script>
     var app = new Vue({

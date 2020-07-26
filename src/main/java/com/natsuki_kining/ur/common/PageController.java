@@ -2,6 +2,7 @@ package com.natsuki_kining.ur.common;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * TODO
@@ -12,8 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 
-    @GetMapping("page")
-    public String page(String html){
-        return html;
+    @GetMapping("page/{html}")
+    public String page(@PathVariable("html") String html){
+        return html+".html";
+    }
+
+    @GetMapping("bigScreenPage/{html}")
+    public String bigScreenPage(@PathVariable("html") String html){
+        return "bigscreen/"+html+".html";
     }
 }
