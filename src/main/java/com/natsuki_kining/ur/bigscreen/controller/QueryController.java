@@ -21,7 +21,7 @@ public class QueryController {
 
     @PostMapping("query")
     public Object query(@RequestBody QueryParams queryParams) {
-        return this.query.queryResult(queryParams);
+        return this.query.query(queryParams);
     }
 
 
