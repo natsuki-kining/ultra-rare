@@ -13,13 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class PageController {
 
-    @GetMapping("page/{html}")
+    @GetMapping("/{html}.html")
     public String page(@PathVariable("html") String html){
-        return html+".html";
-    }
-
-    @GetMapping("demoPage/{html}")
-    public String bigScreenPage(@PathVariable("html") String html){
-        return "bigscreen/demo/"+html+".html";
+        return html;
     }
 }
+

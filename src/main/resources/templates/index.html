@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="data-view">
+            <dv-full-screen-container>
+                <top-header></top-header>
+                <div class="main-content">
+                    <digital-flop></digital-flop>
+                    <div class="block-left-right-content">
+                        <ranking-board></ranking-board>
+                        <div class="block-top-bottom-content">
+                            <div class="block-top-content">
+                                <template>
+                                    <rose-chart />
+                                </template>
+
+                                <template>
+                                    <water-level-chart />
+                                </template>
+
+                                <template>
+                                    <scroll-board />
+                                </template>
+                            </div>
+
+                            <cards />
+                        </div>
+                    </div>
+                </div>
+            </dv-full-screen-container>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../dist/datav.map.vue.js"></script>
+    <script src="index.js"></script>
+
+
+</body>
+
+</html>
