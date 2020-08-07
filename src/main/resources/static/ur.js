@@ -2,13 +2,13 @@
     const ur = {
         baseURL: 'http://localhost:8080/',
         success:function(data,func){
-            console.log(func);
+            console.log(data);
             if(func){
-                func(data);
+                func(data.data);
             }
         },
         error:function (data,func) {
-            console.log(func);
+            console.log(data);
             if(func){
                 func(data);
             }
