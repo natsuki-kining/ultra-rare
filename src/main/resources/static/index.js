@@ -170,7 +170,7 @@ var scrollBoard = Vue.extend({
                     ['2019-07-10 09:25:00', '路基危害-防尘网', '3', 'xxxxxxx']
                 ],
                 index: true,
-                columnWidth: [50, 170, 300],
+                columnWidth: [50, 170, 210],
                 align: ['center'],
                 rowNum: 7,
                 headerBGC: '#1981f6',

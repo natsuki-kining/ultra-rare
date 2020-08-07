@@ -1,53 +1,46 @@
 (function ($w, $vue, undefined) {
     const ur = {
         baseURL: 'http://localhost:8080/',
-        success:function(data,func){
+        success: function (data, func) {
             console.log(data);
-            if(func){
+            if (func) {
                 func(data.data);
             }
         },
-        error:function (data,func) {
+        error: function (data, func) {
             console.log(data);
-            if(func){
+            if (func) {
                 func(data);
             }
         },
-        ajax: function (config,successFunc,errorFunc) {
-            if (!config.url){
-                config.url = this.baseURL + 'query';
-            }
+        ajax: function (config, successFunc, errorFunc) {
+            config.url = config.url || this.baseURL + 'query';
             axios(config)
-            .then(function(data){
-                ur.success(data,successFunc)
-            })
-            .catch(function (data) {
-                ur.error(data,errorFunc);
-            });
+                .then(function (data) {
+                    ur.success(data, successFunc)
+                })
+                .catch(function (data) {
+                    ur.error(data, errorFunc);
+                });
         },
-        post: function (config,successFunc,errorFunc) {
-            if (!config){
-                config = {}
-            }
+        post: function (config, successFunc, errorFunc) {
+            config = config || {};
             config.method = 'post';
-            this.ajax(config,successFunc,errorFunc);
+            this.ajax(config, successFunc, errorFunc);
         },
-        get: function (config,successFunc,errorFunc) {
-            if (!config){
-                config = {}
-            }
+        get: function (config, successFunc, errorFunc) {
+            config = config || {};
             config.method = 'get';
-            this.ajax(config,successFunc,errorFunc);
+            this.ajax(config, successFunc, errorFunc);
         },
-        query:function (queryCode, params,successFunc,errorFunc) {
-            if (!params){
-                params = {}
-            }
-            params.queryCode = queryCode;
+        query: function (queryCode, params, data, successFunc, errorFunc) {
+            data = data || {};
+            data.params = params || {};
+            data.queryCode = queryCode;
             let config = {
-                data:params
+                data: data
             };
-            this.post(config,successFunc,errorFunc);
+            this.post(config, successFunc, errorFunc);
         },
     }
     $w.ur = ur;
