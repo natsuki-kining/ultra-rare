@@ -3,6 +3,7 @@ Vue.component("top-header", {
 });
 
 function topHeaderHtml(){
+    ur.query('query-user-where');
     return '<div id="top-header"> <dv-decoration-8 class="header-left-decoration" /> <dv-decoration-5 class="header-center-decoration" /> <dv-decoration-8 class="header-right-decoration" :reverse="true" /> <div class="center-title">施工养护综合数据</div> </div>';
 }
 

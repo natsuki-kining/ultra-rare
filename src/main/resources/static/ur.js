@@ -1,33 +1,54 @@
 (function ($w, $vue, undefined) {
     const ur = {
-        baseInfo: {
-            baseUrl: 'https://localhost:8080/',
-            baseQueryUrl: BASE_URL + 'query'
+        baseURL: 'http://localhost:8080/',
+        success:function(data,func){
+            console.log(func);
+            if(func){
+                func(data);
+            }
         },
-        success:function(){
-
+        error:function (data,func) {
+            console.log(func);
+            if(func){
+                func(data);
+            }
         },
-        error:function () {
-        },
-        ajax: function (url, params, type) {
-
-        },
-        post: function (url, params) {
-            this.ajax(url, params, 'post');
-        },
-        get: function (url, params) {
-            Vue.$http.get('/user',{
-                params:{
-
-                }
+        ajax: function (config,successFunc,errorFunc) {
+            if (!config.url){
+                config.url = this.baseURL + 'query';
+            }
+            axios(config)
+            .then(function(data){
+                ur.success(data,successFunc)
             })
-                .then(function(response){
-                    console.log(response);
-                })
-                .catch(function(err){
-                    console.log(err);
-                });
-        }
+            .catch(function (data) {
+                ur.error(data,errorFunc);
+            });
+        },
+        post: function (config,successFunc,errorFunc) {
+            if (!config){
+                config = {}
+            }
+            config.method = 'post';
+            this.ajax(config,successFunc,errorFunc);
+        },
+        get: function (config,successFunc,errorFunc) {
+            if (!config){
+                config = {}
+            }
+            config.method = 'get';
+            this.ajax(config,successFunc,errorFunc);
+        },
+        query:function (queryCode, params,successFunc,errorFunc) {
+            if (!params){
+                params = {}
+            }
+            params.queryCode = queryCode;
+            let config = {
+                data:params
+            };
+            this.post(config,successFunc,errorFunc);
+        },
     }
     $w.ur = ur;
 })(window, Vue);
