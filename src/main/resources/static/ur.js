@@ -48,17 +48,15 @@
             config.method = config.method || 'get';
             this.ajax(config, successFunc, errorFunc);
         },
-        query: function (queryParam, params, successFunc, errorFunc) {
+        query: function (queryParam, config, successFunc, errorFunc) {
+            config = config || {};
             let data = {};
             if (typeof queryParam === 'string') {
                 data.queryCode = queryParam;
             } else {
                 data = queryParam;
             }
-            data.params = params || {};
-            let config = {
-                data: data
-            };
+            config.data = data;
             this.post(config, successFunc, errorFunc);
         },
         /**
