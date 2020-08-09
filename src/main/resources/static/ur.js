@@ -59,6 +59,11 @@
             config.data = data;
             this.post(config, successFunc, errorFunc);
         },
+        setQueryData:function(queryParam,data, config){
+            this.query(queryParam,config,function(responseData){
+                data = responseData;
+            });
+        },
         /**
          * 将map key转为驼峰格式
          * @param json
