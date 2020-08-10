@@ -3,7 +3,7 @@ Vue.component("top-header", {
 });
 
 function topHeaderHtml(){
-    ur.query("template-top-head");
+    //ur.query("template-top-head");
     return '<div id="top-header"> <dv-decoration-8 class="header-left-decoration" /> <dv-decoration-5 class="header-center-decoration" /> <dv-decoration-8 class="header-right-decoration" :reverse="true" /> <div class="center-title">施工养护综合数据</div> </div>';
 }
 
@@ -31,7 +31,8 @@ var rankingBoard = Vue.extend({
     template: `<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>`,
     data() {
         return {
-            rankingBoardConfig: {
+            rankingBoardConfig: {}
+            /*rankingBoardConfig: {
                 data: [{
                         name: '日常养护',
                         value: 55
@@ -70,8 +71,23 @@ var rankingBoard = Vue.extend({
                     }
                 ],
                 rowNum: 9
-            }
+            }*/
         }
+    },
+    methods: {
+        createData() {
+            // this.rankingBoardConfig = {};
+            // ur.query({"queryCode":"test-ranking-board","queryResultModel":false},{},function(responseData){
+            //     this.
+            //     console.log("rankingBoardConfig:",this.rankingBoardConfig);
+            // });
+            ur.setQueryData({"queryCode":"test-ranking-board","queryResultModel":false},this.rankingBoardConfig,{"useTransformResponse":false});
+
+        }
+    },
+    mounted() {
+        const { createData } = this;
+        createData();
     }
 });
 
