@@ -2,13 +2,13 @@
     const ur = {
         baseURL: 'http://localhost:8080/',
         success: function (response, func) {
-            console.log(response);
+            console.debug(response);
             if (func) {
                 func(response.data);
             }
         },
         error: function (response, func) {
-            console.log(response);
+            console.error(response);
             if (func) {
                 func(data);
             }
@@ -18,15 +18,15 @@
          * @param data
          * @returns {any}
          */
-        transformResponse:function(data){
+        transformResponse: function (data) {
             let parse = JSON.parse(data);
             ur.keyCase(parse);
             return parse;
         },
         ajax: function (config, successFunc, errorFunc) {
             config.url = config.url || this.baseURL + 'query';
-            if (!config.transformResponse){
-                if (config.useTransformResponse === undefined || config.useTransformResponse){
+            if (!config.transformResponse) {
+                if (config.useTransformResponse === undefined || config.useTransformResponse) {
                     config.transformResponse = ur.transformResponse;
                 }
             }
@@ -41,12 +41,12 @@
         post: function (config, successFunc, errorFunc) {
             config = config || {};
             config.method = config.method || 'post';
-            this.ajax(config, successFunc, errorFunc);
+            return this.ajax(config, successFunc, errorFunc);
         },
         get: function (config, successFunc, errorFunc) {
             config = config || {};
             config.method = config.method || 'get';
-            this.ajax(config, successFunc, errorFunc);
+            return this.ajax(config, successFunc, errorFunc);
         },
         query: function (queryParam, config, successFunc, errorFunc) {
             config = config || {};
@@ -57,11 +57,14 @@
                 data = queryParam;
             }
             config.data = data;
-            this.post(config, successFunc, errorFunc);
+            return this.post(config, successFunc, errorFunc);
         },
-        setQueryData:function(queryParam,data, config){
-            this.query(queryParam,config,function(responseData){
-                data = responseData;
+        setQueryData: function (queryParam, config,data,arrayKey) {
+            this.query(queryParam, config, function (responseData) {
+                for (const index in arrayKey) {
+                    data[[arrayKey[index]]] = responseData[[arrayKey[index]]];
+                }
+                console.log("data:",data);
             });
         },
         /**
@@ -81,24 +84,24 @@
                             ur.keyCase(item);
                         }
                         delete (json[key]);
-                        let newKey='';
+                        let newKey = '';
                         key = key.toLocaleLowerCase();
                         for (let i = 0; i < key.length; i++) {
                             let char = key.charAt(i);
-                            if (char == '_'){
+                            if (char == '_') {
                                 i++;
                                 char = key.charAt(i).toLocaleUpperCase();
-                                newKey+=char;
+                                newKey += char;
                                 continue;
                             }
-                            newKey+=char;
+                            newKey += char;
                         }
                         json[newKey] = item;
                     }
                 }
             }
-
         }
     }
     $w.ur = ur;
-})(window, Vue);
+})
+(window, Vue);

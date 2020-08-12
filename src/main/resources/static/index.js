@@ -32,57 +32,18 @@ var rankingBoard = Vue.extend({
     data() {
         return {
             rankingBoardConfig: {}
-            /*rankingBoardConfig: {
-                data: [{
-                        name: '日常养护',
-                        value: 55
-                    },
-                    {
-                        name: '交通事故',
-                        value: 120
-                    },
-                    {
-                        name: '路面',
-                        value: 78
-                    },
-                    {
-                        name: '桥通',
-                        value: 66
-                    },
-                    {
-                        name: '计日工',
-                        value: 80
-                    },
-                    {
-                        name: '路基',
-                        value: 45
-                    },
-                    {
-                        name: '交安设施',
-                        value: 29
-                    },
-                    {
-                        name: '除雪',
-                        value: 29
-                    },
-                    {
-                        name: '绿化',
-                        value: 29
-                    }
-                ],
-                rowNum: 9
-            }*/
         }
     },
     methods: {
         createData() {
-            // this.rankingBoardConfig = {};
-            // ur.query({"queryCode":"test-ranking-board","queryResultModel":false},{},function(responseData){
-            //     this.
-            //     console.log("rankingBoardConfig:",this.rankingBoardConfig);
-            // });
-            ur.setQueryData({"queryCode":"test-ranking-board","queryResultModel":false},this.rankingBoardConfig,{"useTransformResponse":false});
-
+            this.rankingBoardConfig = {};
+            ur.query(
+                {"queryCode":"test-ranking-board","queryResultModel":false},
+                {"useTransformResponse":false},
+                (responseData)=>{
+                    this.rankingBoardConfig = responseData;
+                }
+            );
         }
     },
     mounted() {
