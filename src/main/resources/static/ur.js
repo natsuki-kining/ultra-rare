@@ -25,8 +25,10 @@
         },
         ajax: function (config, successFunc, errorFunc) {
             config.url = config.url || this.baseURL + 'query';
+            config.data.queryResultModel = config.data.queryResultModel || false;
             if (!config.transformResponse) {
-                if (config.useTransformResponse === undefined || config.useTransformResponse) {
+                config.useTransformResponse = config.useTransformResponse || false;
+                if (config.useTransformResponse) {
                     config.transformResponse = ur.transformResponse;
                 }
             }
@@ -59,12 +61,9 @@
             config.data = data;
             return this.post(config, successFunc, errorFunc);
         },
-        setQueryData: function (queryParam, config,data,arrayKey) {
-            this.query(queryParam, config, function (responseData) {
-                for (const index in arrayKey) {
-                    data[[arrayKey[index]]] = responseData[[arrayKey[index]]];
-                }
-                console.log("data:",data);
+        setQueryData: function (setting) {
+            this.query(setting.queryParam||{}, setting.config||{}, (responseData)=> {
+                setting.obj[setting.objKey] = responseData;
             });
         },
         /**

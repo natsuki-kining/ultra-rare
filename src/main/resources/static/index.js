@@ -2,8 +2,7 @@ Vue.component("top-header", {
     template: topHeaderHtml()
 });
 
-function topHeaderHtml(){
-    //ur.query("template-top-head");
+function topHeaderHtml() {
     return '<div id="top-header"> <dv-decoration-8 class="header-left-decoration" /> <dv-decoration-5 class="header-center-decoration" /> <dv-decoration-8 class="header-right-decoration" :reverse="true" /> <div class="center-title">施工养护综合数据</div> </div>';
 }
 
@@ -16,13 +15,17 @@ var digitalFlop = Vue.extend({
     },
     methods: {
         createData() {
-            this.digitalFlopData = getDigitalFlopData();
+            ur.setQueryData({
+                "queryParam": "test-digital-flop",
+                "obj": this,
+                "objKey": "digitalFlopData"
+            });
         }
     },
     mounted() {
-        const { createData } = this;
+        const {createData} = this;
         createData();
-        setInterval(createData, 3000);
+        setInterval(createData, 3000000);
     }
 });
 
@@ -36,18 +39,15 @@ var rankingBoard = Vue.extend({
     },
     methods: {
         createData() {
-            this.rankingBoardConfig = {};
-            ur.query(
-                {"queryCode":"test-ranking-board","queryResultModel":false},
-                {"useTransformResponse":false},
-                (responseData)=>{
-                    this.rankingBoardConfig = responseData;
-                }
-            );
+            ur.setQueryData({
+                "queryParam": "test-ranking-board",
+                "obj": this,
+                "objKey": "rankingBoardConfig"
+            });
         }
     },
     mounted() {
-        const { createData } = this;
+        const {createData} = this;
         createData();
     }
 });
@@ -61,7 +61,7 @@ var roseChart = Vue.extend({
     },
     methods: {
         createData() {
-            const { randomExtend } = this
+            const {randomExtend} = this
 
             this.option = {
                 series: [{
@@ -69,15 +69,15 @@ var roseChart = Vue.extend({
                     radius: '50%',
                     roseSort: false,
                     data: [
-                        { name: '路基', value: randomExtend(40, 70) },
-                        { name: '交安设施', value: randomExtend(20, 30) },
-                        { name: '日常养护', value: randomExtend(10, 50) },
-                        { name: '桥通', value: randomExtend(5, 20) },
-                        { name: '交通事故', value: randomExtend(40, 50) },
-                        { name: '路面', value: randomExtend(20, 30) },
-                        { name: '绿化', value: randomExtend(5, 10) },
-                        { name: '计日工', value: randomExtend(20, 35) },
-                        { name: '除雪', value: randomExtend(5, 10) }
+                        {name: '路基', value: randomExtend(40, 70)},
+                        {name: '交安设施', value: randomExtend(20, 30)},
+                        {name: '日常养护', value: randomExtend(10, 50)},
+                        {name: '桥通', value: randomExtend(5, 20)},
+                        {name: '交通事故', value: randomExtend(40, 50)},
+                        {name: '路面', value: randomExtend(20, 30)},
+                        {name: '绿化', value: randomExtend(5, 10)},
+                        {name: '计日工', value: randomExtend(20, 35)},
+                        {name: '除雪', value: randomExtend(5, 10)}
                     ],
                     insideLabel: {
                         show: false
@@ -106,10 +106,8 @@ var roseChart = Vue.extend({
         }
     },
     mounted() {
-        const { createData } = this
-
+        const {createData} = this
         createData()
-
         setInterval(createData, 30000)
     }
 });
@@ -169,7 +167,7 @@ var cards = Vue.extend({
     },
     methods: {
         createData() {
-            const { randomExtend } = this
+            const {randomExtend} = this
 
             this.cards = new Array(5).fill(0).map((foo, i) => ({
                 title: '测试路段' + (i + i),
@@ -199,7 +197,7 @@ var cards = Vue.extend({
                         arcLineWidth: 13,
                         radius: '80%',
                         data: [
-                            { name: '资金占比', value: randomExtend(40, 60) }
+                            {name: '资金占比', value: randomExtend(40, 60)}
                         ],
                         axisLabel: {
                             show: false
@@ -237,7 +235,7 @@ var cards = Vue.extend({
         }
     },
     mounted() {
-        const { createData } = this
+        const {createData} = this
 
         createData()
 
@@ -260,7 +258,6 @@ var app = new Vue({
 });
 
 
-
 function randomExtend(minNum, maxNum) {
     if (arguments.length === 1) {
         return parseInt(Math.random() * minNum + 1, 10)
@@ -269,123 +266,6 @@ function randomExtend(minNum, maxNum) {
     }
 }
 
-function getDigitalFlopData() {
-    return [{
-            title: '管养里程',
-            number: {
-                number: [randomExtend(20000, 30000)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#4d99fc',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '公里'
-        },
-        {
-            title: '桥梁',
-            number: {
-                number: [randomExtend(20, 30)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#f46827',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '座'
-        },
-        {
-            title: '涵洞隧道',
-            number: {
-                number: [randomExtend(20, 30)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#40faee',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '匝道',
-            number: {
-                number: [randomExtend(10, 20)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#4d99fc',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '隧道',
-            number: {
-                number: [randomExtend(5, 10)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#f46827',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '服务区',
-            number: {
-                number: [randomExtend(5, 10)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#40faee',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '收费站',
-            number: {
-                number: [randomExtend(5, 10)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#4d99fc',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '超限站',
-            number: {
-                number: [randomExtend(5, 10)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#f46827',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        },
-        {
-            title: '停车区',
-            number: {
-                number: [randomExtend(5, 10)],
-                content: '{nt}',
-                textAlign: 'right',
-                style: {
-                    fill: '#40faee',
-                    fontWeight: 'bold'
-                }
-            },
-            unit: '个'
-        }
-    ]
-}
+
+
+
