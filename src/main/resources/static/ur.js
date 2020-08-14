@@ -66,6 +66,13 @@
                 setting.obj[setting.objKey] = responseData;
             });
         },
+        setResponseData:function(obj){
+            this.setQueryData({
+                "queryParam": obj.setting.queryCode,
+                "obj": obj,
+                "objKey": obj.setting.objKey
+            });
+        },
         /**
          * 将map key转为驼峰格式
          * @param json

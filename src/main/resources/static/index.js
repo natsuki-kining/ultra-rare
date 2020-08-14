@@ -10,16 +10,16 @@ var digitalFlop = Vue.extend({
     template: `<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>`,
     data() {
         return {
-            digitalFlopData: []
+            digitalFlopData: [],
+            querySetting:{
+                queryCode:"test-digital-flop",
+                objKey:"digitalFlopData"
+            }
         }
     },
     methods: {
-        createData() {
-            ur.setQueryData({
-                "queryParam": "test-digital-flop",
-                "obj": this,
-                "objKey": "digitalFlopData"
-            });
+        createData(){
+            ur.setResponseData(this);
         }
     },
     mounted() {

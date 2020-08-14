@@ -63,37 +63,3 @@ CREATE TABLE `ur_template` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ur_template_unique` (`TEMPLATE_CODE`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Table structure for test_ranking_board
--- ----------------------------
-DROP TABLE IF EXISTS `test_ranking_board`;
-CREATE TABLE `test_ranking_board` (
-  `id` varchar(32) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `value` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
--- 测试数据
-INSERT INTO `ur_dynamic_sql` VALUES ('1', 'test-ranking-board', 'test-ranking-board', 'test-ranking-board', 'select * from test_ranking_board', NULL, '', 'var queryData=ssrParams.queryData;queryData.rowNum = queryData.count;queryData.data = queryData.list;delete (queryData.count);delete (queryData.list);ssrResult=queryData;', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-
--- ----------------------------
--- Records of test_ranking_board
--- ----------------------------
-INSERT INTO `test_ranking_board` VALUES ('1', '日常养护', '55');
-INSERT INTO `test_ranking_board` VALUES ('2', '交通事故', '120');
-INSERT INTO `test_ranking_board` VALUES ('3', '路面', '78');
-INSERT INTO `test_ranking_board` VALUES ('4', '桥通', '66');
-INSERT INTO `test_ranking_board` VALUES ('5', '计日工', '80');
-INSERT INTO `test_ranking_board` VALUES ('6', '路基', '45');
-INSERT INTO `test_ranking_board` VALUES ('7', '交安设施', '29');
-INSERT INTO `test_ranking_board` VALUES ('8', '除雪', '29');
-INSERT INTO `test_ranking_board` VALUES ('9', '绿化', '29');
-
-
-
