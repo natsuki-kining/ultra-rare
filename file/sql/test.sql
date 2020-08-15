@@ -31,12 +31,26 @@ CREATE TABLE `test_ranking_board` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ----------------------------
+-- Table structure for test_rose_chart
+-- ----------------------------
+DROP TABLE IF EXISTS `test_rose_chart`;
+CREATE TABLE `test_ranking_board` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 
 -- 测试数据
 INSERT INTO `ur_dynamic_sql` VALUES ('1', 'test-ranking-board', 'test-ranking-board', 'test', 'select * from test_ranking_board', NULL, '', 'var queryData=ssrParams.queryData;queryData.rowNum = queryData.count;queryData.data = queryData.list;delete (queryData.count);delete (queryData.list);ssrResult=queryData;', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `ur_dynamic_sql` VALUES ('2', 'test-digital-flop', 'test-digital-flop', 'test', 'SELECT\r\n	f.id,\r\n	f.title,\r\n	f.unit,\r\n	a.number\r\nFROM\r\n	test_digital_flop f,\r\n	(\r\n		SELECT\r\n			n.test_digital_flop_id,\r\n			sum(n.number) number\r\n		FROM\r\n			test_digital_flop_number n\r\n		GROUP BY\r\n			n.test_digital_flop_id\r\n	) a\r\nWHERE\r\n	f.id = a.test_digital_flop_id', NULL, NULL, 'var testDigitalFlopData = ssrParams.queryData;var colors = [\'#4d99fc\',\'#f46827\',\'#40faee\',\'#4d99fc\',\'#f46827\',\'#40faee\',\'#4d99fc\',\'#f46827\',\'#40faee\'];\nfor (var i in testDigitalFlopData.list) {\n    testDigitalFlopData.list[i].number = {\"number\": [testDigitalFlopData.list[i].number]};\n    testDigitalFlopData.list[i].number.content = \'{nt}\';\n    testDigitalFlopData.list[i].number.textAlign = \'right\';\n    testDigitalFlopData.list[i].number.style = {\"fill\": colors[i], \"fontWeight\": \'bold\'};\n} ssrResult=testDigitalFlopData.list;\n', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `ur_dynamic_sql` VALUES ('1', 'test-rose-chart', 'test-rose-chart', 'test', 'select * from test_rose_chart', NULL, '', "var queryData=ssrParams.queryData;queryData.data = queryData.list;delete (queryData.count);delete (queryData.list);ssrResult=series: [{ type: 'pie', radius: '50%', roseSort: false, data: queryData, insideLabel: { show: false }, outsideLabel: { formatter: '{name} {percent}%', labelLineEndLength: 20, style: { fill: '#fff' }, labelLineStyle: { stroke: '#fff' } }, roseType: true }], color: ['#da2f00', '#fa3600', '#ff4411', '#ff724c', '#541200', '#801b00', '#a02200', '#5d1400', '#b72700'];", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+
+
 
 -- ----------------------------
 -- Records of test_digital_flop
@@ -78,3 +92,18 @@ INSERT INTO `test_ranking_board` VALUES ('6', '路基', '45');
 INSERT INTO `test_ranking_board` VALUES ('7', '交安设施', '29');
 INSERT INTO `test_ranking_board` VALUES ('8', '除雪', '29');
 INSERT INTO `test_ranking_board` VALUES ('9', '绿化', '29');
+
+
+
+-- ----------------------------
+-- Records of test_rose_chart
+-- ----------------------------
+INSERT INTO `test_rose_chart` VALUES ('1', '日常养护', '55');
+INSERT INTO `test_rose_chart` VALUES ('2', '交通事故', '25');
+INSERT INTO `test_rose_chart` VALUES ('3', '路面', '46');
+INSERT INTO `test_rose_chart` VALUES ('4', '桥通', '16');
+INSERT INTO `test_rose_chart` VALUES ('5', '计日工', '40');
+INSERT INTO `test_rose_chart` VALUES ('6', '路基', '25');
+INSERT INTO `test_rose_chart` VALUES ('7', '交安设施', '29');
+INSERT INTO `test_rose_chart` VALUES ('8', '除雪', '39');
+INSERT INTO `test_rose_chart` VALUES ('9', '绿化', '49');

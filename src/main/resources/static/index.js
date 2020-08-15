@@ -34,16 +34,16 @@ var rankingBoard = Vue.extend({
     template: `<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>`,
     data() {
         return {
-            rankingBoardConfig: {}
+            rankingBoardConfig: {},
+            querySetting:{
+                queryCode:"test-ranking-board",
+                objKey:"rankingBoardConfig"
+            }
         }
     },
     methods: {
         createData() {
-            ur.setQueryData({
-                "queryParam": "test-ranking-board",
-                "obj": this,
-                "objKey": "rankingBoardConfig"
-            });
+            ur.setResponseData(this);
         }
     },
     mounted() {
@@ -53,56 +53,19 @@ var rankingBoard = Vue.extend({
 });
 
 var roseChart = Vue.extend({
-    template: `<div id="rose-chart"> <div class="rose-chart-title">累计计量资金分布</div> <dv-charts :option="option" /> </div>`,
+    template: `<div id="rose-chart"> <div class="rose-chart-title">累计计量资金分布</div> <dv-charts :option="roseChartOption" /> </div>`,
     data() {
         return {
-            option: {}
+            option: {},
+            querySetting:{
+                queryCode:"test-rose-chart",
+                objKey:"roseChartOption"
+            }
         }
     },
     methods: {
         createData() {
-            const {randomExtend} = this
-
-            this.option = {
-                series: [{
-                    type: 'pie',
-                    radius: '50%',
-                    roseSort: false,
-                    data: [
-                        {name: '路基', value: randomExtend(40, 70)},
-                        {name: '交安设施', value: randomExtend(20, 30)},
-                        {name: '日常养护', value: randomExtend(10, 50)},
-                        {name: '桥通', value: randomExtend(5, 20)},
-                        {name: '交通事故', value: randomExtend(40, 50)},
-                        {name: '路面', value: randomExtend(20, 30)},
-                        {name: '绿化', value: randomExtend(5, 10)},
-                        {name: '计日工', value: randomExtend(20, 35)},
-                        {name: '除雪', value: randomExtend(5, 10)}
-                    ],
-                    insideLabel: {
-                        show: false
-                    },
-                    outsideLabel: {
-                        formatter: '{name} {percent}%',
-                        labelLineEndLength: 20,
-                        style: {
-                            fill: '#fff'
-                        },
-                        labelLineStyle: {
-                            stroke: '#fff'
-                        }
-                    },
-                    roseType: true
-                }],
-                color: ['#da2f00', '#fa3600', '#ff4411', '#ff724c', '#541200', '#801b00', '#a02200', '#5d1400', '#b72700']
-            }
-        },
-        randomExtend(minNum, maxNum) {
-            if (arguments.length === 1) {
-                return parseInt(Math.random() * minNum + 1, 10)
-            } else {
-                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
-            }
+            ur.setResponseData(this);
         }
     },
     mounted() {

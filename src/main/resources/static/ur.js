@@ -1,12 +1,22 @@
 (function ($w, $vue, undefined) {
     const ur = {
         baseURL: 'http://localhost:8080/',
+        /**
+         * 
+         * @param {object} response 响应数据
+         * @param {function} func 请求成功回调的函数
+         */
         success: function (response, func) {
             console.debug(response);
             if (func) {
                 func(response.data);
             }
         },
+        /**
+         * 请求失败回调函数
+         * @param {error}} response 
+         * @param {*} func 
+         */
         error: function (response, func) {
             console.error(response);
             if (func) {
