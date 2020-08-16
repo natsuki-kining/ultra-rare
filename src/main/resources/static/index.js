@@ -106,6 +106,7 @@ var scrollBoard = Vue.extend({
             querySetting:{
                 queryCode:"test-scroll-board",
                 objKey:"scrollBoardConfig"
+            }
         }
     },
     methods: {
@@ -125,11 +126,17 @@ var cards = Vue.extend({
     template: `<div id="cards"> <div class="card-item" v-for="(card, i) in cards" :key="card.title" > <div class="card-header"> <div class="card-header-left">{{ card.title }}</div> <div class="card-header-right">{{ '0' + (i + 1) }}</div> </div> <dv-charts class="ring-charts" :option="card.ring" /> <div class="card-footer"> <div class="card-footer-item"> <div class="footer-title">累计金额</div> <div class="footer-detail"> <dv-digital-flop :config="card.total" style="width:70%;height:35px;" />元 </div> </div> <div class="card-footer-item"> <div class="footer-title">巡查病害</div> <div class="footer-detail"> <dv-digital-flop :config="card.num" style="width:70%;height:35px;" />处 </div> </div> </div> </div> </div>`,
     data() {
         return {
-            cards: []
+            cards: [],
+            querySetting:{
+                queryCode:"test-cards",
+                objKey:"cards"
+            }
         }
     },
     methods: {
         createData() {
+            ur.setResponseData(this);
+
             const {randomExtend} = this
 
             this.cards = new Array(5).fill(0).map((foo, i) => ({
@@ -201,7 +208,7 @@ var cards = Vue.extend({
         const {createData} = this
 
         createData()
-
+        console.log(this.cards);
         setInterval(this.createData, 30000)
     }
 });
