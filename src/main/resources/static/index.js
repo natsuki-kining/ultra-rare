@@ -56,7 +56,7 @@ var roseChart = Vue.extend({
     template: `<div id="rose-chart"> <div class="rose-chart-title">累计计量资金分布</div> <dv-charts :option="roseChartOption" /> </div>`,
     data() {
         return {
-            option: {},
+            roseChartOption: {},
             querySetting:{
                 queryCode:"test-rose-chart",
                 objKey:"roseChartOption"
@@ -71,21 +71,30 @@ var roseChart = Vue.extend({
     mounted() {
         const {createData} = this
         createData()
-        setInterval(createData, 30000)
+        setInterval(createData, 50000)
     }
 });
 
 var waterLevelChart = Vue.extend({
-    template: `<div id="water-level-chart"> <div class="water-level-chart-title">计划资金累计完成情况</div> <div class="water-level-chart-details"> 累计完成<span>235,680</span>元 </div> <div class="chart-container"> <dv-water-level-pond :config="config" /> </div> </div>`,
+    template: `<div id="water-level-chart"> <div class="water-level-chart-title">计划资金累计完成情况</div> <div class="water-level-chart-details"> 累计完成<span>235,680</span>元 </div> <div class="chart-container"> <dv-water-level-pond :config="waterLevelChartConfig" /> </div> </div>`,
     data() {
         return {
-            config: {
-                data: [45],
-                shape: 'round',
-                waveHeight: 25,
-                waveNum: 2
+            waterLevelChartConfig: {},
+            querySetting:{
+                queryCode:"test-water-level-chart",
+                objKey:"waterLevelChartConfig"
             }
         }
+    },
+    methods: {
+        createData() {
+            ur.setResponseData(this);
+        }
+    },
+    mounted() {
+        const {createData} = this
+        createData()
+        setInterval(createData, 60000)
     }
 });
 
