@@ -138,3 +138,17 @@ INSERT INTO `test_rose_chart` VALUES ('9', '绿化', '49');
 -- Records of test_water_level_chart
 -- ----------------------------
 INSERT INTO `test_water_level_chart` VALUES ('1', 25, 5);
+
+-- ----------------------------
+-- Records of test_scroll_board
+-- ----------------------------
+INSERT INTO `test_scroll_board` VALUE('1','2019-07-01 19:25:00', '路面危害-松散', '5', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('2','2019-07-02 17:25:00', '路面危害-路面油污清理', '13', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('3','2019-07-03 16:25:00', '交安设施-交通标志牌结构', '6', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('4','2019-07-04 15:25:00', '路基危害-防尘网', '2', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('5','2019-07-05 14:25:00', '交安设施-交通标志牌结构', '1', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('6','2019-07-06 13:25:00', '路面危害-松散', '3', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('7','2019-07-07 12:25:00', '路基危害-防尘网', '4', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('8','2019-07-08 11:25:00', '路面危害-路面油污清理', '2', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('9','2019-07-09 10:25:00', '交安设施-交通标志牌结构', '5', 'xxxxxxx');
+INSERT INTO `test_scroll_board` VALUE('10','2019-07-10 09:25:00', '路基危害-防尘网', '3', 'xxxxxxx']
