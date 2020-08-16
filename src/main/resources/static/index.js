@@ -99,10 +99,10 @@ var waterLevelChart = Vue.extend({
 });
 
 var scrollBoard = Vue.extend({
-    template: `<div id="scroll-board"> <dv-scroll-board :config="config" /> </div>`,
+    template: `<div id="scroll-board"> <dv-scroll-board :config="scrollBoardConfig" /> </div>`,
     data() {
         return {
-            config: {
+            scrollBoardConfig: {
                 header: ['时间', '病害信息', '数量', '标段'],
                 data: [
                     ['2019-07-01 19:25:00', '路面危害-松散', '5', 'xxxxxxx'],
@@ -124,6 +124,10 @@ var scrollBoard = Vue.extend({
                 headerHeight: 45,
                 oddRowBGC: 'rgba(0, 44, 81, 0.8)',
                 evenRowBGC: 'rgba(10, 29, 50, 0.8)'
+            },
+            querySetting:{
+                queryCode:"test-scroll-board",
+                objKey:"scrollBoardConfig"
             }
         }
     }
