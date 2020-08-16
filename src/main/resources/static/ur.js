@@ -83,6 +83,27 @@
                 "objKey": obj.setting.objKey
             });
         },
+        vueExtend:function(template,data,setIntervalTime){
+            let ve = Vue.extend({
+                template: template,
+                data() {
+                    return data;
+                },
+                methods: {
+                    createData() {
+                        ur.setResponseData(this);
+                    }
+                },
+                mounted() {
+                    const {createData} = this
+                    createData()
+                    if(setIntervalTime&&setIntervalTime>0){
+                        setInterval(createData, setIntervalTime)
+                    }
+                }
+            });
+            return ve;
+        },
         /**
          * 将map key转为驼峰格式
          * @param json
