@@ -83,11 +83,11 @@
                 "objKey": obj.setting.objKey
             });
         },
-        vueExtend:function(template,data,setIntervalTime){
+        vueExtend:function(config){
             let ve = Vue.extend({
-                template: template,
+                template: config.template,
                 data() {
-                    return data;
+                    return config.data;
                 },
                 methods: {
                     createData() {
@@ -97,7 +97,7 @@
                 mounted() {
                     const {createData} = this
                     createData()
-                    if(setIntervalTime&&setIntervalTime>0){
+                    if(config.setIntervalTime&&config.setIntervalTime>0){
                         setInterval(createData, setIntervalTime)
                     }
                 }

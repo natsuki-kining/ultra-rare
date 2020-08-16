@@ -6,51 +6,73 @@ function topHeaderHtml() {
     return '<div id="top-header"> <dv-decoration-8 class="header-left-decoration" /> <dv-decoration-5 class="header-center-decoration" /> <dv-decoration-8 class="header-right-decoration" :reverse="true" /> <div class="center-title">施工养护综合数据</div> </div>';
 }
 
-var digitalFlop = Vue.extend({
-    template: `<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>`,
-    data() {
-        return {
-            digitalFlopData: [],
-            querySetting:{
-                queryCode:"test-digital-flop",
-                objKey:"digitalFlopData"
-            }
+var digitalFlop = ur.vueExtend({
+    template:'<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>',
+    data:{
+        digitalFlopData: [],
+        querySetting:{
+            queryCode:"test-digital-flop",
+            objKey:"digitalFlopData"
         }
     },
-    methods: {
-        createData(){
-            ur.setResponseData(this);
+    setIntervalTime:3000000
+});
+
+// var digitalFlop = Vue.extend({
+//     template: `<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>`,
+//     data() {
+//         return {
+//             digitalFlopData: [],
+//             querySetting:{
+//                 queryCode:"test-digital-flop",
+//                 objKey:"digitalFlopData"
+//             }
+//         }
+//     },
+//     methods: {
+//         createData(){
+//             ur.setResponseData(this);
+//         }
+//     },
+//     mounted() {
+//         const {createData} = this;
+//         createData();
+//         setInterval(createData, 3000000);
+//     }
+// });
+
+var rankingBoard = ur.vueExtend({
+    template:'<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>',
+    data:{
+        rankingBoardConfig: {},
+        querySetting:{
+            queryCode:"test-ranking-board",
+            objKey:"rankingBoardConfig"
         }
-    },
-    mounted() {
-        const {createData} = this;
-        createData();
-        setInterval(createData, 3000000);
     }
 });
 
-
-var rankingBoard = Vue.extend({
-    template: `<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>`,
-    data() {
-        return {
-            rankingBoardConfig: {},
-            querySetting:{
-                queryCode:"test-ranking-board",
-                objKey:"rankingBoardConfig"
-            }
-        }
-    },
-    methods: {
-        createData() {
-            ur.setResponseData(this);
-        }
-    },
-    mounted() {
-        const {createData} = this;
-        createData();
-    }
-});
+// var rankingBoard = Vue.extend({
+//     template: `<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>`,
+//     data() {
+//         return {
+//             rankingBoardConfig: {},
+//             querySetting:{
+//                 queryCode:"test-ranking-board",
+//                 objKey:"rankingBoardConfig"
+//             }
+//         }
+//     },
+//     methods: {
+//         createData() {
+//             ur.setResponseData(this);
+//         }
+//     },
+//     mounted() {
+//         const {createData} = this;
+//         createData();
+//     }
+// });
 
 var roseChart = Vue.extend({
     template: `<div id="rose-chart"> <div class="rose-chart-title">累计计量资金分布</div> <dv-charts :option="roseChartOption" /> </div>`,
