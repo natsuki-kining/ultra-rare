@@ -6,152 +6,74 @@ function topHeaderHtml() {
     return '<div id="top-header"> <dv-decoration-8 class="header-left-decoration" /> <dv-decoration-5 class="header-center-decoration" /> <dv-decoration-8 class="header-right-decoration" :reverse="true" /> <div class="center-title">施工养护综合数据</div> </div>';
 }
 
-var digitalFlop = ur.vueExtend({
-    template:'<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>',
-    data:{
+const digitalFlop = ur.vueExtend({
+    template: '<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>',
+    data: {
         digitalFlopData: [],
-        querySetting:{
-            queryCode:"test-digital-flop",
-            objKey:"digitalFlopData"
+        querySetting: {
+            queryCode: "test-digital-flop",
+            objKey: "digitalFlopData"
         }
     },
-    setIntervalTime:3000000
+    setIntervalTime: 3000000
 });
 
-// var digitalFlop = Vue.extend({
-//     template: `<div id="digital-flop"> <div class="digital-flop-item" v-for="item in digitalFlopData" :key="item.title" > <div class="digital-flop-title">{{ item.title }}</div> <div class="digital-flop"> <dv-digital-flop :config="item.number" style="width:100px;height:50px;" /> <div class="unit">{{ item.unit }}</div> </div> </div> <dv-decoration-10 /> </div>`,
-//     data() {
-//         return {
-//             digitalFlopData: [],
-//             querySetting:{
-//                 queryCode:"test-digital-flop",
-//                 objKey:"digitalFlopData"
-//             }
-//         }
-//     },
-//     methods: {
-//         createData(){
-//             ur.setResponseData(this);
-//         }
-//     },
-//     mounted() {
-//         const {createData} = this;
-//         createData();
-//         setInterval(createData, 3000000);
-//     }
-// });
-
-var rankingBoard = ur.vueExtend({
-    template:'<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>',
-    data:{
+const rankingBoard = ur.vueExtend({
+    template: '<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>',
+    data: {
         rankingBoardConfig: {},
-        querySetting:{
-            queryCode:"test-ranking-board",
-            objKey:"rankingBoardConfig"
+        querySetting: {
+            queryCode: "test-ranking-board",
+            objKey: "rankingBoardConfig"
         }
     }
 });
 
-// var rankingBoard = Vue.extend({
-//     template: `<div id="ranking-board"> <div class="ranking-board-title">巡查上报记录数量</div> <dv-scroll-ranking-board :config="rankingBoardConfig" /> </div>`,
-//     data() {
-//         return {
-//             rankingBoardConfig: {},
-//             querySetting:{
-//                 queryCode:"test-ranking-board",
-//                 objKey:"rankingBoardConfig"
-//             }
-//         }
-//     },
-//     methods: {
-//         createData() {
-//             ur.setResponseData(this);
-//         }
-//     },
-//     mounted() {
-//         const {createData} = this;
-//         createData();
-//     }
-// });
-
-var roseChart = Vue.extend({
+const roseChart = ur.vueExtend({
     template: `<div id="rose-chart"> <div class="rose-chart-title">累计计量资金分布</div> <dv-charts :option="roseChartOption" /> </div>`,
-    data() {
-        return {
-            roseChartOption: {},
-            querySetting:{
-                queryCode:"test-rose-chart",
-                objKey:"roseChartOption"
-            }
+    data: {
+        roseChartOption: {},
+        querySetting: {
+            queryCode: "test-rose-chart",
+            objKey: "roseChartOption"
         }
     },
-    methods: {
-        createData() {
-            ur.setResponseData(this);
-        }
-    },
-    mounted() {
-        const {createData} = this
-        createData()
-        setInterval(createData, 50000)
-    }
+    setIntervalTime: 50000000
 });
 
-var waterLevelChart = Vue.extend({
+const waterLevelChart = ur.vueExtend({
     template: `<div id="water-level-chart"> <div class="water-level-chart-title">计划资金累计完成情况</div> <div class="water-level-chart-details"> 累计完成<span>235,680</span>元 </div> <div class="chart-container"> <dv-water-level-pond :config="waterLevelChartConfig" /> </div> </div>`,
-    data() {
-        return {
-            waterLevelChartConfig: {},
-            querySetting:{
-                queryCode:"test-water-level-chart",
-                objKey:"waterLevelChartConfig"
-            }
+    data: {
+        waterLevelChartConfig: {},
+        querySetting: {
+            queryCode: "test-water-level-chart",
+            objKey: "waterLevelChartConfig"
         }
     },
-    methods: {
-        createData() {
-            ur.setResponseData(this);
-        }
-    },
-    mounted() {
-        const {createData} = this
-        createData()
-        setInterval(createData, 60000)
-    }
+    setInterval: 600000000
 });
 
-var scrollBoard = Vue.extend({
+const scrollBoard = ur.vueExtend({
     template: `<div id="scroll-board"> <dv-scroll-board :config="scrollBoardConfig" /> </div>`,
-    data() {
-        return {
-            scrollBoardConfig: {},
-            querySetting:{
-                queryCode:"test-scroll-board",
-                objKey:"scrollBoardConfig"
-            }
+    data: {
+        scrollBoardConfig: {},
+        querySetting: {
+            queryCode: "test-scroll-board",
+            objKey: "scrollBoardConfig"
         }
     },
-    methods: {
-        createData() {
-            ur.setResponseData(this);
-        }
-    },
-    mounted() {
-        const {createData} = this
-        createData()
-        setInterval(createData, 60000)
-    }
+    setInterval: 600000000
 });
 
 
-var cards = Vue.extend({
+const cards = Vue.extend({
     template: `<div id="cards"> <div class="card-item" v-for="(card, i) in cards" :key="card.title" > <div class="card-header"> <div class="card-header-left">{{ card.title }}</div> <div class="card-header-right">{{ '0' + (i + 1) }}</div> </div> <dv-charts class="ring-charts" :option="card.ring" /> <div class="card-footer"> <div class="card-footer-item"> <div class="footer-title">累计金额</div> <div class="footer-detail"> <dv-digital-flop :config="card.total" style="width:70%;height:35px;" />元 </div> </div> <div class="card-footer-item"> <div class="footer-title">巡查病害</div> <div class="footer-detail"> <dv-digital-flop :config="card.num" style="width:70%;height:35px;" />处 </div> </div> </div> </div> </div>`,
     data() {
         return {
             cards: [],
-            querySetting:{
-                queryCode:"test-cards",
-                objKey:"cards"
+            querySetting: {
+                queryCode: "test-cards",
+                objKey: "cards"
             }
         }
     },
@@ -229,14 +151,14 @@ var cards = Vue.extend({
     mounted() {
         const {createData} = this
 
-        createData()
+        // createData()
         console.log(this.cards);
-        setInterval(this.createData, 30000)
+        setInterval(this.createData, 3000000)
     }
 });
 
 
-var app = new Vue({
+const app = new Vue({
     el: '#app',
     components: {
         'digitalFlop': digitalFlop,
@@ -244,7 +166,7 @@ var app = new Vue({
         'roseChart': roseChart,
         'waterLevelChart': waterLevelChart,
         'scrollBoard': scrollBoard,
-        'cards': cards
+        /*'cards': cards*/
     }
 
 });

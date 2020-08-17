@@ -2,7 +2,7 @@
     const ur = {
         baseURL: 'http://localhost:8080/',
         /**
-         * 
+         *
          * @param {object} response 响应数据
          * @param {function} func 请求成功回调的函数
          */
@@ -14,8 +14,8 @@
         },
         /**
          * 请求失败回调函数
-         * @param {error}} response 
-         * @param {*} func 
+         * @param {error}} response
+         * @param {*} func
          */
         error: function (response, func) {
             console.error(response);
@@ -72,18 +72,18 @@
             return this.post(config, successFunc, errorFunc);
         },
         setQueryData: function (setting) {
-            this.query(setting.queryParam||{}, setting.config||{}, (responseData)=> {
+            this.query(setting.queryParam || {}, setting.config || {}, (responseData) => {
                 setting.obj[setting.objKey] = responseData;
             });
         },
-        setResponseData:function(obj){
+        setResponseData: function (obj) {
             this.setQueryData({
-                "queryParam": obj.setting.queryCode,
+                "queryParam": obj.querySetting.queryCode,
                 "obj": obj,
-                "objKey": obj.setting.objKey
+                "objKey": obj.querySetting.objKey
             });
         },
-        vueExtend:function(config){
+        vueExtend: function (config) {
             let ve = Vue.extend({
                 template: config.template,
                 data() {
@@ -97,8 +97,8 @@
                 mounted() {
                     const {createData} = this
                     createData()
-                    if(config.setIntervalTime&&config.setIntervalTime>0){
-                        setInterval(createData, setIntervalTime)
+                    if (config.setIntervalTime && config.setIntervalTime > 0) {
+                        setInterval(createData, config.setIntervalTime)
                     }
                 }
             });
