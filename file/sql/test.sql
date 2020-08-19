@@ -66,6 +66,17 @@ CREATE TABLE `test_scroll_board` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ----------------------------
+-- Table structure for test_cards
+-- ----------------------------
+DROP TABLE IF EXISTS `test_cards`;
+CREATE TABLE `test_cards` (
+  `id` varchar(32) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 -- 测试数据
 INSERT INTO `ur_dynamic_sql` VALUES ('1', 'test-ranking-board', 'test-ranking-board', 'test', 'select * from test_ranking_board', null, '', 'var queryData=ssrParams.queryData;queryData.rowNum = queryData.count;queryData.data = queryData.list;delete (queryData.count);delete (queryData.list);ssrResult=queryData;', null, null, null, null, null, null, null, null, null, null);
@@ -73,6 +84,7 @@ INSERT INTO `ur_dynamic_sql` VALUES ('2', 'test-digital-flop', 'test-digital-flo
 INSERT INTO `ur_dynamic_sql` VALUES ('3', 'test-rose-chart', 'test-rose-chart', 'test', 'select * from test_rose_chart', null, '', 'var queryData=ssrParams.queryData;\r\nvar ArrayList = Java.type(\'java.util.ArrayList\');\r\nvar series = new ArrayList();\r\nvar seriesArray1 = { type: \'pie\', radius: \'50%\', roseSort: false, data: queryData.list, insideLabel: { show: false }, outsideLabel: { formatter: \'{name} {percent}%\', labelLineEndLength: 20, style: { fill: \'#fff\' }, labelLineStyle: { stroke: \'#fff\' } }, roseType: true };\r\nseries.add(seriesArray1);\r\nvar color = new ArrayList();\r\ncolor.add(\'#da2f00\');\r\ncolor.add(\'#fa3600\');\r\ncolor.add(\'#ff4411\');\r\ncolor.add(\'#ff724c\');\r\ncolor.add(\'#541200\');\r\ncolor.add(\'#801b00\');\r\ncolor.add(\'#a02200\');\r\ncolor.add(\'#5d1400\');\r\ncolor.add(\'#b72700\');\r\nssrResult={series: series, color: color};', null, null, null, null, null, null, null, null, null, null);
 INSERT INTO `ur_dynamic_sql` VALUES ('4', 'test-water-level-chart', 'test-water-level-chart', 'test', 'select wave_height waveHeight,wave_num waveNum from test_water_level_chart', null, '', 'ssrResult = {\r\n                data: [45],\r\n                shape: \'round\',\r\n                waveHeight: 25,\r\n                waveNum: 2\r\n            }', null, null, null, null, null, null, null, null, null, null);
 INSERT INTO `ur_dynamic_sql` VALUES ('5', 'test-scroll-board', 'test-scroll-board', 'test', 'select * from test_scroll_board', null, '', 'var ArrayList = Java.type(\'java.util.ArrayList\');\r\nvar array = new ArrayList();\r\nfor(var i = 0,len = ssrParams.queryData.list.length;i<len;i++){\r\n	var temp = ssrParams.queryData.list[i];\r\n	var tempArray = new ArrayList();\r\n	tempArray.add(temp.date);\r\n	tempArray.add(temp.info);\r\n	tempArray.add(temp.quantity);\r\n	tempArray.add(temp.jieduan);\r\n	array.add(tempArray);\r\n}\r\nvar header = new ArrayList();\r\nheader.add(\'时间\');\r\nheader.add(\'病害信息\');\r\nheader.add(\'数量\');\r\nheader.add(\'标段\');\r\nvar columnWidth = new ArrayList();\r\ncolumnWidth.add(50);\r\ncolumnWidth.add(170);\r\ncolumnWidth.add(210);\r\nvar align = new ArrayList();\r\nalign.add(\'center\');\r\n\r\nssrResult = {\r\n                header: header,\r\n                data: array,\r\n                index: true,\r\n                columnWidth: columnWidth,\r\n                align: align,\r\n                rowNum: 7,\r\n                headerBGC: \'#1981f6\',\r\n                headerHeight: 45,\r\n                oddRowBGC: \'rgba(0, 44, 81, 0.8)\',\r\n                evenRowBGC: \'rgba(10, 29, 50, 0.8)\'\r\n            }', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `ur_dynamic_sql` VALUES ('6', 'test-cards', 'test-cards', 'test', 'select * from test_cards', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 
 
@@ -152,3 +164,14 @@ INSERT INTO `test_scroll_board` VALUE('7','2019-07-07 12:25:00', '路基危害-�
 INSERT INTO `test_scroll_board` VALUE('8','2019-07-08 11:25:00', '路面危害-路面油污清理', '2', 'xxxxxxx');
 INSERT INTO `test_scroll_board` VALUE('9','2019-07-09 10:25:00', '交安设施-交通标志牌结构', '5', 'xxxxxxx');
 INSERT INTO `test_scroll_board` VALUE('10','2019-07-10 09:25:00', '路基危害-防尘网', '3', 'xxxxxxx');
+
+
+-- ----------------------------
+-- Records of test_cards
+-- ----------------------------
+INSERT INTO `test_cards` VALUES ('1', '测试路段01');
+INSERT INTO `test_cards` VALUES ('2', '测试路段02');
+INSERT INTO `test_cards` VALUES ('3', '测试路段03');
+INSERT INTO `test_cards` VALUES ('4', '测试路段04');
+INSERT INTO `test_cards` VALUES ('5', '测试路段05');
+INSERT INTO `test_cards` VALUES ('6', '测试路段06');

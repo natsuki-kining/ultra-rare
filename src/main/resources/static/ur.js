@@ -95,7 +95,7 @@
                     }
                 },
                 mounted() {
-                    const {createData} = this
+                    const {createData} = this;
                     createData()
                     if (config.setIntervalTime && config.setIntervalTime > 0) {
                         setInterval(createData, config.setIntervalTime)
@@ -103,6 +103,28 @@
                 }
             });
             return ve;
+        },
+        /**
+         * config.template
+         * config.dataKey
+         * config.dataValue
+         * config.queryCOde
+         * config.objKey
+         * @param config
+         */
+        vueExtendConfig:function(config){
+            let vueExtendConfig = {
+                template: config.template,
+                setInterval: config.setIntervalTime
+            }
+
+            let data = {querySetting: {}};
+            data[config.dataKey] = config.dataValue || {};
+            data.querySetting.queryCode = config.queryCode;
+            data.querySetting.objKey = config.objKey || config.dataKey;
+            vueExtendConfig.data = data;
+
+            return ur.vueExtend(vueExtendConfig);
         },
         /**
          * 将map key转为驼峰格式
