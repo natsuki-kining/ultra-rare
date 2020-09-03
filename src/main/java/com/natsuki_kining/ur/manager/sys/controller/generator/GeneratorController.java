@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author natsuki_kining
+ */
 @Controller
 @RequestMapping(value = "/sys/generator")
-//@RequiresRoles(value={"role:all","admin:all","admin:sys:all","sys:generator"})
 public class GeneratorController extends BaseController {
 	
 	@Autowired
