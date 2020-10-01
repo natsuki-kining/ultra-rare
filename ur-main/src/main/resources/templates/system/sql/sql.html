@@ -11,19 +11,16 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>查询的code：</label>
+                                <label>code：</label>
                                 <input type="text" name="queryCode"/>
                             </li>
                             <li>
-                                <label>查询的名称：</label>
+                                <label>名称：</label>
                                 <input type="text" name="queryName"/>
                             </li>
                             <li>
-                                <label>查询的类型：</label>
-                                <select name="queryType">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                <label>类型：</label>
+                                <input type="text" name="queryType"/>
                             </li>
                             <li>
                                 <label>数据源名称：</label>
@@ -34,11 +31,11 @@
                                 <input type="text" name="sqlTemplate"/>
                             </li>
                             <li>
-                                <label>查询之前脚本：</label>
+                                <label>查前脚本：</label>
                                 <input type="text" name="beforeScript"/>
                             </li>
                             <li>
-                                <label>查询之后脚本：</label>
+                                <label>查后脚本：</label>
                                 <input type="text" name="afterScript"/>
                             </li>
                             <li>
@@ -117,15 +114,15 @@
                 },
                 {
                     field: 'queryCode',
-                    title: '查询的code'
+                    title: 'code'
                 },
                 {
                     field: 'queryName',
-                    title: '查询的名称'
+                    title: '名称'
                 },
                 {
                     field: 'queryType',
-                    title: '查询的类型'
+                    title: '类型'
                 },
                 {
                     field: 'dataSourceName',
@@ -137,11 +134,11 @@
                 },
                 {
                     field: 'beforeScript',
-                    title: '查询之前脚本'
+                    title: '查前脚本'
                 },
                 {
                     field: 'afterScript',
-                    title: '查询之后脚本'
+                    title: '查后脚本'
                 },
                 {
                     field: 'version',
