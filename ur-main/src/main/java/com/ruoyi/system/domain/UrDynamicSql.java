@@ -16,7 +16,7 @@ public class UrDynamicSql extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private String ID;
+    private Integer id;
 
     /** 查询的code */
     @Excel(name = "查询的code")
@@ -48,10 +48,9 @@ public class UrDynamicSql extends BaseEntity
 
     /** 版本号 */
     @Excel(name = "版本号")
-    private String VERSION;
+    private String version;
 
     /** 是否删除。1：是，0：否。 */
-    @Excel(name = "是否删除。1：是，0：否。")
     private Integer delFlag;
 
     /** 排序编号。正序。 */
@@ -74,14 +73,14 @@ public class UrDynamicSql extends BaseEntity
     @Excel(name = "修改人id")
     private String updateId;
 
-    public void setID(String ID) 
+    public void setId(Integer id)
     {
-        this.ID = ID;
+        this.id = id;
     }
 
-    public String getID() 
+    public Integer getId()
     {
-        return ID;
+        return id;
     }
     public void setQueryCode(String queryCode) 
     {
@@ -146,14 +145,14 @@ public class UrDynamicSql extends BaseEntity
     {
         return afterScript;
     }
-    public void setVERSION(String VERSION) 
+    public void setVersion(String version) 
     {
-        this.VERSION = VERSION;
+        this.version = version;
     }
 
-    public String getVERSION() 
+    public String getVersion() 
     {
-        return VERSION;
+        return version;
     }
     public void setDelFlag(Integer delFlag) 
     {
@@ -213,7 +212,7 @@ public class UrDynamicSql extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("ID", getID())
+            .append("id", getId())
             .append("queryCode", getQueryCode())
             .append("queryName", getQueryName())
             .append("queryType", getQueryType())
@@ -221,7 +220,7 @@ public class UrDynamicSql extends BaseEntity
             .append("sqlTemplate", getSqlTemplate())
             .append("beforeScript", getBeforeScript())
             .append("afterScript", getAfterScript())
-            .append("VERSION", getVERSION())
+            .append("version", getVersion())
             .append("delFlag", getDelFlag())
             .append("orderNum", getOrderNum())
             .append("createName", getCreateName())

@@ -1,12 +1,11 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
-
-import com.ruoyi.system.domain.UrTemplate;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UrTemplateMapper;
+import com.ruoyi.system.domain.UrTemplate;
 import com.ruoyi.system.service.IUrTemplateService;
 import com.ruoyi.common.core.text.Convert;
 
@@ -25,13 +24,13 @@ public class UrTemplateServiceImpl implements IUrTemplateService
     /**
      * 查询模板
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 模板
      */
     @Override
-    public UrTemplate selectUrTemplateById(String ID)
+    public UrTemplate selectUrTemplateById(String id)
     {
-        return urTemplateMapper.selectUrTemplateById(ID);
+        return urTemplateMapper.selectUrTemplateById(id);
     }
 
     /**
@@ -87,12 +86,12 @@ public class UrTemplateServiceImpl implements IUrTemplateService
     /**
      * 删除模板信息
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 结果
      */
     @Override
-    public int deleteUrTemplateById(String ID)
+    public int deleteUrTemplateById(String id)
     {
-        return urTemplateMapper.deleteUrTemplateById(ID);
+        return urTemplateMapper.deleteUrTemplateById(id);
     }
 }

@@ -16,15 +16,15 @@
                             </li>
                             <li>
                                 <label>模板：</label>
-                                <input type="text" name="TEMPLATE"/>
+                                <input type="text" name="template"/>
                             </li>
                             <li>
                                 <label>脚本：</label>
-                                <input type="text" name="JAVASCRIPT"/>
+                                <input type="text" name="javascript"/>
                             </li>
                             <li>
                                 <label>版本号：</label>
-                                <input type="text" name="VERSION"/>
+                                <input type="text" name="version"/>
                             </li>
                             <li>
                                 <label>排序编号。正序。：</label>
@@ -38,12 +38,6 @@
                                 <label>创建人id：</label>
                                 <input type="text" name="createId"/>
                             </li>
-                            <li class="select-time">
-                                <label>创建时间：</label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
-                            </li>
                             <li>
                                 <label>修改人名称：</label>
                                 <input type="text" name="updateName"/>
@@ -51,12 +45,6 @@
                             <li>
                                 <label>修改人id：</label>
                                 <input type="text" name="updateId"/>
-                            </li>
-                            <li class="select-time">
-                                <label>修改时间：</label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -104,7 +92,7 @@
                     checkbox: true
                 },
                 {
-                    field: 'ID',
+                    field: 'id',
                     title: '主键',
                     visible: false
                 },
@@ -113,20 +101,16 @@
                     title: '模板code'
                 },
                 {
-                    field: 'TEMPLATE',
+                    field: 'template',
                     title: '模板'
                 },
                 {
-                    field: 'JAVASCRIPT',
+                    field: 'javascript',
                     title: '脚本'
                 },
                 {
-                    field: 'VERSION',
+                    field: 'version',
                     title: '版本号'
-                },
-                {
-                    field: 'delFlag',
-                    title: '是否删除。1：是，0：否。'
                 },
                 {
                     field: 'orderNum',
@@ -141,10 +125,6 @@
                     title: '创建人id'
                 },
                 {
-                    field: 'createTime',
-                    title: '创建时间'
-                },
-                {
                     field: 'updateName',
                     title: '修改人名称'
                 },
@@ -153,11 +133,7 @@
                     title: '修改人id'
                 },
                 {
-                    field: 'updateTime',
-                    title: '修改时间'
-                },
-                {
-                    field: 'REMARK',
+                    field: 'remark',
                     title: '备注'
                 },
                 {
@@ -165,8 +141,8 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.ID + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.ID + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]

@@ -14,10 +14,10 @@ public interface UrTemplateMapper
     /**
      * 查询模板
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 模板
      */
-    public UrTemplate selectUrTemplateById(String ID);
+    public UrTemplate selectUrTemplateById(String id);
 
     /**
      * 查询模板列表
@@ -46,16 +46,16 @@ public interface UrTemplateMapper
     /**
      * 删除模板
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 结果
      */
-    public int deleteUrTemplateById(String ID);
+    public int deleteUrTemplateById(String id);
 
     /**
      * 批量删除模板
      * 
-     * @param IDs 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteUrTemplateByIds(String[] IDs);
+    public int deleteUrTemplateByIds(String[] ids);
 }

@@ -16,7 +16,7 @@ public class UrTemplate extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private String ID;
+    private String id;
 
     /** 模板code */
     @Excel(name = "模板code")
@@ -24,18 +24,17 @@ public class UrTemplate extends BaseEntity
 
     /** 模板 */
     @Excel(name = "模板")
-    private String TEMPLATE;
+    private String template;
 
     /** 脚本 */
     @Excel(name = "脚本")
-    private String JAVASCRIPT;
+    private String javascript;
 
     /** 版本号 */
     @Excel(name = "版本号")
-    private String VERSION;
+    private String version;
 
     /** 是否删除。1：是，0：否。 */
-    @Excel(name = "是否删除。1：是，0：否。")
     private Integer delFlag;
 
     /** 排序编号。正序。 */
@@ -58,14 +57,14 @@ public class UrTemplate extends BaseEntity
     @Excel(name = "修改人id")
     private String updateId;
 
-    public void setID(String ID) 
+    public void setId(String id) 
     {
-        this.ID = ID;
+        this.id = id;
     }
 
-    public String getID() 
+    public String getId() 
     {
-        return ID;
+        return id;
     }
     public void setTemplateCode(String templateCode) 
     {
@@ -76,32 +75,32 @@ public class UrTemplate extends BaseEntity
     {
         return templateCode;
     }
-    public void setTEMPLATE(String TEMPLATE) 
+    public void setTemplate(String template) 
     {
-        this.TEMPLATE = TEMPLATE;
+        this.template = template;
     }
 
-    public String getTEMPLATE() 
+    public String getTemplate() 
     {
-        return TEMPLATE;
+        return template;
     }
-    public void setJAVASCRIPT(String JAVASCRIPT) 
+    public void setJavascript(String javascript) 
     {
-        this.JAVASCRIPT = JAVASCRIPT;
-    }
-
-    public String getJAVASCRIPT() 
-    {
-        return JAVASCRIPT;
-    }
-    public void setVERSION(String VERSION) 
-    {
-        this.VERSION = VERSION;
+        this.javascript = javascript;
     }
 
-    public String getVERSION() 
+    public String getJavascript() 
     {
-        return VERSION;
+        return javascript;
+    }
+    public void setVersion(String version) 
+    {
+        this.version = version;
+    }
+
+    public String getVersion() 
+    {
+        return version;
     }
     public void setDelFlag(Integer delFlag) 
     {
@@ -161,11 +160,11 @@ public class UrTemplate extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("ID", getID())
+            .append("id", getId())
             .append("templateCode", getTemplateCode())
-            .append("TEMPLATE", getTEMPLATE())
-            .append("JAVASCRIPT", getJAVASCRIPT())
-            .append("VERSION", getVERSION())
+            .append("template", getTemplate())
+            .append("javascript", getJavascript())
+            .append("version", getVersion())
             .append("delFlag", getDelFlag())
             .append("orderNum", getOrderNum())
             .append("createName", getCreateName())

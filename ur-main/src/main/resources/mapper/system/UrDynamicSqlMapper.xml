@@ -4,83 +4,79 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.UrDynamicSqlMapper">
     
-    <resultMap type="com.ruoyi.system.domain.UrDynamicSql" id="UrDynamicSqlResult">
-        <result property="ID"    column="ID"    />
-        <result property="queryCode"    column="QUERY_CODE"    />
-        <result property="queryName"    column="QUERY_NAME"    />
-        <result property="queryType"    column="QUERY_TYPE"    />
-        <result property="dataSourceName"    column="DATA_SOURCE_NAME"    />
-        <result property="sqlTemplate"    column="SQL_TEMPLATE"    />
-        <result property="beforeScript"    column="BEFORE_SCRIPT"    />
-        <result property="afterScript"    column="AFTER_SCRIPT"    />
-        <result property="VERSION"    column="VERSION"    />
-        <result property="delFlag"    column="DEL_FLAG"    />
-        <result property="orderNum"    column="ORDER_NUM"    />
-        <result property="createName"    column="CREATE_NAME"    />
-        <result property="createId"    column="CREATE_Id"    />
-        <result property="createTime"    column="CREATE_TIME"    />
-        <result property="updateName"    column="UPDATE_NAME"    />
-        <result property="updateId"    column="UPDATE_Id"    />
-        <result property="updateTime"    column="UPDATE_TIME"    />
+    <resultMap type="UrDynamicSql" id="UrDynamicSqlResult">
+        <result property="id"    column="id"    />
+        <result property="queryCode"    column="query_code"    />
+        <result property="queryName"    column="query_name"    />
+        <result property="queryType"    column="query_type"    />
+        <result property="dataSourceName"    column="data_source_name"    />
+        <result property="sqlTemplate"    column="sql_template"    />
+        <result property="beforeScript"    column="before_script"    />
+        <result property="afterScript"    column="after_script"    />
+        <result property="version"    column="version"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="createName"    column="create_name"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateName"    column="update_name"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectUrDynamicSqlVo">
-        select ID, QUERY_CODE, QUERY_NAME, QUERY_TYPE, DATA_SOURCE_NAME, SQL_TEMPLATE, BEFORE_SCRIPT, AFTER_SCRIPT, VERSION, DEL_FLAG, ORDER_NUM, CREATE_NAME, CREATE_Id, CREATE_TIME, UPDATE_NAME, UPDATE_Id, UPDATE_TIME, REMARK from ur_dynamic_sql
+        select id, query_code, query_name, query_type, data_source_name, sql_template, before_script, after_script, version, del_flag, order_num, create_name, create_id, create_time, update_name, update_id, update_time, remark from ur_dynamic_sql
     </sql>
 
-    <select id="selectUrDynamicSqlList" parameterType="com.ruoyi.system.domain.UrDynamicSql" resultMap="UrDynamicSqlResult">
+    <select id="selectUrDynamicSqlList" parameterType="UrDynamicSql" resultMap="UrDynamicSqlResult">
         <include refid="selectUrDynamicSqlVo"/>
         <where>  
-            <if test="queryCode != null  and queryCode != ''"> and QUERY_CODE = #{queryCode}</if>
-            <if test="queryName != null  and queryName != ''"> and QUERY_NAME like concat('%', #{queryName}, '%')</if>
-            <if test="queryType != null  and queryType != ''"> and QUERY_TYPE = #{queryType}</if>
-            <if test="dataSourceName != null  and dataSourceName != ''"> and DATA_SOURCE_NAME like concat('%', #{dataSourceName}, '%')</if>
-            <if test="sqlTemplate != null  and sqlTemplate != ''"> and SQL_TEMPLATE = #{sqlTemplate}</if>
-            <if test="beforeScript != null  and beforeScript != ''"> and BEFORE_SCRIPT = #{beforeScript}</if>
-            <if test="afterScript != null  and afterScript != ''"> and AFTER_SCRIPT = #{afterScript}</if>
-            <if test="VERSION != null  and VERSION != ''"> and VERSION = #{VERSION}</if>
-            <if test="delFlag != null  and delFlag != ''"> and DEL_FLAG = #{delFlag}</if>
-            <if test="orderNum != null "> and ORDER_NUM = #{orderNum}</if>
-            <if test="createName != null  and createName != ''"> and CREATE_NAME like concat('%', #{createName}, '%')</if>
-            <if test="createId != null  and createId != ''"> and CREATE_Id = #{createId}</if>
-            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
-            <if test="updateName != null  and updateName != ''"> and UPDATE_NAME like concat('%', #{updateName}, '%')</if>
-            <if test="updateId != null  and updateId != ''"> and UPDATE_Id = #{updateId}</if>
-            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="remark != null  and remark != ''"> and REMARK = #{remark}</if>
+            <if test="queryCode != null  and queryCode != ''"> and query_code = #{queryCode}</if>
+            <if test="queryName != null  and queryName != ''"> and query_name like concat('%', #{queryName}, '%')</if>
+            <if test="queryType != null  and queryType != ''"> and query_type = #{queryType}</if>
+            <if test="dataSourceName != null  and dataSourceName != ''"> and data_source_name like concat('%', #{dataSourceName}, '%')</if>
+            <if test="sqlTemplate != null  and sqlTemplate != ''"> and sql_template = #{sqlTemplate}</if>
+            <if test="beforeScript != null  and beforeScript != ''"> and before_script = #{beforeScript}</if>
+            <if test="afterScript != null  and afterScript != ''"> and after_script = #{afterScript}</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="createName != null  and createName != ''"> and create_name like concat('%', #{createName}, '%')</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updateName != null  and updateName != ''"> and update_name like concat('%', #{updateName}, '%')</if>
+            <if test="updateId != null  and updateId != ''"> and update_id = #{updateId}</if>
         </where>
     </select>
     
     <select id="selectUrDynamicSqlById" parameterType="String" resultMap="UrDynamicSqlResult">
         <include refid="selectUrDynamicSqlVo"/>
-        where ID = #{ID}
+        where id = #{id}
     </select>
         
     <insert id="insertUrDynamicSql" parameterType="UrDynamicSql">
         insert into ur_dynamic_sql
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="ID != null">ID,</if>
-            <if test="queryCode != null and queryCode != ''">QUERY_CODE,</if>
-            <if test="queryName != null">QUERY_NAME,</if>
-            <if test="queryType != null">QUERY_TYPE,</if>
-            <if test="dataSourceName != null">DATA_SOURCE_NAME,</if>
-            <if test="sqlTemplate != null and sqlTemplate != ''">SQL_TEMPLATE,</if>
-            <if test="beforeScript != null">BEFORE_SCRIPT,</if>
-            <if test="afterScript != null">AFTER_SCRIPT,</if>
-            <if test="VERSION != null">VERSION,</if>
-            <if test="delFlag != null">DEL_FLAG,</if>
-            <if test="orderNum != null">ORDER_NUM,</if>
-            <if test="createName != null">CREATE_NAME,</if>
-            <if test="createId != null">CREATE_Id,</if>
-            <if test="createTime != null">CREATE_TIME,</if>
-            <if test="updateName != null">UPDATE_NAME,</if>
-            <if test="updateId != null">UPDATE_Id,</if>
-            <if test="updateTime != null">UPDATE_TIME,</if>
-            <if test="REMARK != null">REMARK,</if>
+            <if test="id != null">id,</if>
+            <if test="queryCode != null and queryCode != ''">query_code,</if>
+            <if test="queryName != null">query_name,</if>
+            <if test="queryType != null">query_type,</if>
+            <if test="dataSourceName != null">data_source_name,</if>
+            <if test="sqlTemplate != null and sqlTemplate != ''">sql_template,</if>
+            <if test="beforeScript != null">before_script,</if>
+            <if test="afterScript != null">after_script,</if>
+            <if test="version != null">version,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="createName != null">create_name,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateName != null">update_name,</if>
+            <if test="updateId != null">update_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="ID != null">#{ID},</if>
+            <if test="id != null">#{id},</if>
             <if test="queryCode != null and queryCode != ''">#{queryCode},</if>
             <if test="queryName != null">#{queryName},</if>
             <if test="queryType != null">#{queryType},</if>
@@ -88,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sqlTemplate != null and sqlTemplate != ''">#{sqlTemplate},</if>
             <if test="beforeScript != null">#{beforeScript},</if>
             <if test="afterScript != null">#{afterScript},</if>
-            <if test="VERSION != null">#{VERSION},</if>
+            <if test="version != null">#{version},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="orderNum != null">#{orderNum},</if>
             <if test="createName != null">#{createName},</if>
@@ -97,42 +93,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateName != null">#{updateName},</if>
             <if test="updateId != null">#{updateId},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="REMARK != null">#{REMARK},</if>
+            <if test="remark != null">#{remark},</if>
          </trim>
     </insert>
 
     <update id="updateUrDynamicSql" parameterType="UrDynamicSql">
         update ur_dynamic_sql
         <trim prefix="SET" suffixOverrides=",">
-            <if test="queryCode != null and queryCode != ''">QUERY_CODE = #{queryCode},</if>
-            <if test="queryName != null">QUERY_NAME = #{queryName},</if>
-            <if test="queryType != null">QUERY_TYPE = #{queryType},</if>
-            <if test="dataSourceName != null">DATA_SOURCE_NAME = #{dataSourceName},</if>
-            <if test="sqlTemplate != null and sqlTemplate != ''">SQL_TEMPLATE = #{sqlTemplate},</if>
-            <if test="beforeScript != null">BEFORE_SCRIPT = #{beforeScript},</if>
-            <if test="afterScript != null">AFTER_SCRIPT = #{afterScript},</if>
-            <if test="VERSION != null">VERSION = #{VERSION},</if>
-            <if test="delFlag != null">DEL_FLAG = #{delFlag},</if>
-            <if test="orderNum != null">ORDER_NUM = #{orderNum},</if>
-            <if test="createName != null">CREATE_NAME = #{createName},</if>
-            <if test="createId != null">CREATE_Id = #{createId},</if>
-            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
-            <if test="updateName != null">UPDATE_NAME = #{updateName},</if>
-            <if test="updateId != null">UPDATE_Id = #{updateId},</if>
-            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
-            <if test="REMARK != null">REMARK = #{REMARK},</if>
+            <if test="queryCode != null and queryCode != ''">query_code = #{queryCode},</if>
+            <if test="queryName != null">query_name = #{queryName},</if>
+            <if test="queryType != null">query_type = #{queryType},</if>
+            <if test="dataSourceName != null">data_source_name = #{dataSourceName},</if>
+            <if test="sqlTemplate != null and sqlTemplate != ''">sql_template = #{sqlTemplate},</if>
+            <if test="beforeScript != null">before_script = #{beforeScript},</if>
+            <if test="afterScript != null">after_script = #{afterScript},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="createName != null">create_name = #{createName},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateName != null">update_name = #{updateName},</if>
+            <if test="updateId != null">update_id = #{updateId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
         </trim>
-        where ID = #{ID}
+        where id = #{id}
     </update>
 
     <delete id="deleteUrDynamicSqlById" parameterType="String">
-        delete from ur_dynamic_sql where ID = #{ID}
+        delete from ur_dynamic_sql where id = #{id}
     </delete>
 
     <delete id="deleteUrDynamicSqlByIds" parameterType="String">
-        delete from ur_dynamic_sql where ID in 
-        <foreach item="ID" collection="array" open="(" separator="," close=")">
-            #{ID}
+        delete from ur_dynamic_sql where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 

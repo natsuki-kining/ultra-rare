@@ -14,10 +14,10 @@ public interface IUrDynamicSqlService
     /**
      * 查询动态sql
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 动态sql
      */
-    public UrDynamicSql selectUrDynamicSqlById(String ID);
+    public UrDynamicSql selectUrDynamicSqlById(String id);
 
     /**
      * 查询动态sql列表
@@ -54,8 +54,8 @@ public interface IUrDynamicSqlService
     /**
      * 删除动态sql信息
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 结果
      */
-    public int deleteUrDynamicSqlById(String ID);
+    public int deleteUrDynamicSqlById(String id);
 }

@@ -1,11 +1,10 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
-
-import com.ruoyi.system.mapper.UrDynamicSqlMapper;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.system.mapper.UrDynamicSqlMapper;
 import com.ruoyi.system.domain.UrDynamicSql;
 import com.ruoyi.system.service.IUrDynamicSqlService;
 import com.ruoyi.common.core.text.Convert;
@@ -25,13 +24,13 @@ public class UrDynamicSqlServiceImpl implements IUrDynamicSqlService
     /**
      * 查询动态sql
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 动态sql
      */
     @Override
-    public UrDynamicSql selectUrDynamicSqlById(String ID)
+    public UrDynamicSql selectUrDynamicSqlById(String id)
     {
-        return urDynamicSqlMapper.selectUrDynamicSqlById(ID);
+        return urDynamicSqlMapper.selectUrDynamicSqlById(id);
     }
 
     /**
@@ -87,12 +86,12 @@ public class UrDynamicSqlServiceImpl implements IUrDynamicSqlService
     /**
      * 删除动态sql信息
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 结果
      */
     @Override
-    public int deleteUrDynamicSqlById(String ID)
+    public int deleteUrDynamicSqlById(String id)
     {
-        return urDynamicSqlMapper.deleteUrDynamicSqlById(ID);
+        return urDynamicSqlMapper.deleteUrDynamicSqlById(id);
     }
 }

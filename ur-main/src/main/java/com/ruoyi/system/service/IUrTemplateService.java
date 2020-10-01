@@ -1,7 +1,6 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-
 import com.ruoyi.system.domain.UrTemplate;
 
 /**
@@ -15,10 +14,10 @@ public interface IUrTemplateService
     /**
      * 查询模板
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 模板
      */
-    public UrTemplate selectUrTemplateById(String ID);
+    public UrTemplate selectUrTemplateById(String id);
 
     /**
      * 查询模板列表
@@ -55,8 +54,8 @@ public interface IUrTemplateService
     /**
      * 删除模板信息
      * 
-     * @param ID 模板ID
+     * @param id 模板ID
      * @return 结果
      */
-    public int deleteUrTemplateById(String ID);
+    public int deleteUrTemplateById(String id);
 }

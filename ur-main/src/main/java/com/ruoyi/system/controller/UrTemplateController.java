@@ -1,8 +1,6 @@
 package com.ruoyi.system.controller;
 
 import java.util.List;
-
-import com.ruoyi.system.domain.UrTemplate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.system.domain.UrTemplate;
 import com.ruoyi.system.service.IUrTemplateService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -93,10 +92,10 @@ public class UrTemplateController extends BaseController
     /**
      * 修改模板
      */
-    @GetMapping("/edit/{ID}")
-    public String edit(@PathVariable("ID") String ID, ModelMap mmap)
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        UrTemplate urTemplate = urTemplateService.selectUrTemplateById(ID);
+        UrTemplate urTemplate = urTemplateService.selectUrTemplateById(id);
         mmap.put("urTemplate", urTemplate);
         return prefix + "/edit";
     }

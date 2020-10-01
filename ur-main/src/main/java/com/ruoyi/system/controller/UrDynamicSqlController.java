@@ -92,10 +92,10 @@ public class UrDynamicSqlController extends BaseController
     /**
      * 修改动态sql
      */
-    @GetMapping("/edit/{ID}")
-    public String edit(@PathVariable("ID") String ID, ModelMap mmap)
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        UrDynamicSql urDynamicSql = urDynamicSqlService.selectUrDynamicSqlById(ID);
+        UrDynamicSql urDynamicSql = urDynamicSqlService.selectUrDynamicSqlById(id);
         mmap.put("urDynamicSql", urDynamicSql);
         return prefix + "/edit";
     }

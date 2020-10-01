@@ -14,10 +14,10 @@ public interface UrDynamicSqlMapper
     /**
      * 查询动态sql
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 动态sql
      */
-    public UrDynamicSql selectUrDynamicSqlById(String ID);
+    public UrDynamicSql selectUrDynamicSqlById(String id);
 
     /**
      * 查询动态sql列表
@@ -46,16 +46,16 @@ public interface UrDynamicSqlMapper
     /**
      * 删除动态sql
      * 
-     * @param ID 动态sqlID
+     * @param id 动态sqlID
      * @return 结果
      */
-    public int deleteUrDynamicSqlById(String ID);
+    public int deleteUrDynamicSqlById(String id);
 
     /**
      * 批量删除动态sql
      * 
-     * @param IDs 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteUrDynamicSqlByIds(String[] IDs);
+    public int deleteUrDynamicSqlByIds(String[] ids);
 }

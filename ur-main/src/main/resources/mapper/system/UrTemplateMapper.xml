@@ -5,74 +5,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.system.mapper.UrTemplateMapper">
     
     <resultMap type="UrTemplate" id="UrTemplateResult">
-        <result property="ID"    column="ID"    />
-        <result property="templateCode"    column="TEMPLATE_CODE"    />
-        <result property="TEMPLATE"    column="TEMPLATE"    />
-        <result property="JAVASCRIPT"    column="JAVASCRIPT"    />
-        <result property="VERSION"    column="VERSION"    />
-        <result property="delFlag"    column="DEL_FLAG"    />
-        <result property="orderNum"    column="ORDER_NUM"    />
-        <result property="createName"    column="CREATE_NAME"    />
-        <result property="createId"    column="CREATE_Id"    />
-        <result property="createTime"    column="CREATE_TIME"    />
-        <result property="updateName"    column="UPDATE_NAME"    />
-        <result property="updateId"    column="UPDATE_Id"    />
-        <result property="updateTime"    column="UPDATE_TIME"    />
-        <result property="REMARK"    column="REMARK"    />
+        <result property="id"    column="id"    />
+        <result property="templateCode"    column="template_code"    />
+        <result property="template"    column="template"    />
+        <result property="javascript"    column="javascript"    />
+        <result property="version"    column="version"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="createName"    column="create_name"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateName"    column="update_name"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectUrTemplateVo">
-        select ID, TEMPLATE_CODE, TEMPLATE, JAVASCRIPT, VERSION, DEL_FLAG, ORDER_NUM, CREATE_NAME, CREATE_Id, CREATE_TIME, UPDATE_NAME, UPDATE_Id, UPDATE_TIME, REMARK from ur_template
+        select id, template_code, template, javascript, version, del_flag, order_num, create_name, create_id, create_time, update_name, update_id, update_time, remark from ur_template
     </sql>
 
     <select id="selectUrTemplateList" parameterType="UrTemplate" resultMap="UrTemplateResult">
         <include refid="selectUrTemplateVo"/>
         <where>  
-            <if test="templateCode != null  and templateCode != ''"> and TEMPLATE_CODE = #{templateCode}</if>
-            <if test="TEMPLATE != null  and TEMPLATE != ''"> and TEMPLATE = #{TEMPLATE}</if>
-            <if test="JAVASCRIPT != null  and JAVASCRIPT != ''"> and JAVASCRIPT = #{JAVASCRIPT}</if>
-            <if test="VERSION != null  and VERSION != ''"> and VERSION = #{VERSION}</if>
-            <if test="delFlag != null  and delFlag != ''"> and DEL_FLAG = #{delFlag}</if>
-            <if test="orderNum != null "> and ORDER_NUM = #{orderNum}</if>
-            <if test="createName != null  and createName != ''"> and CREATE_NAME like concat('%', #{createName}, '%')</if>
-            <if test="createId != null  and createId != ''"> and CREATE_Id = #{createId}</if>
-            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
-            <if test="updateName != null  and updateName != ''"> and UPDATE_NAME like concat('%', #{updateName}, '%')</if>
-            <if test="updateId != null  and updateId != ''"> and UPDATE_Id = #{updateId}</if>
-            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="REMARK != null  and REMARK != ''"> and REMARK = #{REMARK}</if>
+            <if test="templateCode != null  and templateCode != ''"> and template_code = #{templateCode}</if>
+            <if test="template != null  and template != ''"> and template = #{template}</if>
+            <if test="javascript != null  and javascript != ''"> and javascript = #{javascript}</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="createName != null  and createName != ''"> and create_name like concat('%', #{createName}, '%')</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updateName != null  and updateName != ''"> and update_name like concat('%', #{updateName}, '%')</if>
+            <if test="updateId != null  and updateId != ''"> and update_id = #{updateId}</if>
         </where>
     </select>
     
     <select id="selectUrTemplateById" parameterType="String" resultMap="UrTemplateResult">
         <include refid="selectUrTemplateVo"/>
-        where ID = #{ID}
+        where id = #{id}
     </select>
         
     <insert id="insertUrTemplate" parameterType="UrTemplate">
         insert into ur_template
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="ID != null">ID,</if>
-            <if test="templateCode != null and templateCode != ''">TEMPLATE_CODE,</if>
-            <if test="TEMPLATE != null">TEMPLATE,</if>
-            <if test="JAVASCRIPT != null">JAVASCRIPT,</if>
-            <if test="VERSION != null">VERSION,</if>
-            <if test="delFlag != null">DEL_FLAG,</if>
-            <if test="orderNum != null">ORDER_NUM,</if>
-            <if test="createName != null">CREATE_NAME,</if>
-            <if test="createId != null">CREATE_Id,</if>
-            <if test="createTime != null">CREATE_TIME,</if>
-            <if test="updateName != null">UPDATE_NAME,</if>
-            <if test="updateId != null">UPDATE_Id,</if>
-            <if test="updateTime != null">UPDATE_TIME,</if>
-            <if test="REMARK != null">REMARK,</if>
+            <if test="id != null">id,</if>
+            <if test="templateCode != null and templateCode != ''">template_code,</if>
+            <if test="template != null">template,</if>
+            <if test="javascript != null">javascript,</if>
+            <if test="version != null">version,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="createName != null">create_name,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateName != null">update_name,</if>
+            <if test="updateId != null">update_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="ID != null">#{ID},</if>
+            <if test="id != null">#{id},</if>
             <if test="templateCode != null and templateCode != ''">#{templateCode},</if>
-            <if test="TEMPLATE != null">#{TEMPLATE},</if>
-            <if test="JAVASCRIPT != null">#{JAVASCRIPT},</if>
-            <if test="VERSION != null">#{VERSION},</if>
+            <if test="template != null">#{template},</if>
+            <if test="javascript != null">#{javascript},</if>
+            <if test="version != null">#{version},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="orderNum != null">#{orderNum},</if>
             <if test="createName != null">#{createName},</if>
@@ -81,38 +77,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateName != null">#{updateName},</if>
             <if test="updateId != null">#{updateId},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="REMARK != null">#{REMARK},</if>
+            <if test="remark != null">#{remark},</if>
          </trim>
     </insert>
 
     <update id="updateUrTemplate" parameterType="UrTemplate">
         update ur_template
         <trim prefix="SET" suffixOverrides=",">
-            <if test="templateCode != null and templateCode != ''">TEMPLATE_CODE = #{templateCode},</if>
-            <if test="TEMPLATE != null">TEMPLATE = #{TEMPLATE},</if>
-            <if test="JAVASCRIPT != null">JAVASCRIPT = #{JAVASCRIPT},</if>
-            <if test="VERSION != null">VERSION = #{VERSION},</if>
-            <if test="delFlag != null">DEL_FLAG = #{delFlag},</if>
-            <if test="orderNum != null">ORDER_NUM = #{orderNum},</if>
-            <if test="createName != null">CREATE_NAME = #{createName},</if>
-            <if test="createId != null">CREATE_Id = #{createId},</if>
-            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
-            <if test="updateName != null">UPDATE_NAME = #{updateName},</if>
-            <if test="updateId != null">UPDATE_Id = #{updateId},</if>
-            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
-            <if test="REMARK != null">REMARK = #{REMARK},</if>
+            <if test="templateCode != null and templateCode != ''">template_code = #{templateCode},</if>
+            <if test="template != null">template = #{template},</if>
+            <if test="javascript != null">javascript = #{javascript},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="createName != null">create_name = #{createName},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateName != null">update_name = #{updateName},</if>
+            <if test="updateId != null">update_id = #{updateId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
         </trim>
-        where ID = #{ID}
+        where id = #{id}
     </update>
 
     <delete id="deleteUrTemplateById" parameterType="String">
-        delete from ur_template where ID = #{ID}
+        delete from ur_template where id = #{id}
     </delete>
 
     <delete id="deleteUrTemplateByIds" parameterType="String">
-        delete from ur_template where ID in 
-        <foreach item="ID" collection="array" open="(" separator="," close=")">
-            #{ID}
+        delete from ur_template where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 
