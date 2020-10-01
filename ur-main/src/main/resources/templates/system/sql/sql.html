@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('动态sql列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>查询的code：</label>
+                                <input type="text" name="queryCode"/>
+                            </li>
+                            <li>
+                                <label>查询的名称：</label>
+                                <input type="text" name="queryName"/>
+                            </li>
+                            <li>
+                                <label>查询的类型：</label>
+                                <select name="queryType">
+                                    <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>数据源名称：</label>
+                                <input type="text" name="dataSourceName"/>
+                            </li>
+                            <li>
+                                <label>sql模板：</label>
+                                <input type="text" name="sqlTemplate"/>
+                            </li>
+                            <li>
+                                <label>查询之前脚本：</label>
+                                <input type="text" name="beforeScript"/>
+                            </li>
+                            <li>
+                                <label>查询之后脚本：</label>
+                                <input type="text" name="afterScript"/>
+                            </li>
+                            <li>
+                                <label>版本号：</label>
+                                <input type="text" name="VERSION"/>
+                            </li>
+                            <li>
+                                <label>排序编号。正序。：</label>
+                                <input type="text" name="orderNum"/>
+                            </li>
+                            <li>
+                                <label>创建人名称：</label>
+                                <input type="text" name="createName"/>
+                            </li>
+                            <li>
+                                <label>创建人id：</label>
+                                <input type="text" name="createId"/>
+                            </li>
+                            <li class="select-time">
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
+                            </li>
+                            <li>
+                                <label>修改人名称：</label>
+                                <input type="text" name="updateName"/>
+                            </li>
+                            <li>
+                                <label>修改人id：</label>
+                                <input type="text" name="updateId"/>
+                            </li>
+                            <li class="select-time">
+                                <label>修改时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:sql:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:sql:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:sql:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:sql:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:sql:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:sql:remove')}]];
+        var prefix = ctx + "system/sql";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "动态sql",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'ID',
+                    title: '主键',
+                    visible: false
+                },
+                {
+                    field: 'queryCode',
+                    title: '查询的code'
+                },
+                {
+                    field: 'queryName',
+                    title: '查询的名称'
+                },
+                {
+                    field: 'queryType',
+                    title: '查询的类型'
+                },
+                {
+                    field: 'dataSourceName',
+                    title: '数据源名称'
+                },
+                {
+                    field: 'sqlTemplate',
+                    title: 'sql模板'
+                },
+                {
+                    field: 'beforeScript',
+                    title: '查询之前脚本'
+                },
+                {
+                    field: 'afterScript',
+                    title: '查询之后脚本'
+                },
+                {
+                    field: 'VERSION',
+                    title: '版本号'
+                },
+                {
+                    field: 'delFlag',
+                    title: '是否删除。1：是，0：否。'
+                },
+                {
+                    field: 'orderNum',
+                    title: '排序编号。正序。'
+                },
+                {
+                    field: 'createName',
+                    title: '创建人名称'
+                },
+                {
+                    field: 'createId',
+                    title: '创建人id'
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
+                    field: 'updateName',
+                    title: '修改人名称'
+                },
+                {
+                    field: 'updateId',
+                    title: '修改人id'
+                },
+                {
+                    field: 'updateTime',
+                    title: '修改时间'
+                },
+                {
+                    field: 'REMARK',
+                    title: '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.ID + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.ID + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
