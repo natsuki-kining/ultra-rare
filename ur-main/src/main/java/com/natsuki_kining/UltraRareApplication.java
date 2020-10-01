@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @Date : 2020/5/23 23:36
  */
 @SpringBootApplication(scanBasePackages = {"com.natsuki_kining", "com.ruoyi"}, exclude = {DataSourceAutoConfiguration.class})
-public class Application {
+public class UltraRareApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(UltraRareApplication.class, args);
     }
 
 }

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.UrDynamicSqlMapper">
     
-    <resultMap type="UrDynamicSql" id="UrDynamicSqlResult">
+    <resultMap type="com.ruoyi.system.domain.UrDynamicSql" id="UrDynamicSqlResult">
         <result property="ID"    column="ID"    />
         <result property="queryCode"    column="QUERY_CODE"    />
         <result property="queryName"    column="QUERY_NAME"    />
@@ -22,14 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateName"    column="UPDATE_NAME"    />
         <result property="updateId"    column="UPDATE_Id"    />
         <result property="updateTime"    column="UPDATE_TIME"    />
-        <result property="REMARK"    column="REMARK"    />
+        <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectUrDynamicSqlVo">
         select ID, QUERY_CODE, QUERY_NAME, QUERY_TYPE, DATA_SOURCE_NAME, SQL_TEMPLATE, BEFORE_SCRIPT, AFTER_SCRIPT, VERSION, DEL_FLAG, ORDER_NUM, CREATE_NAME, CREATE_Id, CREATE_TIME, UPDATE_NAME, UPDATE_Id, UPDATE_TIME, REMARK from ur_dynamic_sql
     </sql>
 
-    <select id="selectUrDynamicSqlList" parameterType="UrDynamicSql" resultMap="UrDynamicSqlResult">
+    <select id="selectUrDynamicSqlList" parameterType="com.ruoyi.system.domain.UrDynamicSql" resultMap="UrDynamicSqlResult">
         <include refid="selectUrDynamicSqlVo"/>
         <where>  
             <if test="queryCode != null  and queryCode != ''"> and QUERY_CODE = #{queryCode}</if>
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateName != null  and updateName != ''"> and UPDATE_NAME like concat('%', #{updateName}, '%')</if>
             <if test="updateId != null  and updateId != ''"> and UPDATE_Id = #{updateId}</if>
             <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
-            <if test="REMARK != null  and REMARK != ''"> and REMARK = #{REMARK}</if>
+            <if test="remark != null  and remark != ''"> and REMARK = #{remark}</if>
         </where>
     </select>
     
