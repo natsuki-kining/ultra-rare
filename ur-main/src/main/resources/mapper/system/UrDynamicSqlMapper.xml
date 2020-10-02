@@ -40,11 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="beforeScript != null  and beforeScript != ''"> and before_script = #{beforeScript}</if>
             <if test="afterScript != null  and afterScript != ''"> and after_script = #{afterScript}</if>
             <if test="version != null  and version != ''"> and version = #{version}</if>
-            <if test="orderNum != null "> and order_num = #{orderNum}</if>
             <if test="createName != null  and createName != ''"> and create_name like concat('%', #{createName}, '%')</if>
-            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
             <if test="updateName != null  and updateName != ''"> and update_name like concat('%', #{updateName}, '%')</if>
-            <if test="updateId != null  and updateId != ''"> and update_id = #{updateId}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
     </select>
     

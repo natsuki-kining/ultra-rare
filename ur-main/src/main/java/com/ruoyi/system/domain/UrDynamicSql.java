@@ -8,26 +8,26 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 动态sql对象 ur_dynamic_sql
  * 
- * @author ruoyi
- * @date 2020-10-01
+ * @author natsuki_kining
+ * @date 2020-10-02
  */
 public class UrDynamicSql extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private Integer id;
+    private String id;
 
-    /** 查询的code */
-    @Excel(name = "查询的code")
+    /** code */
+    @Excel(name = "code")
     private String queryCode;
 
-    /** 查询的名称 */
-    @Excel(name = "查询的名称")
+    /** 名称 */
+    @Excel(name = "名称")
     private String queryName;
 
-    /** 查询的类型 */
-    @Excel(name = "查询的类型")
+    /** 类型 */
+    @Excel(name = "类型")
     private String queryType;
 
     /** 数据源名称 */
@@ -35,26 +35,22 @@ public class UrDynamicSql extends BaseEntity
     private String dataSourceName;
 
     /** sql模板 */
-    @Excel(name = "sql模板")
     private String sqlTemplate;
 
-    /** 查询之前脚本 */
-    @Excel(name = "查询之前脚本")
+    /** 查前脚本 */
     private String beforeScript;
 
-    /** 查询之后脚本 */
-    @Excel(name = "查询之后脚本")
+    /** 查后脚本 */
     private String afterScript;
 
     /** 版本号 */
     @Excel(name = "版本号")
     private String version;
 
-    /** 是否删除。1：是，0：否。 */
+    /** 是否删除 */
     private Integer delFlag;
 
-    /** 排序编号。正序。 */
-    @Excel(name = "排序编号。正序。")
+    /** 排序编号 */
     private Long orderNum;
 
     /** 创建人名称 */
@@ -62,7 +58,6 @@ public class UrDynamicSql extends BaseEntity
     private String createName;
 
     /** 创建人id */
-    @Excel(name = "创建人id")
     private String createId;
 
     /** 修改人名称 */
@@ -70,15 +65,14 @@ public class UrDynamicSql extends BaseEntity
     private String updateName;
 
     /** 修改人id */
-    @Excel(name = "修改人id")
     private String updateId;
 
-    public void setId(Integer id)
+    public void setId(String id) 
     {
         this.id = id;
     }
 
-    public Integer getId()
+    public String getId() 
     {
         return id;
     }

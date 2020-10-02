@@ -15,19 +15,11 @@
                                 <input type="text" name="templateCode"/>
                             </li>
                             <li>
-                                <label>模板：</label>
-                                <input type="text" name="template"/>
-                            </li>
-                            <li>
-                                <label>脚本：</label>
-                                <input type="text" name="javascript"/>
-                            </li>
-                            <li>
                                 <label>版本号：</label>
                                 <input type="text" name="version"/>
                             </li>
                             <li>
-                                <label>排序编号。正序。：</label>
+                                <label>排序编号：</label>
                                 <input type="text" name="orderNum"/>
                             </li>
                             <li>
@@ -37,6 +29,12 @@
                             <li>
                                 <label>创建人id：</label>
                                 <input type="text" name="createId"/>
+                            </li>
+                            <li class="select-time">
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
                             </li>
                             <li>
                                 <label>修改人名称：</label>
@@ -113,10 +111,6 @@
                     title: '版本号'
                 },
                 {
-                    field: 'orderNum',
-                    title: '排序编号。正序。'
-                },
-                {
                     field: 'createName',
                     title: '创建人名称'
                 },
@@ -125,12 +119,20 @@
                     title: '创建人id'
                 },
                 {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
                     field: 'updateName',
                     title: '修改人名称'
                 },
                 {
                     field: 'updateId',
                     title: '修改人id'
+                },
+                {
+                    field: 'updateTime',
+                    title: '修改时间'
                 },
                 {
                     field: 'remark',

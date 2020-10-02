@@ -6,8 +6,8 @@ import com.ruoyi.system.domain.UrDynamicSql;
 /**
  * 动态sqlMapper接口
  * 
- * @author ruoyi
- * @date 2020-10-01
+ * @author natsuki_kining
+ * @date 2020-10-02
  */
 public interface UrDynamicSqlMapper 
 {

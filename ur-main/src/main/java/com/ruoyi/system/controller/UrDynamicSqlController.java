@@ -22,8 +22,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 动态sqlController
  * 
- * @author ruoyi
- * @date 2020-10-01
+ * @author natsuki_kining
+ * @date 2020-10-02
  */
 @Controller
 @RequestMapping("/system/sql")

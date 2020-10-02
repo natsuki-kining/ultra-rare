@@ -8,8 +8,8 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 模板对象 ur_template
  * 
- * @author ruoyi
- * @date 2020-10-01
+ * @author natsuki_kining
+ * @date 2020-10-02
  */
 public class UrTemplate extends BaseEntity
 {
@@ -34,11 +34,10 @@ public class UrTemplate extends BaseEntity
     @Excel(name = "版本号")
     private String version;
 
-    /** 是否删除。1：是，0：否。 */
+    /** 是否删除 */
     private Integer delFlag;
 
-    /** 排序编号。正序。 */
-    @Excel(name = "排序编号。正序。")
+    /** 排序编号 */
     private Long orderNum;
 
     /** 创建人名称 */

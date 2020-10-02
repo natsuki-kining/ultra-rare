@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderNum != null "> and order_num = #{orderNum}</if>
             <if test="createName != null  and createName != ''"> and create_name like concat('%', #{createName}, '%')</if>
             <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
             <if test="updateName != null  and updateName != ''"> and update_name like concat('%', #{updateName}, '%')</if>
             <if test="updateId != null  and updateId != ''"> and update_id = #{updateId}</if>
         </where>

@@ -27,40 +27,28 @@
                                 <input type="text" name="dataSourceName"/>
                             </li>
                             <li>
-                                <label>sql模板：</label>
-                                <input type="text" name="sqlTemplate"/>
-                            </li>
-                            <li>
-                                <label>查前脚本：</label>
-                                <input type="text" name="beforeScript"/>
-                            </li>
-                            <li>
-                                <label>查后脚本：</label>
-                                <input type="text" name="afterScript"/>
-                            </li>
-                            <li>
                                 <label>版本号：</label>
                                 <input type="text" name="version"/>
-                            </li>
-                            <li>
-                                <label>排序编号：</label>
-                                <input type="text" name="orderNum"/>
                             </li>
                             <li>
                                 <label>创建人名称：</label>
                                 <input type="text" name="createName"/>
                             </li>
-                            <li>
-                                <label>创建人id：</label>
-                                <input type="text" name="createId"/>
+                            <li class="select-time">
+                                <label>创建时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreateTime]"/>
                             </li>
                             <li>
                                 <label>修改人名称：</label>
                                 <input type="text" name="updateName"/>
                             </li>
-                            <li>
-                                <label>修改人id：</label>
-                                <input type="text" name="updateId"/>
+                            <li class="select-time">
+                                <label>修改时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdateTime]"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -129,44 +117,24 @@
                     title: '数据源名称'
                 },
                 {
-                    field: 'sqlTemplate',
-                    title: 'sql模板'
-                },
-                {
-                    field: 'beforeScript',
-                    title: '查前脚本'
-                },
-                {
-                    field: 'afterScript',
-                    title: '查后脚本'
-                },
-                {
                     field: 'version',
                     title: '版本号'
-                },
-                {
-                    field: 'orderNum',
-                    title: '排序编号。正序。'
                 },
                 {
                     field: 'createName',
                     title: '创建人名称'
                 },
                 {
-                    field: 'createId',
-                    title: '创建人id'
+                    field: 'createTime',
+                    title: '创建时间'
                 },
                 {
                     field: 'updateName',
                     title: '修改人名称'
                 },
                 {
-                    field: 'updateId',
-                    title: '修改人id'
-                },
-                {
-                    field: 'remark',
-                    title: '备注'
+                    field: 'updateTime',
+                    title: '修改时间'
                 },
                 {
                     title: '操作',
