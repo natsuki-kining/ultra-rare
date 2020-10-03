@@ -1,0 +1,20 @@
+# ssr
+ssr:
+  enable:
+    generate-by-table: true
+    generate-by-entity: true
+  script:
+    type: javaScript
+  multi-data-source:
+    ur:
+      username: root
+      password: root
+      url: jdbc:mysql://localhost:3306/ur?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  show-query-info:
+    enable: false
+  dynamicSql:
+    TableName: UR_DYNAMIC_SQL
+
+freemarker:
+  checkTemplateLocation: false
