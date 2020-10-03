@@ -1,5 +1,6 @@
 package com.ruoyi.system.service;
 
+import com.ruoyi.system.domain.UrDynamicDataSource;
 import com.ruoyi.system.service.base.IUrDynamicDataSourceBaseService;
 
 /**
@@ -10,4 +11,17 @@ import com.ruoyi.system.service.base.IUrDynamicDataSourceBaseService;
  */
 public interface IUrDynamicDataSourceService extends IUrDynamicDataSourceBaseService {
 
+    /**
+     * 启动数据源
+     * @param urDynamicDataSource
+     * @return
+     */
+    boolean startDataSource(UrDynamicDataSource urDynamicDataSource);
+
+    /**
+     * 关闭数据源
+     * @param urDynamicDataSource
+     * @return
+     */
+    boolean shutdownDataSource(UrDynamicDataSource urDynamicDataSource);
 }

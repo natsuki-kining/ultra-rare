@@ -25,9 +25,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/tool/gen/abstract")
-public class GenAbsController extends BaseController
-{
-    private String prefix = "tool/gen";
+public class GenAbsController extends BaseController{
 
     @Autowired
     private GenTableAbsServiceImpl genTableService;
