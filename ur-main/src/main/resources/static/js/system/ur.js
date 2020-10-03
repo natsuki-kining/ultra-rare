@@ -1,0 +1,5 @@
+(function ($) {
+    $.extend({
+
+    });
+})(jQuery);
