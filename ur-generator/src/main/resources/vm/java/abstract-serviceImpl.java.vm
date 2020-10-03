@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ${packageName}.domain.${subClassName};
 #end
 import ${packageName}.mapper.${ClassName}BaseMapper;
+import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}BaseService;
 import com.ruoyi.common.core.text.Convert;
@@ -33,8 +34,11 @@ import com.ruoyi.common.core.text.Convert;
  * @date ${datetime}
  */
 public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}BaseService {
+
     @Autowired
-    private ${ClassName}BaseMapper ${className}Mapper;
+    protected ${ClassName}BaseMapper ${className}BaseMapper;
+    @Autowired
+    protected ${ClassName}Mapper ${className}Mapper;
 
     /**
      * 查询${functionName}
@@ -44,7 +48,7 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      */
     @Override
     public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField}) {
-        return ${className}Mapper.select${ClassName}ById(${pkColumn.javaField});
+        return ${className}BaseMapper.select${ClassName}ById(${pkColumn.javaField});
     }
 
     /**
@@ -55,7 +59,7 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      */
     @Override
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
-        return ${className}Mapper.select${ClassName}List(${className});
+        return ${className}BaseMapper.select${ClassName}List(${className});
     }
 
     /**
@@ -64,22 +68,22 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      * @param ${className} ${functionName}
      * @return 结果
      */
-    #if($table.sub)
+#if($table.sub)
     @Transactional
-    #end
+#end
     @Override
     public int insert${ClassName}(${ClassName} ${className}) {
 #foreach ($column in $columns)
-    #if($column.javaField == 'createTime')
+#if($column.javaField == 'createTime')
         ${className}.setCreateTime(DateUtils.getNowDate());
-    #end
+#end
 #end
 #if($table.sub)
-    int rows = ${className}Mapper.insert${ClassName}(${className});
-    insert${subClassName}(${className});
-    return rows;
+        int rows = ${className}BaseMapper.insert${ClassName}(${className});
+        insert${subClassName}(${className});
+        return rows;
 #else
-    return ${className}Mapper.insert${ClassName}(${className});
+        return ${className}BaseMapper.insert${ClassName}(${className});
 #end
     }
 
@@ -89,22 +93,21 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      * @param ${className} ${functionName}
      * @return 结果
      */
-    #if($table.sub)
+#if($table.sub)
     @Transactional
-    #end
+#end
     @Override
     public int update${ClassName}(${ClassName} ${className}) {
-        #foreach ($column in $columns)
-            #if($column.javaField == 'updateTime')
-                ${className}.setUpdateTime(DateUtils.getNowDate());
-            #end
-        #end
-        #if($table.sub)
-                ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}())
-            ;
-            insert${subClassName}(${className});
-        #end
-        return ${className}Mapper.update${ClassName}(${className});
+#foreach ($column in $columns)
+#if($column.javaField == 'updateTime')
+        ${className}.setUpdateTime(DateUtils.getNowDate());
+#end
+#end
+#if($table.sub)
+        ${className}BaseMapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
+        insert${subClassName}(${className});
+#end
+        return ${className}BaseMapper.update${ClassName}(${className});
     }
 
     /**
@@ -113,15 +116,15 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    #if($table.sub)
+#if($table.sub)
     @Transactional
-    #end
+#end
     @Override
     public int delete${ClassName}ByIds(String ids) {
-        #if($table.sub)
-                ${className}Mapper.delete${subClassName}By${subTableFkClassName}s(Convert.toStrArray(ids));
-        #end
-        return ${className}Mapper.delete${ClassName}ByIds(Convert.toStrArray(ids));
+#if($table.sub)
+        ${className}BaseMapper.delete${subClassName}By${subTableFkClassName}s(Convert.toStrArray(ids));
+#end
+        return ${className}BaseMapper.delete${ClassName}ByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -132,10 +135,10 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      */
     @Override
     public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField}) {
-        #if($table.sub)
-                ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
-        #end
-        return ${className}Mapper.delete${ClassName}ById(${pkColumn.javaField});
+#if($table.sub)
+        ${className}BaseMapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
+#end
+        return ${className}BaseMapper.delete${ClassName}ById(${pkColumn.javaField});
     }
 
 #if($table.tree)
@@ -146,7 +149,7 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
      */
     @Override
     public List<Ztree> select${ClassName}Tree() {
-        List<${ClassName}> ${className}List = ${className}Mapper.select${ClassName}List(new ${ClassName}());
+        List<${ClassName}> ${className}List = ${className}BaseMapper.select${ClassName}List(new ${ClassName}());
         List<Ztree> ztrees = new ArrayList<Ztree>();
         for (${ClassName} ${className} :${className}List)
         {
@@ -181,7 +184,7 @@ public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}Ba
                 list.add(${subclassName});
             }
             if (list.size() > 0) {
-                    ${className}Mapper.batch${subClassName}(list);
+                    ${className}BaseMapper.batch${subClassName}(list);
             }
         }
     }

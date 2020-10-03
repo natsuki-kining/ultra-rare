@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
@@ -30,7 +29,7 @@ public abstract class UrTemplateAbstractController extends BaseController {
     private final String prefix = "system/template" ;
 
     @Autowired
-    private IUrTemplateService urTemplateService;
+    protected IUrTemplateService urTemplateService;
 
     @RequiresPermissions("system:template:view" )
     @GetMapping()

@@ -5,6 +5,7 @@ import java.util.List;
         import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UrDynamicDataSourceBaseMapper;
+import com.ruoyi.system.mapper.UrDynamicDataSourceMapper;
 import com.ruoyi.system.domain.UrDynamicDataSource;
 import com.ruoyi.system.service.IUrDynamicDataSourceBaseService;
 import com.ruoyi.common.core.text.Convert;
@@ -16,8 +17,11 @@ import com.ruoyi.common.core.text.Convert;
  * @date 2020-10-13
  */
 public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynamicDataSourceBaseService {
+
     @Autowired
-    private UrDynamicDataSourceBaseMapper urDynamicDataSourceMapper;
+    protected UrDynamicDataSourceBaseMapper urDynamicDataSourceBaseMapper;
+    @Autowired
+    protected UrDynamicDataSourceMapper urDynamicDataSourceMapper;
 
     /**
      * 查询动态数据源
@@ -27,7 +31,7 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      */
     @Override
     public UrDynamicDataSource selectUrDynamicDataSourceById(Long id) {
-        return urDynamicDataSourceMapper.selectUrDynamicDataSourceById(id);
+        return urDynamicDataSourceBaseMapper.selectUrDynamicDataSourceById(id);
     }
 
     /**
@@ -38,7 +42,7 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      */
     @Override
     public List<UrDynamicDataSource> selectUrDynamicDataSourceList(UrDynamicDataSource urDynamicDataSource) {
-        return urDynamicDataSourceMapper.selectUrDynamicDataSourceList(urDynamicDataSource);
+        return urDynamicDataSourceBaseMapper.selectUrDynamicDataSourceList(urDynamicDataSource);
     }
 
     /**
@@ -47,10 +51,10 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      * @param urDynamicDataSource 动态数据源
      * @return 结果
      */
-        @Override
+    @Override
     public int insertUrDynamicDataSource(UrDynamicDataSource urDynamicDataSource) {
-                                                            urDynamicDataSource.setCreateTime(DateUtils.getNowDate());
-                        return urDynamicDataSourceMapper.insertUrDynamicDataSource(urDynamicDataSource);
+        urDynamicDataSource.setCreateTime(DateUtils.getNowDate());
+        return urDynamicDataSourceBaseMapper.insertUrDynamicDataSource(urDynamicDataSource);
     }
 
     /**
@@ -59,10 +63,10 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      * @param urDynamicDataSource 动态数据源
      * @return 结果
      */
-        @Override
+    @Override
     public int updateUrDynamicDataSource(UrDynamicDataSource urDynamicDataSource) {
-                                                                                                                                                                                                                                                                                                                                                urDynamicDataSource.setUpdateTime(DateUtils.getNowDate());
-                                                        return urDynamicDataSourceMapper.updateUrDynamicDataSource(urDynamicDataSource);
+        urDynamicDataSource.setUpdateTime(DateUtils.getNowDate());
+        return urDynamicDataSourceBaseMapper.updateUrDynamicDataSource(urDynamicDataSource);
     }
 
     /**
@@ -71,9 +75,9 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-        @Override
+    @Override
     public int deleteUrDynamicDataSourceByIds(String ids) {
-                return urDynamicDataSourceMapper.deleteUrDynamicDataSourceByIds(Convert.toStrArray(ids));
+        return urDynamicDataSourceBaseMapper.deleteUrDynamicDataSourceByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -84,7 +88,7 @@ public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynam
      */
     @Override
     public int deleteUrDynamicDataSourceById(Long id) {
-                return urDynamicDataSourceMapper.deleteUrDynamicDataSourceById(id);
+        return urDynamicDataSourceBaseMapper.deleteUrDynamicDataSourceById(id);
     }
 
 

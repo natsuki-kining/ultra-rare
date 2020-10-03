@@ -5,6 +5,7 @@ import java.util.List;
         import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UrTemplateBaseMapper;
+import com.ruoyi.system.mapper.UrTemplateMapper;
 import com.ruoyi.system.domain.UrTemplate;
 import com.ruoyi.system.service.IUrTemplateBaseService;
 import com.ruoyi.common.core.text.Convert;
@@ -16,8 +17,11 @@ import com.ruoyi.common.core.text.Convert;
  * @date 2020-10-13
  */
 public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseService {
+
     @Autowired
-    private UrTemplateBaseMapper urTemplateMapper;
+    protected UrTemplateBaseMapper urTemplateBaseMapper;
+    @Autowired
+    protected UrTemplateMapper urTemplateMapper;
 
     /**
      * 查询模板
@@ -27,7 +31,7 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      */
     @Override
     public UrTemplate selectUrTemplateById(String id) {
-        return urTemplateMapper.selectUrTemplateById(id);
+        return urTemplateBaseMapper.selectUrTemplateById(id);
     }
 
     /**
@@ -38,7 +42,7 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      */
     @Override
     public List<UrTemplate> selectUrTemplateList(UrTemplate urTemplate) {
-        return urTemplateMapper.selectUrTemplateList(urTemplate);
+        return urTemplateBaseMapper.selectUrTemplateList(urTemplate);
     }
 
     /**
@@ -47,10 +51,10 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      * @param urTemplate 模板
      * @return 结果
      */
-        @Override
+    @Override
     public int insertUrTemplate(UrTemplate urTemplate) {
-                                                urTemplate.setCreateTime(DateUtils.getNowDate());
-                        return urTemplateMapper.insertUrTemplate(urTemplate);
+        urTemplate.setCreateTime(DateUtils.getNowDate());
+        return urTemplateBaseMapper.insertUrTemplate(urTemplate);
     }
 
     /**
@@ -59,10 +63,10 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      * @param urTemplate 模板
      * @return 结果
      */
-        @Override
+    @Override
     public int updateUrTemplate(UrTemplate urTemplate) {
-                                                                                                                                                                                                                                                                                    urTemplate.setUpdateTime(DateUtils.getNowDate());
-                                                        return urTemplateMapper.updateUrTemplate(urTemplate);
+        urTemplate.setUpdateTime(DateUtils.getNowDate());
+        return urTemplateBaseMapper.updateUrTemplate(urTemplate);
     }
 
     /**
@@ -71,9 +75,9 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-        @Override
+    @Override
     public int deleteUrTemplateByIds(String ids) {
-                return urTemplateMapper.deleteUrTemplateByIds(Convert.toStrArray(ids));
+        return urTemplateBaseMapper.deleteUrTemplateByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -84,7 +88,7 @@ public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseSe
      */
     @Override
     public int deleteUrTemplateById(String id) {
-                return urTemplateMapper.deleteUrTemplateById(id);
+        return urTemplateBaseMapper.deleteUrTemplateById(id);
     }
 
 

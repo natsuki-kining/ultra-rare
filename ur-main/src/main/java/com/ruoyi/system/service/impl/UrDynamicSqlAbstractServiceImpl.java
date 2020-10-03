@@ -5,6 +5,7 @@ import java.util.List;
         import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.UrDynamicSqlBaseMapper;
+import com.ruoyi.system.mapper.UrDynamicSqlMapper;
 import com.ruoyi.system.domain.UrDynamicSql;
 import com.ruoyi.system.service.IUrDynamicSqlBaseService;
 import com.ruoyi.common.core.text.Convert;
@@ -16,8 +17,11 @@ import com.ruoyi.common.core.text.Convert;
  * @date 2020-10-13
  */
 public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBaseService {
+
     @Autowired
-    private UrDynamicSqlBaseMapper urDynamicSqlMapper;
+    protected UrDynamicSqlBaseMapper urDynamicSqlBaseMapper;
+    @Autowired
+    protected UrDynamicSqlMapper urDynamicSqlMapper;
 
     /**
      * 查询动态sql
@@ -27,7 +31,7 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      */
     @Override
     public UrDynamicSql selectUrDynamicSqlById(String id) {
-        return urDynamicSqlMapper.selectUrDynamicSqlById(id);
+        return urDynamicSqlBaseMapper.selectUrDynamicSqlById(id);
     }
 
     /**
@@ -38,7 +42,7 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      */
     @Override
     public List<UrDynamicSql> selectUrDynamicSqlList(UrDynamicSql urDynamicSql) {
-        return urDynamicSqlMapper.selectUrDynamicSqlList(urDynamicSql);
+        return urDynamicSqlBaseMapper.selectUrDynamicSqlList(urDynamicSql);
     }
 
     /**
@@ -47,10 +51,10 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      * @param urDynamicSql 动态sql
      * @return 结果
      */
-        @Override
+    @Override
     public int insertUrDynamicSql(UrDynamicSql urDynamicSql) {
-                                                                urDynamicSql.setCreateTime(DateUtils.getNowDate());
-                        return urDynamicSqlMapper.insertUrDynamicSql(urDynamicSql);
+        urDynamicSql.setCreateTime(DateUtils.getNowDate());
+        return urDynamicSqlBaseMapper.insertUrDynamicSql(urDynamicSql);
     }
 
     /**
@@ -59,10 +63,10 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      * @param urDynamicSql 动态sql
      * @return 结果
      */
-        @Override
+    @Override
     public int updateUrDynamicSql(UrDynamicSql urDynamicSql) {
-                                                                                                                                                                                                                                                                                                                                                                    urDynamicSql.setUpdateTime(DateUtils.getNowDate());
-                                                        return urDynamicSqlMapper.updateUrDynamicSql(urDynamicSql);
+        urDynamicSql.setUpdateTime(DateUtils.getNowDate());
+        return urDynamicSqlBaseMapper.updateUrDynamicSql(urDynamicSql);
     }
 
     /**
@@ -71,9 +75,9 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-        @Override
+    @Override
     public int deleteUrDynamicSqlByIds(String ids) {
-                return urDynamicSqlMapper.deleteUrDynamicSqlByIds(Convert.toStrArray(ids));
+        return urDynamicSqlBaseMapper.deleteUrDynamicSqlByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -84,7 +88,7 @@ public abstract class UrDynamicSqlAbstractServiceImpl implements IUrDynamicSqlBa
      */
     @Override
     public int deleteUrDynamicSqlById(String id) {
-                return urDynamicSqlMapper.deleteUrDynamicSqlById(id);
+        return urDynamicSqlBaseMapper.deleteUrDynamicSqlById(id);
     }
 
 
