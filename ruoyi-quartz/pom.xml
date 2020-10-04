@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ruoyi-quartz</artifactId>
-    <version>4.4.0</version>
 
     <description>
         quartz定时任务
@@ -32,7 +31,7 @@
 
         <!-- 通用工具-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
+            <groupId>com.natsuki_kining.ur</groupId>
             <artifactId>ruoyi-common</artifactId>
         </dependency>
 
