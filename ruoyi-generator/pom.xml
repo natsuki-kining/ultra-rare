@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <version>4.4.0</version>
     <artifactId>ruoyi-generator</artifactId>
+    <version>4.4.0</version>
 
     <description>
         generator代码生成
@@ -26,7 +26,7 @@
 
         <!-- 通用工具-->
         <dependency>
-            <groupId>com.natsuki_kining.ur</groupId>
+            <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-common</artifactId>
         </dependency>
 

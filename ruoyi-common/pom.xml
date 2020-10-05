@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <version>4.4.0</version>
     <artifactId>ruoyi-common</artifactId>
+    <version>4.4.0</version>
 
     <description>
         common通用工具
