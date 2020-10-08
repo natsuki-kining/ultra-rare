@@ -18,8 +18,8 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <artifactId>ruoyi-admin</artifactId>
             <groupId>com.natsuki_kining.ur</groupId>
+            <artifactId>ruoyi-admin</artifactId>
         </dependency>
     </dependencies>
 
