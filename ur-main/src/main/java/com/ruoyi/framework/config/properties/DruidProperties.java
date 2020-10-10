@@ -6,5 +6,5 @@ package com.ruoyi.framework.config.properties;
  * @Author natsuki_kining
  * @Date 2020/10/2 22:48
  **/
-//public class DruidProperties {
-//}
+public class DruidProperties {
+}
