@@ -5,7 +5,7 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-datasource-edit" th:object="${urDynamicDatasource}">
+        <form class="form-horizontal m" id="form-datasource-edit" th:object="${urDynamicDataSource}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
                 <label class="col-sm-3 control-label is-required">数据源名称：</label>
@@ -41,6 +41,48 @@
                 <label class="col-sm-3 control-label">其他配置信息：</label>
                 <div class="col-sm-8">
                     <textarea name="otherConfig" class="form-control">[[*{otherConfig}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">版本号：</label>
+                <div class="col-sm-8">
+                    <input name="version" th:field="*{version}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">排序编号：</label>
+                <div class="col-sm-8">
+                    <input name="orderNum" th:field="*{orderNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人名称：</label>
+                <div class="col-sm-8">
+                    <input name="createName" th:field="*{createName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人id：</label>
+                <div class="col-sm-8">
+                    <input name="createId" th:field="*{createId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">修改人名称：</label>
+                <div class="col-sm-8">
+                    <input name="updateName" th:field="*{updateName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">修改人id：</label>
+                <div class="col-sm-8">
+                    <input name="updateId" th:field="*{updateId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control">[[*{remark}]]</textarea>
                 </div>
             </div>
         </form>

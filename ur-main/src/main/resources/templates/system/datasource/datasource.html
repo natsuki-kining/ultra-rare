@@ -27,6 +27,30 @@
                                 <input type="text" name="driverClassName"/>
                             </li>
                             <li>
+                                <label>版本号：</label>
+                                <input type="text" name="version"/>
+                            </li>
+                            <li>
+                                <label>排序编号：</label>
+                                <input type="text" name="orderNum"/>
+                            </li>
+                            <li>
+                                <label>创建人名称：</label>
+                                <input type="text" name="createName"/>
+                            </li>
+                            <li>
+                                <label>创建人id：</label>
+                                <input type="text" name="createId"/>
+                            </li>
+                            <li>
+                                <label>修改人名称：</label>
+                                <input type="text" name="updateName"/>
+                            </li>
+                            <li>
+                                <label>修改人id：</label>
+                                <input type="text" name="updateId"/>
+                            </li>
+                            <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
@@ -95,6 +119,34 @@
                 {
                     field: 'driverClassName',
                     title: '驱动名称'
+                },
+                {
+                    field: 'version',
+                    title: '版本号'
+                },
+                {
+                    field: 'orderNum',
+                    title: '排序编号'
+                },
+                {
+                    field: 'createName',
+                    title: '创建人名称'
+                },
+                {
+                    field: 'createId',
+                    title: '创建人id'
+                },
+                {
+                    field: 'updateName',
+                    title: '修改人名称'
+                },
+                {
+                    field: 'updateId',
+                    title: '修改人id'
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
                 },
                 {
                     title: '操作',
