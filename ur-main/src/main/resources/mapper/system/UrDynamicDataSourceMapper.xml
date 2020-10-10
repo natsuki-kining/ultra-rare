@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.UrDynamicDataSourceMapper">
+    
+    <resultMap type="UrDynamicDataSource" id="UrDynamicDataSourceResult">
+        <result property="id"    column="id"    />
+        <result property="datasourceName"    column="datasource_name"    />
+        <result property="userName"    column="user_name"    />
+        <result property="password"    column="password"    />
+        <result property="url"    column="url"    />
+        <result property="driverClassName"    column="driver_class_name"    />
+        <result property="otherConfig"    column="other_config"    />
+        <result property="version"    column="version"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="createName"    column="create_name"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateName"    column="update_name"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectUrDynamicDataSourceVo">
+        select id, datasource_name, user_name, password, url, driver_class_name, other_config, version, del_flag, order_num, create_name, create_id, create_time, update_name, update_id, update_time, remark from ur_dynamic_data_source
+    </sql>
+
+    <select id="selectUrDynamicDataSourceList" parameterType="UrDynamicDataSource" resultMap="UrDynamicDataSourceResult">
+        <include refid="selectUrDynamicDataSourceVo"/>
+        <where>  
+            <if test="datasourceName != null  and datasourceName != ''"> and datasource_name like concat('%', #{datasourceName}, '%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="password != null  and password != ''"> and password like concat('%', #{password}, '%')</if>
+            <if test="url != null  and url != ''"> and url like concat('%', #{url}, '%')</if>
+            <if test="driverClassName != null  and driverClassName != ''"> and driver_class_name like concat('%', #{driverClassName}, '%')</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="createName != null  and createName != ''"> and create_name like concat('%', #{createName}, '%')</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updateName != null  and updateName != ''"> and update_name like concat('%', #{updateName}, '%')</if>
+            <if test="updateId != null  and updateId != ''"> and update_id = #{updateId}</if>
+        </where>
+    </select>
+    
+    <select id="selectUrDynamicDataSourceById" parameterType="Long" resultMap="UrDynamicDataSourceResult">
+        <include refid="selectUrDynamicDataSourceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUrDynamicDataSource" parameterType="UrDynamicDataSource" useGeneratedKeys="true" keyProperty="id">
+        insert into ur_dynamic_data_source
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="datasourceName != null and datasourceName != ''">datasource_name,</if>
+            <if test="userName != null and userName != ''">user_name,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="driverClassName != null and driverClassName != ''">driver_class_name,</if>
+            <if test="otherConfig != null">other_config,</if>
+            <if test="version != null">version,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="createName != null">create_name,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateName != null">update_name,</if>
+            <if test="updateId != null">update_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="datasourceName != null and datasourceName != ''">#{datasourceName},</if>
+            <if test="userName != null and userName != ''">#{userName},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="driverClassName != null and driverClassName != ''">#{driverClassName},</if>
+            <if test="otherConfig != null">#{otherConfig},</if>
+            <if test="version != null">#{version},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="createName != null">#{createName},</if>
+            <if test="createId != null">#{createId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateName != null">#{updateName},</if>
+            <if test="updateId != null">#{updateId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUrDynamicDataSource" parameterType="UrDynamicDataSource">
+        update ur_dynamic_data_source
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="datasourceName != null and datasourceName != ''">datasource_name = #{datasourceName},</if>
+            <if test="userName != null and userName != ''">user_name = #{userName},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="driverClassName != null and driverClassName != ''">driver_class_name = #{driverClassName},</if>
+            <if test="otherConfig != null">other_config = #{otherConfig},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="createName != null">create_name = #{createName},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateName != null">update_name = #{updateName},</if>
+            <if test="updateId != null">update_id = #{updateId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUrDynamicDataSourceById" parameterType="Long">
+        delete from ur_dynamic_data_source where id = #{id}
+    </delete>
+
+    <delete id="deleteUrDynamicDataSourceByIds" parameterType="String">
+        delete from ur_dynamic_data_source where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

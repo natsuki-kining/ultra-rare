@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.UrDynamicDatasource;
-import com.ruoyi.system.service.IUrDynamicDatasourceService;
+import com.ruoyi.system.domain.UrDynamicDataSource;
+import com.ruoyi.system.service.IUrDynamicDataSourceService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -23,16 +23,16 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 动态数据源Controller
  * 
  * @author natsuki_kining
- * @date 2020-10-03
+ * @date 2020-10-10
  */
 @Controller
 @RequestMapping("/system/datasource")
-public class UrDynamicDatasourceController extends BaseController
+public class UrDynamicDataSourceController extends BaseController
 {
     private String prefix = "system/datasource";
 
     @Autowired
-    private IUrDynamicDatasourceService urDynamicDatasourceService;
+    private IUrDynamicDataSourceService urDynamicDataSourceService;
 
     @RequiresPermissions("system:datasource:view")
     @GetMapping()
@@ -47,10 +47,10 @@ public class UrDynamicDatasourceController extends BaseController
     @RequiresPermissions("system:datasource:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(UrDynamicDatasource urDynamicDatasource)
+    public TableDataInfo list(UrDynamicDataSource urDynamicDataSource)
     {
         startPage();
-        List<UrDynamicDatasource> list = urDynamicDatasourceService.selectUrDynamicDatasourceList(urDynamicDatasource);
+        List<UrDynamicDataSource> list = urDynamicDataSourceService.selectUrDynamicDataSourceList(urDynamicDataSource);
         return getDataTable(list);
     }
 
@@ -61,10 +61,10 @@ public class UrDynamicDatasourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(UrDynamicDatasource urDynamicDatasource)
+    public AjaxResult export(UrDynamicDataSource urDynamicDataSource)
     {
-        List<UrDynamicDatasource> list = urDynamicDatasourceService.selectUrDynamicDatasourceList(urDynamicDatasource);
-        ExcelUtil<UrDynamicDatasource> util = new ExcelUtil<UrDynamicDatasource>(UrDynamicDatasource.class);
+        List<UrDynamicDataSource> list = urDynamicDataSourceService.selectUrDynamicDataSourceList(urDynamicDataSource);
+        ExcelUtil<UrDynamicDataSource> util = new ExcelUtil<UrDynamicDataSource>(UrDynamicDataSource.class);
         return util.exportExcel(list, "datasource");
     }
 
@@ -84,9 +84,9 @@ public class UrDynamicDatasourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(UrDynamicDatasource urDynamicDatasource)
+    public AjaxResult addSave(UrDynamicDataSource urDynamicDataSource)
     {
-        return toAjax(urDynamicDatasourceService.insertUrDynamicDatasource(urDynamicDatasource));
+        return toAjax(urDynamicDataSourceService.insertUrDynamicDataSource(urDynamicDataSource));
     }
 
     /**
@@ -95,8 +95,8 @@ public class UrDynamicDatasourceController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        UrDynamicDatasource urDynamicDatasource = urDynamicDatasourceService.selectUrDynamicDatasourceById(id);
-        mmap.put("urDynamicDatasource", urDynamicDatasource);
+        UrDynamicDataSource urDynamicDataSource = urDynamicDataSourceService.selectUrDynamicDataSourceById(id);
+        mmap.put("urDynamicDataSource", urDynamicDataSource);
         return prefix + "/edit";
     }
 
@@ -107,9 +107,9 @@ public class UrDynamicDatasourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(UrDynamicDatasource urDynamicDatasource)
+    public AjaxResult editSave(UrDynamicDataSource urDynamicDataSource)
     {
-        return toAjax(urDynamicDatasourceService.updateUrDynamicDatasource(urDynamicDatasource));
+        return toAjax(urDynamicDataSourceService.updateUrDynamicDataSource(urDynamicDataSource));
     }
 
     /**
@@ -121,6 +121,6 @@ public class UrDynamicDatasourceController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(urDynamicDatasourceService.deleteUrDynamicDatasourceByIds(ids));
+        return toAjax(urDynamicDataSourceService.deleteUrDynamicDataSourceByIds(ids));
     }
 }

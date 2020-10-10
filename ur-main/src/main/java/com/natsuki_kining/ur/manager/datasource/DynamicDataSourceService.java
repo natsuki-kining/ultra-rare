@@ -5,8 +5,8 @@ import com.natsuki_kining.ssr.core.config.multisource.DynamicDataSourceHandle;
 import com.natsuki_kining.ssr.core.config.properties.SSRDruidProperties;
 import com.natsuki_kining.ssr.core.utils.CollectionUtils;
 import com.natsuki_kining.ssr.core.utils.StringUtils;
-import com.ruoyi.system.domain.UrDynamicDatasource;
-import com.ruoyi.system.service.IUrDynamicDatasourceService;
+import com.ruoyi.system.domain.UrDynamicDataSource;
+import com.ruoyi.system.service.IUrDynamicDataSourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +27,16 @@ public class DynamicDataSourceService {
     protected Logger logger = LoggerFactory.getLogger(DynamicDataSourceService.class);
 
     @Autowired
-    private IUrDynamicDatasourceService urDynamicDatasourceService;
+    private IUrDynamicDataSourceService urDynamicDataSourceService;
 
     @Autowired
     private DynamicDataSourceHandle dynamicDataSourceHandle;
 
     @PostConstruct
     public void initDataSource() {
-        UrDynamicDatasource urDynamicDatasource = new UrDynamicDatasource();
-        List<UrDynamicDatasource> urDynamicDataSources = urDynamicDatasourceService.selectUrDynamicDatasourceList(urDynamicDatasource);
+        UrDynamicDataSource urDynamicDatasource = new UrDynamicDataSource();
+        urDynamicDatasource.setDelFlag(0);
+        List<UrDynamicDataSource> urDynamicDataSources = urDynamicDataSourceService.selectUrDynamicDataSourceList(urDynamicDatasource);
         if (CollectionUtils.isEmpty(urDynamicDataSources) || urDynamicDataSources.size() == 0) {
             logger.info("没有需要设置的数据源。");
             return;

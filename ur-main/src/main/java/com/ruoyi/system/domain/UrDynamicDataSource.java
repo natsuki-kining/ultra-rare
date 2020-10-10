@@ -6,12 +6,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 动态数据源对象 ur_dynamic_datasource
+ * 动态数据源对象 ur_dynamic_data_source
  * 
  * @author natsuki_kining
- * @date 2020-10-03
+ * @date 2020-10-10
  */
-public class UrDynamicDatasource extends BaseEntity
+public class UrDynamicDataSource extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -40,6 +40,33 @@ public class UrDynamicDatasource extends BaseEntity
 
     /** 其他配置信息 */
     private String otherConfig;
+
+    /** 版本号 */
+    @Excel(name = "版本号")
+    private String version;
+
+    /** 是否删除 */
+    private Integer delFlag;
+
+    /** 排序编号 */
+    @Excel(name = "排序编号")
+    private Long orderNum;
+
+    /** 创建人名称 */
+    @Excel(name = "创建人名称")
+    private String createName;
+
+    /** 创建人id */
+    @Excel(name = "创建人id")
+    private String createId;
+
+    /** 修改人名称 */
+    @Excel(name = "修改人名称")
+    private String updateName;
+
+    /** 修改人id */
+    @Excel(name = "修改人id")
+    private String updateId;
 
     public void setId(Long id) 
     {
@@ -104,6 +131,69 @@ public class UrDynamicDatasource extends BaseEntity
     {
         return otherConfig;
     }
+    public void setVersion(String version) 
+    {
+        this.version = version;
+    }
+
+    public String getVersion() 
+    {
+        return version;
+    }
+    public void setDelFlag(Integer delFlag) 
+    {
+        this.delFlag = delFlag;
+    }
+
+    public Integer getDelFlag() 
+    {
+        return delFlag;
+    }
+    public void setOrderNum(Long orderNum) 
+    {
+        this.orderNum = orderNum;
+    }
+
+    public Long getOrderNum() 
+    {
+        return orderNum;
+    }
+    public void setCreateName(String createName) 
+    {
+        this.createName = createName;
+    }
+
+    public String getCreateName() 
+    {
+        return createName;
+    }
+    public void setCreateId(String createId) 
+    {
+        this.createId = createId;
+    }
+
+    public String getCreateId() 
+    {
+        return createId;
+    }
+    public void setUpdateName(String updateName) 
+    {
+        this.updateName = updateName;
+    }
+
+    public String getUpdateName() 
+    {
+        return updateName;
+    }
+    public void setUpdateId(String updateId) 
+    {
+        this.updateId = updateId;
+    }
+
+    public String getUpdateId() 
+    {
+        return updateId;
+    }
 
     @Override
     public String toString() {
@@ -115,6 +205,16 @@ public class UrDynamicDatasource extends BaseEntity
             .append("url", getUrl())
             .append("driverClassName", getDriverClassName())
             .append("otherConfig", getOtherConfig())
+            .append("version", getVersion())
+            .append("delFlag", getDelFlag())
+            .append("orderNum", getOrderNum())
+            .append("createName", getCreateName())
+            .append("createId", getCreateId())
+            .append("createTime", getCreateTime())
+            .append("updateName", getUpdateName())
+            .append("updateId", getUpdateId())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
             .toString();
     }
 }
