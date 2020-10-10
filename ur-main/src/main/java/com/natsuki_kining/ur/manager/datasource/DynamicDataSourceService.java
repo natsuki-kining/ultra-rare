@@ -2,6 +2,7 @@ package com.natsuki_kining.ur.manager.datasource;
 
 import com.alibaba.fastjson.JSON;
 import com.natsuki_kining.ssr.core.config.multisource.DynamicDataSourceHandle;
+import com.natsuki_kining.ssr.core.config.multisource.MultiSourceConfig;
 import com.natsuki_kining.ssr.core.config.properties.SSRDruidProperties;
 import com.natsuki_kining.ssr.core.utils.CollectionUtils;
 import com.natsuki_kining.ssr.core.utils.StringUtils;
@@ -32,6 +33,9 @@ public class DynamicDataSourceService {
     @Autowired
     private DynamicDataSourceHandle dynamicDataSourceHandle;
 
+    @Autowired
+    private MultiSourceConfig multiSourceConfig;
+
     @PostConstruct
     public void initDataSource() {
         UrDynamicDataSource urDynamicDatasource = new UrDynamicDataSource();
@@ -43,24 +47,30 @@ public class DynamicDataSourceService {
         }
         StringBuilder info = new StringBuilder();
         urDynamicDataSources.forEach(ds -> {
-            SSRDruidProperties druidProperties = null;
-            if (StringUtils.isNotBlank(ds.getOtherConfig())) {
-                druidProperties = JSON.parseObject(ds.getOtherConfig(), SSRDruidProperties.class);
+            if (multiSourceConfig.containsDataSourceName(ds.getDatasourceName())){
+                info.append("数据源");
+                info.append(ds.getDatasourceName());
+                info.append("已存在。");
+            }else{
+                SSRDruidProperties druidProperties = null;
+                if (StringUtils.isNotBlank(ds.getOtherConfig())) {
+                    druidProperties = JSON.parseObject(ds.getOtherConfig(), SSRDruidProperties.class);
+                }
+                if (druidProperties == null) {
+                    druidProperties = new SSRDruidProperties();
+                }
+                druidProperties.setDriverClassName(ds.getDriverClassName());
+                druidProperties.setDataSourceName(ds.getDatasourceName());
+                druidProperties.setPassword(ds.getPassword());
+                druidProperties.setUsername(ds.getUserName());
+                druidProperties.setUrl(ds.getUrl());
+                boolean flag = dynamicDataSourceHandle.addDatasource(druidProperties);
+                String message = flag ? "成功" : "失败";
+                info.append(ds.getDatasourceName());
+                info.append(" 数据源 新增 ");
+                info.append(message);
+                info.append("。");
             }
-            if (druidProperties == null) {
-                druidProperties = new SSRDruidProperties();
-            }
-            druidProperties.setDriverClassName(ds.getDriverClassName());
-            druidProperties.setDataSourceName(ds.getDatasourceName());
-            druidProperties.setPassword(ds.getPassword());
-            druidProperties.setUsername(ds.getUserName());
-            druidProperties.setUrl(ds.getUrl());
-            boolean flag = dynamicDataSourceHandle.addDatasource(druidProperties);
-            String message = flag ? "成功" : "失败";
-            info.append(ds.getDatasourceName());
-            info.append(" 数据源 新增 ");
-            info.append(message);
-            info.append("。");
         });
         logger.info(info.toString());
     }
