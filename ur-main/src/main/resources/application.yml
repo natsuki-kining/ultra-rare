@@ -56,7 +56,7 @@ spring:
 
 
   profiles:
-    active: ruoyi,druid
+    active: ruoyi
 
 logging:
   level:
