@@ -1,5 +1,6 @@
 # ssr
 ssr:
+  version: 1.0.0
   enable:
     generate-by-table: true
     generate-by-entity: true
@@ -18,3 +19,6 @@ ssr:
 
 freemarker:
   checkTemplateLocation: false
+
+ur:
+  version: 1.0.0

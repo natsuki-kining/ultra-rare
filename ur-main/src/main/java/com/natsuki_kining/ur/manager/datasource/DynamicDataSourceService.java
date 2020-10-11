@@ -68,6 +68,7 @@ public class DynamicDataSourceService {
                 info.append("。");
             }
         });
+        logger.info("初始化动态数据源表中的配置：");
         logger.info(info.toString());
     }
 }

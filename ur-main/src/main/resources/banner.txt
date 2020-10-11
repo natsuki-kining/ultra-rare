@@ -1,0 +1,30 @@
+Spring Boot Version: ${spring-boot.version}
+SSR Version: ${ssr.version}
+UR Version: ${ur.version}
+RuoYI Version: ${ruoyi.version}
+
+
+
+
+UUUUUUUU     UUUUUUUU     RRRRRRRRRRRRRRRRR
+U::::::U     U::::::U     R::::::::::::::::R
+U::::::U     U::::::U     R::::::RRRRRR:::::R
+UU:::::U     U:::::UU     RR:::::R     R:::::R
+ U:::::U     U:::::U        R::::R     R:::::R
+ U:::::D     D:::::U        R::::R     R:::::R
+ U:::::D     D:::::U        R::::RRRRRR:::::R
+ U:::::D     D:::::U        R:::::::::::::RR
+ U:::::D     D:::::U        R::::RRRRRR:::::R
+ U:::::D     D:::::U        R::::R     R:::::R
+ U:::::D     D:::::U        R::::R     R:::::R
+ U::::::U   U::::::U        R::::R     R:::::R
+ U:::::::UUU:::::::U      RR:::::R     R:::::R
+  UU:::::::::::::UU       R::::::R     R:::::R
+    UU:::::::::UU         R::::::R     R:::::R
+      UUUUUUUUU           RRRRRRRR     RRRRRRR
+
+
+
+
+
+
