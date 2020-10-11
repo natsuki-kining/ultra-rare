@@ -1,7 +1,6 @@
 package com.natsuki_kining.ur.manager.datasource;
 
 import com.alibaba.fastjson.JSON;
-import com.natsuki_kining.ssr.core.config.multisource.DynamicDataSourceHandle;
 import com.natsuki_kining.ssr.core.config.multisource.MultiSourceConfig;
 import com.natsuki_kining.ssr.core.config.properties.SSRDruidProperties;
 import com.natsuki_kining.ssr.core.utils.CollectionUtils;
@@ -29,9 +28,6 @@ public class DynamicDataSourceService {
 
     @Autowired
     private IUrDynamicDataSourceService urDynamicDataSourceService;
-
-    @Autowired
-    private DynamicDataSourceHandle dynamicDataSourceHandle;
 
     @Autowired
     private MultiSourceConfig multiSourceConfig;
@@ -64,7 +60,7 @@ public class DynamicDataSourceService {
                 druidProperties.setPassword(ds.getPassword());
                 druidProperties.setUsername(ds.getUserName());
                 druidProperties.setUrl(ds.getUrl());
-                boolean flag = dynamicDataSourceHandle.addDatasource(druidProperties);
+                boolean flag = multiSourceConfig.addDataSource(druidProperties);
                 String message = flag ? "成功" : "失败";
                 info.append(ds.getDatasourceName());
                 info.append(" 数据源 新增 ");
