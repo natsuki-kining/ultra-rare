@@ -41,7 +41,7 @@ CREATE TABLE `ur_dynamic_sql` (
   `REMARK` varchar(1000) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `UNIQUE` (`QUERY_CODE`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='动态SQL';
 
 -- ----------------------------
 -- Table structure for ur_template
@@ -63,4 +63,26 @@ CREATE TABLE `ur_template` (
   `REMARK` varchar(1000) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ur_template_unique` (`TEMPLATE_CODE`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='模板表';
+
+DROP TABLE IF EXISTS `ur_dynamic_data_source`;
+CREATE TABLE `ur_dynamic_data_source` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `dataSourceName` varchar(255) NOT NULL COMMENT '数据源名称',
+  `userName` varchar(255) NOT NULL COMMENT '用户名',
+  `password` varchar(255) NOT NULL COMMENT '密码',
+  `url` varchar(500) NOT NULL COMMENT '数据库连接',
+  `driverClassName` varchar(255) NOT NULL COMMENT '驱动名称',
+  `otherConfig` text COMMENT '其他配置',
+  `version` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '版本号',
+  `del_flag` int(1) DEFAULT NULL COMMENT '是否删除。1：是，0：否。',
+  `order_num` int(11) DEFAULT NULL COMMENT '排序编号。正序。',
+  `create_name` varchar(60) CHARACTER SET utf8 DEFAULT NULL COMMENT '创建人名称',
+  `create_id` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '创建人id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_name` varchar(60) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人名称',
+  `update_id` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人id',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `remark` varchar(1000) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='动态数据源';
