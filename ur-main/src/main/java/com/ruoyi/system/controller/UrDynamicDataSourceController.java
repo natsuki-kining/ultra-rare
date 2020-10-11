@@ -1,43 +1,37 @@
 package com.ruoyi.system.controller;
 
-import java.util.List;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.system.domain.UrDynamicDataSource;
+import com.ruoyi.system.service.IUrDynamicDataSourceService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.UrDynamicDataSource;
-import com.ruoyi.system.service.IUrDynamicDataSourceService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 动态数据源Controller
- * 
+ *
  * @author natsuki_kining
  * @date 2020-10-10
  */
 @Controller
 @RequestMapping("/system/datasource")
-public class UrDynamicDataSourceController extends BaseController
-{
-    private String prefix = "system/datasource";
+public class UrDynamicDataSourceController extends AbstractUrDynamicDataSourceController {
+    private final String prefix = "system/datasource";
 
     @Autowired
     private IUrDynamicDataSourceService urDynamicDataSourceService;
 
     @RequiresPermissions("system:datasource:view")
     @GetMapping()
-    public String datasource()
-    {
+    public String datasource() {
         return prefix + "/datasource";
     }
 
@@ -47,8 +41,7 @@ public class UrDynamicDataSourceController extends BaseController
     @RequiresPermissions("system:datasource:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(UrDynamicDataSource urDynamicDataSource)
-    {
+    public TableDataInfo list(UrDynamicDataSource urDynamicDataSource) {
         startPage();
         List<UrDynamicDataSource> list = urDynamicDataSourceService.selectUrDynamicDataSourceList(urDynamicDataSource);
         return getDataTable(list);
@@ -61,8 +54,7 @@ public class UrDynamicDataSourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(UrDynamicDataSource urDynamicDataSource)
-    {
+    public AjaxResult export(UrDynamicDataSource urDynamicDataSource) {
         List<UrDynamicDataSource> list = urDynamicDataSourceService.selectUrDynamicDataSourceList(urDynamicDataSource);
         ExcelUtil<UrDynamicDataSource> util = new ExcelUtil<UrDynamicDataSource>(UrDynamicDataSource.class);
         return util.exportExcel(list, "datasource");
@@ -72,8 +64,7 @@ public class UrDynamicDataSourceController extends BaseController
      * 新增动态数据源
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -84,8 +75,7 @@ public class UrDynamicDataSourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(UrDynamicDataSource urDynamicDataSource)
-    {
+    public AjaxResult addSave(UrDynamicDataSource urDynamicDataSource) {
         return toAjax(urDynamicDataSourceService.insertUrDynamicDataSource(urDynamicDataSource));
     }
 
@@ -93,8 +83,7 @@ public class UrDynamicDataSourceController extends BaseController
      * 修改动态数据源
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") Long id, ModelMap mmap)
-    {
+    public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         UrDynamicDataSource urDynamicDataSource = urDynamicDataSourceService.selectUrDynamicDataSourceById(id);
         mmap.put("urDynamicDataSource", urDynamicDataSource);
         return prefix + "/edit";
@@ -107,8 +96,7 @@ public class UrDynamicDataSourceController extends BaseController
     @Log(title = "动态数据源", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(UrDynamicDataSource urDynamicDataSource)
-    {
+    public AjaxResult editSave(UrDynamicDataSource urDynamicDataSource) {
         return toAjax(urDynamicDataSourceService.updateUrDynamicDataSource(urDynamicDataSource));
     }
 
@@ -117,10 +105,9 @@ public class UrDynamicDataSourceController extends BaseController
      */
     @RequiresPermissions("system:datasource:remove")
     @Log(title = "动态数据源", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
+    public AjaxResult remove(String ids) {
         return toAjax(urDynamicDataSourceService.deleteUrDynamicDataSourceByIds(ids));
     }
 }

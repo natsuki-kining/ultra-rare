@@ -3,9 +3,6 @@ SSR Version: ${ssr.version}
 UR Version: ${ur.version}
 RuoYI Version: ${ruoyi.version}
 
-
-
-
 UUUUUUUU     UUUUUUUU     RRRRRRRRRRRRRRRRR
 U::::::U     U::::::U     R::::::::::::::::R
 U::::::U     U::::::U     R::::::RRRRRR:::::R
@@ -22,9 +19,4 @@ UU:::::U     U:::::UU     RR:::::R     R:::::R
   UU:::::::::::::UU       R::::::R     R:::::R
     UU:::::::::UU         R::::::R     R:::::R
       UUUUUUUUU           RRRRRRRR     RRRRRRR
-
-
-
-
-
 
