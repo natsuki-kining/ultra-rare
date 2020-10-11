@@ -26,9 +26,6 @@ import java.util.List;
 public class UrDynamicDataSourceController extends AbstractUrDynamicDataSourceController {
     private final String prefix = "system/datasource";
 
-    @Autowired
-    private IUrDynamicDataSourceService urDynamicDataSourceService;
-
     @RequiresPermissions("system:datasource:view")
     @GetMapping()
     public String datasource() {

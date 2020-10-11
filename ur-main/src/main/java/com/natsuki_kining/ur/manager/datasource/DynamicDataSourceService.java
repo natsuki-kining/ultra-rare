@@ -43,32 +43,50 @@ public class DynamicDataSourceService {
         }
         StringBuilder info = new StringBuilder();
         urDynamicDataSources.forEach(ds -> {
-            if (multiSourceConfig.containsDataSourceName(ds.getDatasourceName())){
-                info.append("数据源");
-                info.append(ds.getDatasourceName());
-                info.append("已存在。");
-            }else{
-                SSRDruidProperties druidProperties = null;
-                if (StringUtils.isNotBlank(ds.getOtherConfig())) {
-                    druidProperties = JSON.parseObject(ds.getOtherConfig(), SSRDruidProperties.class);
-                }
-                if (druidProperties == null) {
-                    druidProperties = new SSRDruidProperties();
-                }
-                druidProperties.setDriverClassName(ds.getDriverClassName());
-                druidProperties.setDataSourceName(ds.getDatasourceName());
-                druidProperties.setPassword(ds.getPassword());
-                druidProperties.setUsername(ds.getUserName());
-                druidProperties.setUrl(ds.getUrl());
-                boolean flag = multiSourceConfig.addDataSource(druidProperties);
-                String message = flag ? "成功" : "失败";
-                info.append(ds.getDatasourceName());
-                info.append(" 数据源 新增 ");
-                info.append(message);
-                info.append("。");
-            }
+            addDataSource(info,ds);
         });
         logger.info("初始化动态数据源表中的配置：");
         logger.info(info.toString());
+    }
+
+    private boolean addDataSource(StringBuilder info,UrDynamicDataSource ds) {
+        if (multiSourceConfig.containsDataSourceName(ds.getDatasourceName())){
+            info.append("数据源");
+            info.append(ds.getDatasourceName());
+            info.append("已存在。");
+            return false;
+        }else{
+            SSRDruidProperties druidProperties = null;
+            if (StringUtils.isNotBlank(ds.getOtherConfig())) {
+                druidProperties = JSON.parseObject(ds.getOtherConfig(), SSRDruidProperties.class);
+            }
+            if (druidProperties == null) {
+                druidProperties = new SSRDruidProperties();
+            }
+            druidProperties.setDriverClassName(ds.getDriverClassName());
+            druidProperties.setDataSourceName(ds.getDatasourceName());
+            druidProperties.setPassword(ds.getPassword());
+            druidProperties.setUsername(ds.getUserName());
+            druidProperties.setUrl(ds.getUrl());
+            boolean flag = multiSourceConfig.addDataSource(druidProperties);
+            String message = flag ? "成功" : "失败";
+            info.append(ds.getDatasourceName());
+            info.append(" 数据源 新增 ");
+            info.append(message);
+            info.append("。");
+            return true;
+        }
+    }
+
+    /**
+     * 启动数据源
+     * @param urDynamicDataSource
+     * @return
+     */
+    public boolean startDataSource(UrDynamicDataSource urDynamicDataSource){
+        StringBuilder info = new StringBuilder();
+        boolean flag = addDataSource(info, urDynamicDataSource);
+        logger.info(info.toString());
+        return flag;
     }
 }
