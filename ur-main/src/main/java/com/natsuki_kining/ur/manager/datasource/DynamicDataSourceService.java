@@ -50,9 +50,9 @@ public class DynamicDataSourceService {
     }
 
     private boolean addDataSource(StringBuilder info,UrDynamicDataSource ds) {
-        if (multiSourceConfig.containsDataSourceName(ds.getDatasourceName())){
+        if (multiSourceConfig.containsDataSourceName(ds.getDataSourceName())){
             info.append("数据源");
-            info.append(ds.getDatasourceName());
+            info.append(ds.getDataSourceName());
             info.append("已存在。");
             return false;
         }else{
@@ -64,13 +64,13 @@ public class DynamicDataSourceService {
                 druidProperties = new SSRDruidProperties();
             }
             druidProperties.setDriverClassName(ds.getDriverClassName());
-            druidProperties.setDataSourceName(ds.getDatasourceName());
+            druidProperties.setDataSourceName(ds.getDataSourceName());
             druidProperties.setPassword(ds.getPassword());
             druidProperties.setUsername(ds.getUserName());
             druidProperties.setUrl(ds.getUrl());
             boolean flag = multiSourceConfig.addDataSource(druidProperties);
             String message = flag ? "成功" : "失败";
-            info.append(ds.getDatasourceName());
+            info.append(ds.getDataSourceName());
             info.append(" 数据源 新增 ");
             info.append(message);
             info.append("。");

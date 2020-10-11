@@ -20,7 +20,7 @@ public class UrDynamicDataSource extends BaseEntity
 
     /** 数据源名称 */
     @Excel(name = "数据源名称")
-    private String datasourceName;
+    private String dataSourceName;
 
     /** 数据库账号 */
     @Excel(name = "数据库账号")
@@ -77,14 +77,14 @@ public class UrDynamicDataSource extends BaseEntity
     {
         return id;
     }
-    public void setDatasourceName(String datasourceName) 
+    public void setDataSourceName(String dataSourceName)
     {
-        this.datasourceName = datasourceName;
+        this.dataSourceName = dataSourceName;
     }
 
-    public String getDatasourceName() 
+    public String getDataSourceName()
     {
-        return datasourceName;
+        return dataSourceName;
     }
     public void setUserName(String userName) 
     {
@@ -199,7 +199,7 @@ public class UrDynamicDataSource extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("datasourceName", getDatasourceName())
+            .append("datasourceName", getDataSourceName())
             .append("userName", getUserName())
             .append("password", getPassword())
             .append("url", getUrl())
