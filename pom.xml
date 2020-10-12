@@ -17,10 +17,12 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>ur-generator</module>
     </modules>
 
 
     <properties>
+        <ur.version>1.0.0</ur.version>
         <ruoyi.version>4.4.0</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -228,6 +230,12 @@
                 <groupId>com.natsuki_kining.ur</groupId>
                 <artifactId>ruoyi-common</artifactId>
                 <version>${ruoyi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.natsuki_kining.ur</groupId>
+                <artifactId>ur-generator</artifactId>
+                <version>${ur.version}</version>
             </dependency>
 
         </dependencies>

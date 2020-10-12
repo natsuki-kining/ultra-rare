@@ -1,0 +1,15 @@
+package ${packageName}.service.impl;
+
+import org.springframework.stereotype.Service;
+import ${packageName}.service.I${ClassName}Service;
+
+/**
+ * ${functionName}Service业务层处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl extends ${ClassName}AbstractServiceImpl implements I${ClassName}Service {
+
+}

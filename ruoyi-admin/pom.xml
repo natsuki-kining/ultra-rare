@@ -78,7 +78,7 @@
         <!-- 代码生成-->
         <dependency>
             <groupId>com.natsuki_kining.ur</groupId>
-            <artifactId>ruoyi-generator</artifactId>
+            <artifactId>ur-generator</artifactId>
         </dependency>
 
     </dependencies>

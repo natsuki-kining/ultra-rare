@@ -1,0 +1,17 @@
+package ${packageName}.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+/**
+ * ${functionName}Controller
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${moduleName}/${businessName}")
+public class ${ClassName}Controller extends ${ClassName}AbstractController {
+
+}
