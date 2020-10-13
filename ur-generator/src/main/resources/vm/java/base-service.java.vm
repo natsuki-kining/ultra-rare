@@ -1,6 +1,7 @@
 package ${packageName}.service;
 
 import java.util.List;
+
 import ${packageName}.domain.${ClassName};
 #if($table.tree)
 import com.ruoyi.common.core.domain.Ztree;
@@ -8,23 +9,22 @@ import com.ruoyi.common.core.domain.Ztree;
 
 /**
  * ${functionName}Service接口
- * 
+ *
  * @author ${author}
  * @date ${datetime}
  */
-interface I${ClassName}BaseService
-{
+public interface I${ClassName}BaseService {
     /**
      * 查询${functionName}
-     * 
+     *
      * @param ${pkColumn.javaField} ${functionName}ID
      * @return ${functionName}
      */
-    ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+     ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
 
     /**
      * 查询${functionName}列表
-     * 
+     *
      * @param ${className} ${functionName}
      * @return ${functionName}集合
      */
@@ -32,7 +32,7 @@ interface I${ClassName}BaseService
 
     /**
      * 新增${functionName}
-     * 
+     *
      * @param ${className} ${functionName}
      * @return 结果
      */
@@ -40,7 +40,7 @@ interface I${ClassName}BaseService
 
     /**
      * 修改${functionName}
-     * 
+     *
      * @param ${className} ${functionName}
      * @return 结果
      */
@@ -48,7 +48,7 @@ interface I${ClassName}BaseService
 
     /**
      * 批量删除${functionName}
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -56,18 +56,18 @@ interface I${ClassName}BaseService
 
     /**
      * 删除${functionName}信息
-     * 
+     *
      * @param ${pkColumn.javaField} ${functionName}ID
      * @return 结果
      */
     int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
-#if($table.tree)
+    #if($table.tree)
 
     /**
      * 查询${functionName}树列表
-     * 
+     *
      * @return 所有${functionName}信息
      */
     List<Ztree> select${ClassName}Tree();
-#end
+    #end
 }

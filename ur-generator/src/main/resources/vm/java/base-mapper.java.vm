@@ -12,7 +12,7 @@ import ${packageName}.domain.${subClassName};
  * @author ${author}
  * @date ${datetime}
  */
-interface ${ClassName}BaseMapper {
+public interface ${ClassName}BaseMapper {
     /**
      * 查询${functionName}
      * 
