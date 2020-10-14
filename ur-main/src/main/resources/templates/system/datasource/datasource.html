@@ -12,10 +12,10 @@
                         <ul>
                             <li>
                                 <label>数据源名称：</label>
-                                <input type="text" name="datasourceName"/>
+                                <input type="text" name="dataSourceName"/>
                             </li>
                             <li>
-                                <label>数据库账号：</label>
+                                <label>用户名：</label>
                                 <input type="text" name="userName"/>
                             </li>
                             <li>
@@ -25,6 +25,10 @@
                             <li>
                                 <label>驱动名称：</label>
                                 <input type="text" name="driverClassName"/>
+                            </li>
+                            <li>
+                                <label>其他配置：</label>
+                                <input type="text" name="otherConfig"/>
                             </li>
                             <li>
                                 <label>版本号：</label>
@@ -101,12 +105,12 @@
                     visible: false
                 },
                 {
-                    field: 'datasourceName',
+                    field: 'dataSourceName',
                     title: '数据源名称'
                 },
                 {
                     field: 'userName',
-                    title: '数据库账号'
+                    title: '用户名'
                 },
                 {
                     field: 'password',
@@ -119,6 +123,10 @@
                 {
                     field: 'driverClassName',
                     title: '驱动名称'
+                },
+                {
+                    field: 'otherConfig',
+                    title: '其他配置'
                 },
                 {
                     field: 'version',

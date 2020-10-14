@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 动态sql对象 ur_dynamic_sql
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
 public class UrDynamicSql extends BaseEntity {
 

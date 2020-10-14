@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 模板对象 ur_template
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
 public class UrTemplate extends BaseEntity {
 

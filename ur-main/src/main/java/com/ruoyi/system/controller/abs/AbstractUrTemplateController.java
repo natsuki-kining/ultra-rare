@@ -1,10 +1,9 @@
-package com.ruoyi.system.controller;
+package com.ruoyi.system.controller.abs;
 
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +22,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 模板Controller 抽象层
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
-public abstract class UrTemplateAbstractController extends BaseController {
+public abstract class AbstractUrTemplateController extends BaseController {
     private final String prefix = "system/template" ;
 
     @Autowired

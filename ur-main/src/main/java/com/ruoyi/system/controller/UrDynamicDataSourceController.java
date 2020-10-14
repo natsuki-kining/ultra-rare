@@ -2,16 +2,16 @@ package com.ruoyi.system.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.ruoyi.system.controller.abs.AbstractUrDynamicDataSourceController;
 
 /**
  * 动态数据源Controller
  * 
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
 @Controller
 @RequestMapping("/system/datasource")
-public class UrDynamicDataSourceController extends UrDynamicDataSourceAbstractController {
+public class UrDynamicDataSourceController extends AbstractUrDynamicDataSourceController {
 
 }

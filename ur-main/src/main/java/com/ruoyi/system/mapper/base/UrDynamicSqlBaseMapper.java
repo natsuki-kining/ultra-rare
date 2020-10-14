@@ -1,4 +1,4 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.system.mapper.base;
 
 import java.util.List;
 import com.ruoyi.system.domain.UrDynamicSql;
@@ -7,7 +7,7 @@ import com.ruoyi.system.domain.UrDynamicSql;
  * 动态sqlMapper接口
  * 
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
 public interface UrDynamicSqlBaseMapper {
     /**

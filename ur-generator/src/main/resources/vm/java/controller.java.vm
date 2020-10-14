@@ -2,7 +2,7 @@ package ${packageName}.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import ${packageName}.controller.abs.Abstract${ClassName}Controller;
 
 /**
  * ${functionName}Controller
@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/${moduleName}/${businessName}")
-public class ${ClassName}Controller extends ${ClassName}AbstractController {
+public class ${ClassName}Controller extends Abstract${ClassName}Controller {
 
 }

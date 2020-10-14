@@ -1,4 +1,4 @@
-package com.ruoyi.system.service;
+package com.ruoyi.system.service.base;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.ruoyi.system.domain.UrDynamicSql;
  * 动态sqlService接口
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
 public interface IUrDynamicSqlBaseService {
     /**

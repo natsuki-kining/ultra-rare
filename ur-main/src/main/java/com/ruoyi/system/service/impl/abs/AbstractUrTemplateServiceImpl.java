@@ -1,22 +1,22 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.system.service.impl.abs;
 
 import java.util.List;
                                             import com.ruoyi.common.utils.DateUtils;
         import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.UrTemplateBaseMapper;
+import com.ruoyi.system.mapper.base.UrTemplateBaseMapper;
 import com.ruoyi.system.mapper.UrTemplateMapper;
 import com.ruoyi.system.domain.UrTemplate;
-import com.ruoyi.system.service.IUrTemplateBaseService;
+import com.ruoyi.system.service.base.IUrTemplateBaseService;
 import com.ruoyi.common.core.text.Convert;
 
 /**
  * 模板Service业务抽象层处理
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
-public abstract class UrTemplateAbstractServiceImpl implements IUrTemplateBaseService {
+public abstract class AbstractUrTemplateServiceImpl implements IUrTemplateBaseService {
 
     @Autowired
     protected UrTemplateBaseMapper urTemplateBaseMapper;

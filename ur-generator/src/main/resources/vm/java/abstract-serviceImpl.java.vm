@@ -1,4 +1,4 @@
-package ${packageName}.service.impl;
+package ${packageName}.service.impl.abs;
 
 import java.util.List;
 #if($table.tree)
@@ -21,10 +21,10 @@ import com.ruoyi.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 import ${packageName}.domain.${subClassName};
 #end
-import ${packageName}.mapper.${ClassName}BaseMapper;
+import ${packageName}.mapper.base.${ClassName}BaseMapper;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
-import ${packageName}.service.I${ClassName}BaseService;
+import ${packageName}.service.base.I${ClassName}BaseService;
 import com.ruoyi.common.core.text.Convert;
 
 /**
@@ -33,7 +33,7 @@ import com.ruoyi.common.core.text.Convert;
  * @author ${author}
  * @date ${datetime}
  */
-public abstract class ${ClassName}AbstractServiceImpl implements I${ClassName}BaseService {
+public abstract class Abstract${ClassName}ServiceImpl implements I${ClassName}BaseService {
 
     @Autowired
     protected ${ClassName}BaseMapper ${className}BaseMapper;

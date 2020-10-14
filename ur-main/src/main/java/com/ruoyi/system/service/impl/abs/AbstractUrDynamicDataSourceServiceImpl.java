@@ -1,22 +1,22 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.system.service.impl.abs;
 
 import java.util.List;
                                                         import com.ruoyi.common.utils.DateUtils;
         import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.UrDynamicDataSourceBaseMapper;
+import com.ruoyi.system.mapper.base.UrDynamicDataSourceBaseMapper;
 import com.ruoyi.system.mapper.UrDynamicDataSourceMapper;
 import com.ruoyi.system.domain.UrDynamicDataSource;
-import com.ruoyi.system.service.IUrDynamicDataSourceBaseService;
+import com.ruoyi.system.service.base.IUrDynamicDataSourceBaseService;
 import com.ruoyi.common.core.text.Convert;
 
 /**
  * 动态数据源Service业务抽象层处理
  *
  * @author natsuki_kining
- * @date 2020-10-13
+ * @date 2020-10-14
  */
-public abstract class UrDynamicDataSourceAbstractServiceImpl implements IUrDynamicDataSourceBaseService {
+public abstract class AbstractUrDynamicDataSourceServiceImpl implements IUrDynamicDataSourceBaseService {
 
     @Autowired
     protected UrDynamicDataSourceBaseMapper urDynamicDataSourceBaseMapper;

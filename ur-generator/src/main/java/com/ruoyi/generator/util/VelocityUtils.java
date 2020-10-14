@@ -185,23 +185,23 @@ public class VelocityUtils {
         if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory())) {
             fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
         } else if (template.contains("base-mapper.java.vm")) {
-            fileName = StringUtils.format("{}/mapper/{}BaseMapper.java", javaPath, className);
+            fileName = StringUtils.format("{}/mapper/base/{}BaseMapper.java", javaPath, className);
         } else if (template.contains("mapper.java.vm")) {
             fileName = StringUtils.format("{}/mapper/{}Mapper.java", javaPath, className);
         } else if (template.contains("base-service.java.vm")) {
-            fileName = StringUtils.format("{}/service/I{}BaseService.java", javaPath, className);
+            fileName = StringUtils.format("{}/service/base/I{}BaseService.java", javaPath, className);
         }else if (template.contains("service.java.vm")) {
             fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
         } else if (template.contains("abstract-serviceImpl.java.vm")) {
-            fileName = StringUtils.format("{}/service/impl/{}AbstractServiceImpl.java", javaPath, className);
+            fileName = StringUtils.format("{}/service/impl/abs/Abstract{}ServiceImpl.java", javaPath, className);
         } else if (template.contains("serviceImpl.java.vm")) {
             fileName = StringUtils.format("{}/service/impl/{}ServiceImpl.java", javaPath, className);
         } else if (template.contains("abstract-controller.java.vm")) {
-            fileName = StringUtils.format("{}/controller/{}AbstractController.java", javaPath, className);
+            fileName = StringUtils.format("{}/controller/abs/Abstract{}Controller.java", javaPath, className);
         } else if (template.contains("controller.java.vm")) {
             fileName = StringUtils.format("{}/controller/{}Controller.java", javaPath, className);
         } else if (template.contains("base-mapper.xml.vm")) {
-            fileName = StringUtils.format("{}/{}BaseMapper.xml", mybatisPath, className);
+            fileName = StringUtils.format("{}/base/{}BaseMapper.xml", mybatisPath, className);
         } else if (template.contains("mapper.xml.vm")) {
             fileName = StringUtils.format("{}/{}Mapper.xml", mybatisPath, className);
         } else if (template.contains("list.html.vm")) {
