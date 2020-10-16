@@ -499,6 +499,9 @@ var table = {
             },
             // 回显数据字典（字符串数组）
             selectDictLabels: function(datas, value, separator) {
+            	if ($.common.isEmpty(value)) {
+            	    return '';
+            	}
             	var currentSeparator = $.common.isEmpty(separator) ? "," : separator;
             	var actions = [];
                 $.each(value.split(currentSeparator), function(i, val) {
@@ -991,7 +994,6 @@ var table = {
 	            	    $.operate.submit(url, "post", "json", data);
 	                }
             	});
-            	
             },
             // 批量删除信息
             removeAll: function() {
@@ -1303,6 +1305,10 @@ var table = {
         			}
         			var node = tree.getNodesByParam("id", treeId, null)[0];
         			$.tree.selectByIdName(treeId, node);
+        			// 回调tree方法
+                    if(typeof(options.callBack) === "function"){
+                        options.callBack(tree);
+                    }
         		});
         	},
         	// 搜索节点
@@ -1496,6 +1502,39 @@ var table = {
                 });
                 return flag ? str : '';
             },
+            // 日期格式化 时间戳  -> yyyy-MM-dd HH-mm-ss
+            dateFormat: function(date, format) {
+                var that = this;
+                if (that.isEmpty(date)) return "";
+                if (!date) return;
+                if (!format) format = "yyyy-MM-dd";
+                switch (typeof date) {
+                case "string":
+                    date = new Date(date.replace(/-/, "/"));
+                    break;
+                case "number":
+                    date = new Date(date);
+                    break;
+                }
+                if (!date instanceof Date) return;
+                var dict = {
+                    "yyyy": date.getFullYear(),
+                    "M": date.getMonth() + 1,
+                    "d": date.getDate(),
+                    "H": date.getHours(),
+                    "m": date.getMinutes(),
+                    "s": date.getSeconds(),
+                    "MM": ("" + (date.getMonth() + 101)).substr(1),
+                    "dd": ("" + (date.getDate() + 100)).substr(1),
+                    "HH": ("" + (date.getHours() + 100)).substr(1),
+                    "mm": ("" + (date.getMinutes() + 100)).substr(1),
+                    "ss": ("" + (date.getSeconds() + 100)).substr(1)
+                };
+                return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g,
+                function() {
+                    return dict[arguments[0]];
+                });
+            },
             // 获取节点数据，支持多层级访问
             getItemField: function (item, field) {
                 var value = item;
@@ -1598,7 +1637,7 @@ var table = {
         	},
         	// 英文、数字、特殊字符正则表达式，必须包含（字母，数字，特殊字符-_）
         	charValid : function(text){
-        		var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[-_])[A-Za-z\d-_]{6,}$/);
+        		var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#\$%\^&\*\(\)\-=_\+])[A-Za-z\d~!@#\$%\^&\*\(\)\-=_\+]{6,}$/);
         		return patten.test(text);
         	},
         }

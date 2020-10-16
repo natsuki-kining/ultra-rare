@@ -191,8 +191,8 @@ $(function() {
     'use strict';
     $.fn.toTop = function(opt) {
         var elem = this;
-        var win = $(window);
-        var doc = $('html, body');
+        var win = (opt && opt.hasOwnProperty('win')) ? opt.win : $(window);
+        var doc = (opt && opt.hasOwnProperty('doc')) ? opt.doc : $('html, body');
         var options = $.extend({
             autohide: true,
             offset: 50,
@@ -366,7 +366,7 @@ function checkpwd(chrtype, password) {
 		}
 	} else if (chrtype == 4) {
 		if(!$.common.charValid(password)){
-			$.modal.alertWarning("密码必须包含字母、数字、以及特殊符号-、_");
+			$.modal.alertWarning("密码必须包含字母、数字、以及特殊符号<font color='red'>~!@#$%^&*()-=_+</font>");
 			return false;
 		}
 	}
