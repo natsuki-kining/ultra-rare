@@ -14,8 +14,7 @@ ssr:
       driver-class-name: com.mysql.cj.jdbc.Driver
   show-query-info:
     enable: false
-  dynamicSql:
-    TableName: UR_DYNAMIC_SQL
+  dynamic-sql-tableName: UR_DYNAMIC_SQL
 
 freemarker:
   checkTemplateLocation: false
