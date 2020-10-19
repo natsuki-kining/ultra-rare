@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/plugins/codemirror/codemirror-5.58.1/lib/codemirror.css">
     <script src="/plugins/codemirror/codemirror-5.58.1/lib/codemirror.js"></script>
     <script src="/plugins/codemirror/codemirror-5.58.1/mode/clike/clike.js"></script>
+    <script type="text/javascript" src="/plugins/codemirror/codemirror-5.58.1/mode/sql/sql.js"></script>
 </head>
 <body>
     <textarea id="headerFile"></textarea>
@@ -14,7 +15,7 @@
         var editor1 = CodeMirror.fromTextArea(document.getElementById("headerFile"), {
             lineNumbers: true,
             matchBrackets: true,
-            mode: "text/x-c++src",
+            mode: "sql",
             indentUnit:4,
             indentWithTabs: true,
             smartIndent: true,
