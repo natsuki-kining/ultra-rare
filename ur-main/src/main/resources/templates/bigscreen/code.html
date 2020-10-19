@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>code</title>
+    <link rel="stylesheet" href="/plugins/codemirror/codemirror-5.58.1/lib/codemirror.css">
+    <script src="/plugins/codemirror/codemirror-5.58.1/lib/codemirror.js"></script>
+    <script src="/plugins/codemirror/codemirror-5.58.1/mode/clike/clike.js"></script>
+</head>
+<body>
+    <textarea id="headerFile"></textarea>
+
+    <script>
+        var editor1 = CodeMirror.fromTextArea(document.getElementById("headerFile"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/x-c++src",
+            indentUnit:4,
+            indentWithTabs: true,
+            smartIndent: true,
+        });
+    </script>
+</body>
+</html>
