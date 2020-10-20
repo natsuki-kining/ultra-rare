@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2020-10-14
  */
 public abstract class AbstractUrDynamicSqlController extends BaseController {
-    private final String prefix = "system/sql" ;
+    protected final String prefix = "system/sql" ;
 
     @Autowired
     protected IUrDynamicSqlService urDynamicSqlService;
