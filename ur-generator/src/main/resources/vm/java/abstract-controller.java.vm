@@ -30,7 +30,8 @@ import com.ruoyi.common.core.domain.Ztree;
  * @date ${datetime}
  */
 public abstract class Abstract${ClassName}Controller extends BaseController {
-    private final String prefix = "${moduleName}/${businessName}" ;
+
+    protected final String prefix = "${moduleName}/${businessName}" ;
 
     @Autowired
     protected I${ClassName}Service ${className}Service;
