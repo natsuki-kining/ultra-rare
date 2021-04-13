@@ -37,23 +37,6 @@ $(function() {
         })
     }
 	
-    // 气泡弹出框特效（移到元素时）
-    $(document).on("mouseenter", '.table [data-toggle="popover"]', function() {
-        var _this = this;
-        $(this).popover("show");
-        $(".popover").on("mouseleave", function() {
-            $(_this).popover('hide');
-        });
-    })
-
-    // 气泡弹出框特效（离开元素时）
-    $(document).on("mouseleave", '.table [data-toggle="popover"]', function() {
-        var _this = this;
-        setTimeout(function() {
-            if (!$(".popover:hover").length) $(_this).popover("hide");
-        }, 100);
-    });
-	
     // 取消回车自动提交表单
     $(document).on("keypress", ":input:not(textarea):not([type=submit])", function(event) {
         if (event.keyCode == 13) {
@@ -264,7 +247,7 @@ var closeItem = function(dataId){
 }
 
 /** 创建选项卡 */
-function createMenuItem(dataUrl, menuName) {
+function createMenuItem(dataUrl, menuName, isRefresh) {
     var panelUrl = window.frameElement.getAttribute('data-id');
     dataIndex = $.common.random(1, 100),
     flag = true;
@@ -284,6 +267,9 @@ function createMenuItem(dataUrl, menuName) {
                         return false;
                     }
                 });
+            }
+            if (isRefresh) {
+            	refreshTab();
             }
             flag = false;
             return false;
@@ -308,6 +294,15 @@ function createMenuItem(dataUrl, menuName) {
         scrollToTab($('.menuTab.active', topWindow));
     }
     return false;
+}
+
+// 刷新iframe
+function refreshTab() {
+	var topWindow = $(window.parent.document);
+	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
+	var target = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow);
+    var url = target.attr('src');
+	target.attr('src', url).ready();
 }
 
 // 滚动到指定选项卡
@@ -408,15 +403,22 @@ var storage = {
 // 主子表操作封装处理
 var sub = {
     editColumn: function() {
-    	var count = $("#" + table.options.id).bootstrapTable('getData').length;
-    	var params = new Array();
-    	for (var dataIndex = 0; dataIndex <= count; dataIndex++) {
+    	var dataColumns = [];
+		for (var columnIndex = 0; columnIndex < table.options.columns.length; columnIndex++) {
+    		if (table.options.columns[columnIndex].visible != false) {
+    			dataColumns.push(table.options.columns[columnIndex]);
+    		}
+    	}
+		var params = new Array();
+		var data = $("#" + table.options.id).bootstrapTable('getData');
+    	var count = data.length;
+    	for (var dataIndex = 0; dataIndex < count; dataIndex++) {
     	    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
     	    var obj = new Object();
     	    for (var i = 0; i < columns.length; i++) {
     	        var inputValue = $(columns[i]).find('input');
     	        var selectValue = $(columns[i]).find('select');
-    	        var key = table.options.columns[i].field;
+    	        var key = dataColumns[i].field;
     	        if ($.common.isNotEmpty(inputValue.val())) {
     	            obj[key] = inputValue.val();
     	        } else if ($.common.isNotEmpty(selectValue.val())) {
@@ -425,7 +427,9 @@ var sub = {
     	            obj[key] = "";
     	        }
     	    }
-    	    params.push({ index: dataIndex, row: obj });
+    	    var item = data[dataIndex];
+    	    var extendObj = $.extend({}, item, obj);
+    	    params.push({ index: dataIndex, row: extendObj });
     	}
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
     },
@@ -438,8 +442,37 @@ var sub = {
             return;
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
+    },
+    addColumn: function(row, tableId) {
+    	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+    	table.set(currentId);
+    	var count = $("#" + currentId).bootstrapTable('getData').length;
+    	sub.editColumn();
+    	$("#" + currentId).bootstrapTable('insertRow', {
+            index: count + 1,
+            row: row
+        });
     }
 };
+
+// 动态加载css文件
+function loadCss(file, headElem) {
+    var link = document.createElement('link');
+    link.href = file;
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    if (headElem) headElem.appendChild(link);
+    else document.getElementsByTagName('head')[0].appendChild(link);
+}
+
+// 动态加载js文件
+function loadJs(file, headElem) {
+    var script = document.createElement('script');
+    script.src = file;
+    script.type = 'text/javascript';
+    if (headElem) headElem.appendChild(script);
+    else document.getElementsByTagName('head')[0].appendChild(script);
+}
 
 /** 设置全局ajax处理 */
 $.ajaxSetup({

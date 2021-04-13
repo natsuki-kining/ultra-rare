@@ -16,7 +16,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
-                        <p class="user-info-head" onclick="avatar()"><img class="img-circle img-lg" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='../../img/profile.jpg'"></p>
+                        <p class="user-info-head" onclick="avatar()"><img class="img-circle img-lg" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="'this.src=\'' + @{'/img/profile.jpg'} + '\''"></p>
                         <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
                     <ul class="list-group list-group-striped">
@@ -30,7 +30,7 @@
                         </li>
                         <li class="list-group-item" th:if="${user.dept?.deptName != null}"><i class="fa fa-group"></i>
                             <b  class="font-noraml">所属部门：</b>
-                            <p class="pull-right">[[${user.dept?.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
+                            <p class="pull-right" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:120px;">[[${user.dept?.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
                         </li>
                         <li class="list-group-item"><i class="fa fa-envelope-o"></i>
                             <b  class="font-noraml">邮箱地址：</b>
@@ -115,6 +115,16 @@
                                         <label class="col-sm-2 control-label">新密码：</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
+                                            <th:block th:with="chrtype=${@config.getKey('sys.account.chrtype')}"> 
+						                        <th:block th:if="${chrtype != '0'}">
+						                            <span class="help-block m-b-none">
+								                        <th:block th:if="${chrtype == '1'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为0-9数字 </th:block>
+								                        <th:block th:if="${chrtype == '2'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为a-z和A-Z字母</th:block>
+								                        <th:block th:if="${chrtype == '3'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字）</th:block>
+								                        <th:block th:if="${chrtype == '4'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码必须包含（字母，数字，特殊字符!@#$%^&*()-=_+）</th:block>
+						                            </span>
+                                                </th:block>
+						                    </th:block>
                                         </div>
                                     </div>
                                     <div class="form-group">

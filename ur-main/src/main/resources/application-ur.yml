@@ -4,6 +4,7 @@ ssr:
   enable:
     generate-by-table: true
     generate-by-entity: true
+    show-query-info: false
   script:
     type: javaScript
   multi-data-source:
@@ -14,7 +15,7 @@ ssr:
       driver-class-name: com.mysql.cj.jdbc.Driver
   show-query-info:
     enable: false
-  dynamic-sql-tableName: UR_DYNAMIC_SQL
+  dynamic-sql-table-name: UR_DYNAMIC_SQL
 
 freemarker:
   checkTemplateLocation: false

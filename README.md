@@ -1,6 +1,27 @@
 # ultra-rare
 自定义报表
 
+# 体验
+## 准备
+### 数据库
+* 执行 file\sql\ruoyi\ry_20210210.sql
+* 执行 file\sql\ur\ur.sql
+* 执行 file\sql\ur\test.sql
+
+## 依赖
+* git clone https://gitee.com/natsuki_kining/sql-starts-rapid.git
+* cd sql-starts-rapid
+* mvn clean install
+
+## 启动
+> 运行 ultra-rare\ur-main\src\main\java\com\natsuki_kining\UltraRareApplication.java
+
+## 访问
+> http://localhost:8080/bigScreen/index.html
+
+## 效果
+![test-index.html](file\image\test-index.png)
+
 # 大致开发计划
 1. 熟悉ruoyi
 2. √ ruoyi和ur的兼容性测试及调整

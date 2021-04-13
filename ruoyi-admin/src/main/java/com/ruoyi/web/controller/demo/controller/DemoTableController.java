@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * 表格相关
@@ -60,6 +65,16 @@ public class DemoTableController extends BaseController
         users.add(new UserTableModel(26, "1000026", "测试26", "1", "15666666666", "ry@qq.com", 250.0, "1"));
     }
 
+    private final static List<UserTableColumn> columns = new ArrayList<UserTableColumn>();
+    {
+        columns.add(new UserTableColumn("用户ID", "userId"));
+        columns.add(new UserTableColumn("用户编号", "userCode"));
+        columns.add(new UserTableColumn("用户姓名", "userName"));
+        columns.add(new UserTableColumn("用户手机", "userPhone"));
+        columns.add(new UserTableColumn("用户邮箱", "userEmail"));
+        columns.add(new UserTableColumn("用户状态", "status"));
+    }
+
     /**
      * 搜索相关
      */
@@ -94,6 +109,44 @@ public class DemoTableController extends BaseController
     public String export()
     {
         return prefix + "/export";
+    }
+
+    /**
+     * 表格导出选择列
+     */
+    @GetMapping("/exportSelected")
+    public String exportSelected()
+    {
+        return prefix + "/exportSelected";
+    }
+
+    /**
+     * 导出数据
+     */
+    @PostMapping("/exportData")
+    @ResponseBody
+    public AjaxResult exportSelected(UserTableModel userModel, String userIds)
+    {
+        List<UserTableModel> userList = new ArrayList<UserTableModel>(Arrays.asList(new UserTableModel[users.size()]));
+        Collections.copy(userList, users);
+
+        // 条件过滤
+        if (StringUtils.isNotEmpty(userIds))
+        {
+            userList.clear();
+            for (Long userId : Convert.toLongArray(userIds))
+            {
+                for (UserTableModel user : users)
+                {
+                    if (user.getUserId() == userId)
+                    {
+                        userList.add(user);
+                    }
+                }
+            }
+        }
+        ExcelUtil<UserTableModel> util = new ExcelUtil<UserTableModel>(UserTableModel.class);
+        return util.exportExcel(userList, "用户数据");
     }
 
     /**
@@ -269,12 +322,37 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格动态列
+     */
+    @GetMapping("/dynamicColumns")
+    public String dynamicColumns()
+    {
+        return prefix + "/dynamicColumns";
+    }
+
+    /**
      * 表格其他操作
      */
     @GetMapping("/other")
     public String other()
     {
         return prefix + "/other";
+    }
+
+    /**
+     * 动态获取列
+     */
+    @PostMapping("/ajaxColumns")
+    @ResponseBody
+    public AjaxResult ajaxColumns(UserTableColumn userColumn)
+    {
+        List<UserTableColumn> columnList = new ArrayList<UserTableColumn>(Arrays.asList(new UserTableColumn[columns.size()]));
+        Collections.copy(columnList, columns);
+        if (userColumn != null && "userBalance".equals(userColumn.getField()))
+        {
+            columnList.add(new UserTableColumn("用户余额", "userBalance"));
+        }
+        return AjaxResult.success(columnList);
     }
 
     /**
@@ -318,27 +396,71 @@ public class DemoTableController extends BaseController
     }
 }
 
+class UserTableColumn
+{
+    /** 表头 */
+    private String title;
+    /** 字段 */
+    private String field;
+
+    public UserTableColumn()
+    {
+
+    }
+
+    public UserTableColumn(String title, String field)
+    {
+        this.title = title;
+        this.field = field;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getField()
+    {
+        return field;
+    }
+
+    public void setField(String field)
+    {
+        this.field = field;
+    }
+}
+
 class UserTableModel
 {
     /** 用户ID */
     private int userId;
 
     /** 用户编号 */
+    @Excel(name = "用户编号", cellType = ColumnType.NUMERIC)
     private String userCode;
 
     /** 用户姓名 */
+    @Excel(name = "用户姓名")
     private String userName;
 
     /** 用户性别 */
     private String userSex;
 
     /** 用户手机 */
+    @Excel(name = "用户手机")
     private String userPhone;
 
     /** 用户邮箱 */
+    @Excel(name = "用户邮箱")
     private String userEmail;
 
     /** 用户余额 */
+    @Excel(name = "用户余额", cellType = ColumnType.NUMERIC)
     private double userBalance;
 
     /** 用户状态（0正常 1停用） */

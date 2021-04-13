@@ -9,8 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import com.ruoyi.common.config.Global;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.common.config.RuoYiConfig;
+import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysMenu;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.text.Convert;
@@ -19,6 +23,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 
@@ -36,6 +41,9 @@ public class SysIndexController extends BaseController
     @Autowired
     private ISysConfigService configService;
 
+    @Autowired
+    private SysPasswordService passwordService;
+
     // 系统首页
     @GetMapping("/index")
     public String index(ModelMap mmap)
@@ -49,8 +57,8 @@ public class SysIndexController extends BaseController
         mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));
         mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
         mmap.put("ignoreFooter", configService.selectConfigByKey("sys.index.ignoreFooter"));
-        mmap.put("copyrightYear", Global.getCopyrightYear());
-        mmap.put("demoEnabled", Global.isDemoEnabled());
+        mmap.put("copyrightYear", RuoYiConfig.getCopyrightYear());
+        mmap.put("demoEnabled", RuoYiConfig.isDemoEnabled());
         mmap.put("isDefaultModifyPwd", initPasswordIsModify(user.getPwdUpdateDate()));
         mmap.put("isPasswordExpired", passwordIsExpiration(user.getPwdUpdateDate()));
 
@@ -73,6 +81,33 @@ public class SysIndexController extends BaseController
         return webIndex;
     }
 
+    // 锁定屏幕
+    @GetMapping("/lockscreen")
+    public String lockscreen(ModelMap mmap)
+    {
+        mmap.put("user", ShiroUtils.getSysUser());
+        ServletUtils.getSession().setAttribute(ShiroConstants.LOCK_SCREEN, true);
+        return "lock";
+    }
+
+    // 解锁屏幕
+    @PostMapping("/unlockscreen")
+    @ResponseBody
+    public AjaxResult unlockscreen(String password)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        if (StringUtils.isNull(user))
+        {
+            return AjaxResult.error("服务器超时，请重新登陆");
+        }
+        if (passwordService.matches(user, password))
+        {
+            ServletUtils.getSession().removeAttribute(ShiroConstants.LOCK_SCREEN);
+            return AjaxResult.success();
+        }
+        return AjaxResult.error("密码不正确，请重新输入。");
+    }
+
     // 切换主题
     @GetMapping("/system/switchSkin")
     public String switchSkin()
@@ -91,22 +126,22 @@ public class SysIndexController extends BaseController
     @GetMapping("/system/main")
     public String main(ModelMap mmap)
     {
-        mmap.put("version", Global.getVersion());
+        mmap.put("version", RuoYiConfig.getVersion());
         return "main";
     }
 
     // 检查初始密码是否提醒修改
     public boolean initPasswordIsModify(Date pwdUpdateDate)
     {
-        int initPasswordModify = Convert.toInt(configService.selectConfigByKey("sys.account.initPasswordModify"));
-        return initPasswordModify == 1 && pwdUpdateDate == null;
+        Integer initPasswordModify = Convert.toInt(configService.selectConfigByKey("sys.account.initPasswordModify"));
+        return initPasswordModify != null && initPasswordModify == 1 && pwdUpdateDate == null;
     }
 
     // 检查密码是否过期
     public boolean passwordIsExpiration(Date pwdUpdateDate)
     {
-        int passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
-        if (passwordValidateDays > 0)
+        Integer passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
+        if (passwordValidateDays != null && passwordValidateDays > 0)
         {
             if (StringUtils.isNull(pwdUpdateDate))
             {

@@ -41,7 +41,7 @@ var table = {
                     method: 'post',
                     height: undefined,
                     sidePagination: "server",
-                    sortName: "",
+                    sortName: undefined,
                     sortOrder: "asc",
                     pagination: true,
                     paginationLoop: false,
@@ -116,12 +116,17 @@ var table = {
                     mobileResponsive: options.mobileResponsive,         // 是否支持移动端适配
                     cardView: options.cardView,                         // 是否启用显示卡片视图
                     detailView: options.detailView,                     // 是否启用显示细节视图
+                    onCheck: options.onCheck,                           // 当选择此行时触发
+                    onUncheck: options.onUncheck,                       // 当取消此行时触发
+                    onCheckAll: options.onCheckAll,                     // 当全选行时触发
+                    onUncheckAll: options.onUncheckAll,                 // 当取消全选行时触发
                     onClickRow: options.onClickRow,                     // 点击某行触发的事件
                     onDblClickRow: options.onDblClickRow,               // 双击某行触发的事件
                     onClickCell: options.onClickCell,                   // 单击某格触发的事件
                     onDblClickCell: options.onDblClickCell,             // 双击某格触发的事件
                     onEditableSave: options.onEditableSave,             // 行内编辑保存的事件
                     onExpandRow: options.onExpandRow,                   // 点击详细视图的事件
+                    onPostBody: options.onPostBody,                     // 渲染完成后执行的事件
                     maintainSelected: options.maintainSelected,         // 前端翻页时保留所选行
                     rememberSelected: options.rememberSelected,         // 启用翻页记住前面的选择
                     fixedColumns: options.fixedColumns,                 // 是否启用冻结列（左侧）
@@ -137,6 +142,7 @@ var table = {
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
                     onLoadSuccess: $.table.onLoadSuccess,               // 当所有数据被加载时触发处理函数
                     exportOptions: options.exportOptions,               // 前端导出忽略列索引
+                    printPageBuilder: options.printPageBuilder,         // 自定义打印页面模板
                     detailFormatter: options.detailFormatter,           // 在行下面展示其他数据列表
                 });
             },
@@ -167,7 +173,7 @@ var table = {
             	if (typeof table.get(this.id).responseHandler == "function") {
                     table.get(this.id).responseHandler(res);
                 }
-                if (res.code == 0) {
+                if (res.code == web_status.SUCCESS) {
                     if ($.common.isNotEmpty(table.options.sidePagination) && table.options.sidePagination == 'client') {
                     	return res.rows;
                     } else {
@@ -196,6 +202,8 @@ var table = {
             	$(optionsIds).on("post-body.bs.table", function (e, args) {
                     // 浮动提示框特效
                     $(".table [data-toggle='tooltip']").tooltip();
+                    // 气泡弹出框特效
+                    $('.table [data-toggle="popover"]').popover();
             	});
             	// 选中、取消、全部选中、全部取消（事件）
             	$(optionsIds).on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rowsAfter, rowsBefore) {
@@ -280,6 +288,8 @@ var table = {
             destroy: function (tableId) {
             	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
             	$("#" + currentId).bootstrapTable('destroy');
+            	delete table.rememberSelectedIds[currentId];
+            	delete table.rememberSelecteds[currentId];
             },
             // 序列号生成
             serialNumber: function (index, tableId) {
@@ -487,6 +497,9 @@ var table = {
             },
             // 回显数据字典
             selectDictLabel: function(datas, value) {
+            	if ($.common.isEmpty(datas) || $.common.isEmpty(value)) {
+            	    return '';
+            	}
             	var actions = [];
                 $.each(datas, function(index, dict) {
                     if (dict.dictValue == ('' + value)) {
@@ -499,7 +512,7 @@ var table = {
             },
             // 回显数据字典（字符串数组）
             selectDictLabels: function(datas, value, separator) {
-            	if ($.common.isEmpty(value)) {
+            	if ($.common.isEmpty(datas) || $.common.isEmpty(value)) {
             	    return '';
             	}
             	var currentSeparator = $.common.isEmpty(separator) ? "," : separator;
@@ -579,7 +592,7 @@ var table = {
                     expandFirst: options.expandFirst,                   // 是否默认第一级展开--expandAll为false时生效
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.treeTable.responseHandler,       // 在加载服务器发送来的数据之前处理函数
-                    onLoadSuccess: $.table.onLoadSuccess                // 当所有数据被加载时触发处理函数
+                    onLoadSuccess: $.treeTable.onLoadSuccess            // 当所有数据被加载时触发处理函数
                 });
             },
             // 条件查询
@@ -604,12 +617,19 @@ var table = {
             	if (typeof table.options.responseHandler == "function") {
                     table.options.responseHandler(res);
                 }
-            	if (res.code != undefined && res.code != 0) {
+            	if (res.code != undefined && res.code != web_status.SUCCESS) {
                     $.modal.alertWarning(res.msg);
                     return [];
                 } else {
                     return res;
                 }
+            },
+            // 当所有数据被加载时触发
+            onLoadSuccess: function(data) {
+            	if (typeof table.options.onLoadSuccess == "function") {
+                    table.options.onLoadSuccess(data);
+            	}
+            	$(".table [data-toggle='tooltip']").tooltip();
             },
         },
         // 表单封装处理
@@ -752,7 +772,7 @@ var table = {
             },
             // 弹出层指定宽度
             open: function (title, url, width, height, callback) {
-            	//如果是移动端，就使用自适应大小弹窗
+            	// 如果是移动端，就使用自适应大小弹窗
             	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
@@ -800,6 +820,11 @@ var table = {
                 var _width = $.common.isEmpty(options.width) ? "800" : options.width; 
                 var _height = $.common.isEmpty(options.height) ? ($(window).height() - 50) : options.height;
                 var _btn = ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'];
+            	// 如果是移动端，就使用自适应大小弹窗
+            	if ($.common.isMobile()) {
+            	    _width = 'auto';
+            	    _height = 'auto';
+            	}
                 if ($.common.isEmpty(options.yes)) {
                     options.yes = function(index, layero) {
                         options.callBack(index, layero);
@@ -836,7 +861,7 @@ var table = {
             },
             // 弹出层全屏
             openFull: function (title, url, width, height) {
-            	//如果是移动端，就使用自适应大小弹窗
+            	// 如果是移动端，就使用自适应大小弹窗
             	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
@@ -876,8 +901,8 @@ var table = {
                 layer.full(index);
             },
             // 选卡页方式打开
-            openTab: function (title, url) {
-            	createMenuItem(url, title);
+            openTab: function (title, url, isRefresh) {
+            	createMenuItem(url, title, isRefresh);
             },
             // 选卡页同一页签打开
             parentTab: function (title, url) {
@@ -947,17 +972,10 @@ var table = {
             detail: function(id, width, height) {
             	table.set();
             	var _url = $.operate.detailUrl(id);
-            	var _width = $.common.isEmpty(width) ? "800" : width; 
-                var _height = $.common.isEmpty(height) ? ($(window).height() - 50) : height;
-            	//如果是移动端，就使用自适应大小弹窗
-            	if ($.common.isMobile()) {
-            	    _width = 'auto';
-            	    _height = 'auto';
-            	}
             	var options = {
                     title: table.options.modalName + "详细",
-                    width: _width,
-                    height: _height,
+                    width: width,
+                    height: height,
                     url: _url,
                     skin: 'layui-layer-gray', 
                     btn: ['关闭'],
@@ -966,6 +984,11 @@ var table = {
                     }
                 };
             	$.modal.openOptions(options);
+            },
+            // 详细信息，以tab页展现
+            detailTab: function(id) {
+            	table.set();
+            	$.modal.openTab("详细" + table.options.modalName, $.operate.detailUrl(id));
             },
             // 详细访问地址
             detailUrl: function(id) {
@@ -1030,8 +1053,7 @@ var table = {
             // 添加信息 全屏
             addFull: function(id) {
             	table.set();
-            	var url = $.common.isEmpty(id) ? table.options.createUrl : table.options.createUrl.replace("{id}", id);
-                $.modal.openFull("添加" + table.options.modalName, url);
+                $.modal.openFull("添加" + table.options.modalName, $.operate.addUrl(id));
             },
             // 添加访问地址
             addUrl: function(id) {
@@ -1332,7 +1354,7 @@ var table = {
             },
             // 根据Id和Name选中指定节点
             selectByIdName: function(treeId, node) {
-        		if ($.common.isNotEmpty(treeId) && treeId == node.id) {
+        		if ($.common.isNotEmpty(treeId) && node && treeId == node.id) {
         			$._tree.selectNode(node, true);
         		}
             },
